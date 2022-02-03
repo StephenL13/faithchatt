@@ -8,9 +8,9 @@ module.exports.run = async(client, message, args, prefix) => {
         .setColor('#FF0000')
         .setFooter('© FaithChatt Forum');
     const successEmbed = new MessageEmbed()
-        .setColor("#00FF00")
+        .setColor("#ffd100")
         .setDescription("<:Unstaged:880650957925519441> **Bible study channel is now locked.**\n\nTune in next time by [checking out our schedules](https://discord.com/channels/839708279973478430/839718408115191849/926988291650224168) on <#839718408115191849>. Thanks for joining with us. God bless you.")
-        .setFooter("© FaithChatt Forum");
+        .setFooter({ text:"© FaithChatt Forum" });
    
     if(message.member.roles.cache.has({ professorRole, facilitatorRole }) || message.member.permissions.has("MANAGE_ROLES")) {
         if(message.channel.id === bstext){
@@ -25,14 +25,14 @@ module.exports.run = async(client, message, args, prefix) => {
             message.delete()
 
             errorEmbed.setDescription('This command is only accessible to the Bible Study/Sermon Text Chatt.')
-            message.author.send({ embeds: [errorEmbed] })
+            message.author.send({ embeds: [errorEmbed] }).catch(e => {})
         }
 
    } else {
        message.delete();
 
        errorEmbed.setDescription('Professors/Facilitators/Staff Members only have the authority to use this command.')
-       message.author.send({ embeds: [errorEmbed] })
+       message.author.send({ embeds: [errorEmbed] }).catch(e => {})
    }
 }
 
