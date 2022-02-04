@@ -21,7 +21,9 @@ client.on('interactionCreate', async interaction => {
       if(!interaction.member.roles.cache.has(goodsamaritan)) {
         await interaction.member.roles.add(goodsamaritan)
         await interaction.reply({ content: "You have now confirmed to the agreement! Please visit <#839896314963296277> to continue on the server access if you haven't.", ephemeral: true })
-      } else return
+      } else {
+        await interaction.reply({ content: "You have already confirmed to the agreement.", ephemeral: true })
+      }
     }
   }
 })
