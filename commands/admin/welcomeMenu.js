@@ -20,7 +20,12 @@ module.exports.run = async (client, message, args, prefix) => {
         .setURL(
           "https://discord.com/channels/839708279973478430/839896314963296277/922492282928762890"
         )
-        .setDisabled("false")
+        .setDisabled("false"),
+      new MessageButton()
+        .setLabel('Confidentiality Agreement')
+        .setStyle('LINK')
+        .setEmoji('😇')
+        .setURL('')
     );
     const rule_intro = new MessageEmbed()
       .setColor('#ffd100')
