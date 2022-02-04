@@ -9,8 +9,8 @@ client.on('guildMemberAdd', member => {
     .setColor("#ffd100")
     .setFooter({ text: "© FaithChatt Forum" })
     member.send({ embeds: [welcomeEmbed] }).then(() => {
-      member.roles.add('908240970523492353')
-      member.roles.add('929740383892672552')
+      member.roles.add('908240970523492353').catch(e => {})
+      member.roles.add('929740383892672552').catch(e => {})
     }).catch(e => {})
 })
 
