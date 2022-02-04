@@ -30,9 +30,7 @@ module.exports.run = async (client, message, args, prefix) => {
       .setDescription("In order to show your willingness to adhere to our social confidentiality agreement, we need you to react to this message by hitting the button below. Doing so will assign you the Good Samaritan role. Thank you.")
       .setThumbnail('https://www.kindpng.com/picc/m/29-295709_file-twemoji-1f607-svg-emoji-angel-clipart-emojis.png')
       .setFooter({ text:"© FaithChatt Forum" });
-    wc.send({ embeds: [confidentiality, confidentiality2, confidentiality3] }).then(() => {
-        message.channel.send({ embeds: [agree], components: [row] })
-    })
+    wc.send({ embeds: [confidentiality, confidentiality2, confidentiality3, agree] })
   } else return;
 };
 
