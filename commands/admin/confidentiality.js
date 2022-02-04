@@ -6,14 +6,6 @@ module.exports.run = async (client, message, args, prefix) => {
       id: '865857071710470214',
       token: 'RvMtok0QEQQVuh2ov3qdtkgiJNW2N-Zf5nRUfsq6DpzRLdRbLGIttAZZfPa4w8GazOxf'
     });
-    const row = new MessageActionRow().addComponents(
-        new MessageButton()
-        .setLabel("I agree to the confidentiality statement.")
-        .setStyle("SECONDARY")
-        .setEmoji("✅")
-        .setCustomId("cstatement")
-        .setDisabled("false"),
-    )
     const confidentiality = new MessageEmbed()
       .setColor('#ffd100')
       .setTitle('Confidentiality Overview')
