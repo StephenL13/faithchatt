@@ -4,7 +4,7 @@ module.exports.run = async(client, message, args, prefix) => {
     } else return message.delete()
 }
 
-module.exports.help = {
+module.exports.command = {
     name: "joinemit",
     aliases: []
 }
