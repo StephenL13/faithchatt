@@ -9,9 +9,9 @@ module.exports.run = async (client, message, args, prefix) => {
         const everyone = message.guild.roles.cache.find(r => r.name === "@everyone")
 
         if(!moderatorrole) return message.delete().then(async() => {await message.author.send("You're not a staff member authorized to use this command.")}).catch(e => {})
-        if(!targetmember) return message.channel.send("You haven't mentioned a user!")
+        if(!targetmember) return message.channel.send("Command usage:\n`!jail <@user/uid> <reason>`")
         if(targetmember.roles.cache.has(mutedrole)) return message.reply("The member has been already jailed!")
-        if(!reason) reason = "No reason given."
+        if(!reason) return message.channel.send("Please supply a reason of the suspect.\n`!jail <@user/uid> <reason>`")
         targetmember.roles.add(mutedrole)
         let ticketname = targetmember.user.tag
         let jailchannel = await message.guild.channels.create("jail-"+ticketname, {
