@@ -8,6 +8,7 @@ module.exports.run = async (client, message, args, prefix) => {
             }).catch((e) => {});
         if (message.channel.parent.id === "934728381294063616"){
             if(message.channel.id === "934731088570494976") return message.delete()
+            await message.react('✅')
             await message.channel.send("**The channel will be closed in five seconds.**")
             setTimeout(() => {
                 message.channel.delete()
