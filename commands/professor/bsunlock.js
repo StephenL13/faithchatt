@@ -8,7 +8,7 @@ module.exports.run = async(client, message, args, prefix) => {
         .setColor('#FF0000')
         .setFooter({ text: '© FaithChatt Forum' });
     const successEmbed = new MessageEmbed()
-        .setColor("#ffd100")
+        .setColor("#ffff00")
         .setDescription("<:Staged:880649462492569651> Session is about to start in a few moments.\nHead over to <#840942889340239914> and study the Word with us!")
         .setFooter({ text:"© FaithChatt Forum" });
     if(message.member.roles.cache.has({ professorRole, facilitatorRole }) || message.member.permissions.has("MANAGE_ROLES")) {
@@ -16,9 +16,6 @@ module.exports.run = async(client, message, args, prefix) => {
             message.channel.permissionOverwrites.edit(message.guild.id, {
                 "SEND_MESSAGES": null
             })
-            
-            successEmbed.setDescription("<:Staged:880649462492569651> **Bible study channel is now unlocked!**\n\nSession is about to start in a few moments. Head over to <#839912018831474699> and study the Word with us!")
-            successEmbed.setColor("#FFFF00")
             message.channel.send({ embeds: [successEmbed] })
         } else {
             message.delete()
