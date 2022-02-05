@@ -6,12 +6,11 @@ const bstext = '839953010142871552'
 module.exports.run = async(client, message, args, prefix) => {
     const errorEmbed = new MessageEmbed()
         .setColor('#FF0000')
-        .setFooter('© FaithChatt Forum');
+        .setFooter({ text: '© FaithChatt Forum' });
     const successEmbed = new MessageEmbed()
         .setColor("#ffd100")
-        .setDescription("<:Unstaged:880650957925519441> **Bible study channel is now locked.**\n\nTune in next time by [checking out our schedules](https://discord.com/channels/839708279973478430/839718408115191849/926988291650224168) on <#839718408115191849>. Thanks for joining with us. God bless you.")
+        .setDescription("<:Staged:880649462492569651> Session is about to start in a few moments.\nHead over to <#840942889340239914> and study the Word with us!")
         .setFooter({ text:"© FaithChatt Forum" });
-   
     if(message.member.roles.cache.has({ professorRole, facilitatorRole }) || message.member.permissions.has("MANAGE_ROLES")) {
         if(message.channel.id === bstext){
             message.channel.permissionOverwrites.edit(message.guild.id, {
