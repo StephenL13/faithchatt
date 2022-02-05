@@ -30,5 +30,5 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
 });
 
 client.on('guildMemberBan', member => {
-  member.guilds.channels.cache.get('839958256264544266').send(`**${member.tag} is exiled as of the moment. **`)
+  member.guilds.channels.cache.get('839958256264544266').send(`**${member.tag} is exiled as of the moment. **`).catch(e=>{})
 })

@@ -28,7 +28,7 @@ module.exports.run = async (client, message, args, prefix) => {
         console.log(`🚨 Member has been jailed:\nMember: ${targetmember.user.tag}\nReason: ${reason}`)
         const channelembed = new MessageEmbed()
             .setTitle("You have been jailed!")
-            .setDescription(`👤 **Suspect:** \`${targetmember.user.tag}\`\n🔒 **Reason:** \`${reason}\`\n\nYou have been restricted access to all channels as of the moment. Please consider talking to our mods if you're deemed to be acting detrimently in the server.`)
+            .setDescription(`👤 **Suspect:** \`${targetmember.user.tag}\`\n🔒 **Reason:** \`${reason}\`\n\nYou have been restricted access to all channels as of the moment. Please consider talking to our mods if you're deemed to be acting detrimently in the server. Leaving and rejoining the server to bypass the mute will result into a permanent sanction.`)
             .setFooter({ text: targetmember.user.id })
             .setColor('#ff0000')
         jailchannel.send({ content: `${targetmember}`, embeds: [channelembed] })
