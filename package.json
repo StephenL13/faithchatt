@@ -1,10 +1,11 @@
 {
-  "name": "faithchatt-node",
+  "name": "faithchatt",
   "version": "1.0.0",
   "description": "https://discord.gg/faithchatt",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,8 @@
   "homepage": "https://github.com/StephenL13/faithchatt#readme",
   "dependencies": {
     "discord.js": "^13.6.0",
-    "fs": "^0.0.1-security"
+    "dotenv": "^16.0.0",
+    "fs": "^0.0.1-security",
+    "node": "^17.4.0"
   }
 }
