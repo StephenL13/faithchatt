@@ -8,7 +8,7 @@ module.exports.run = async (client, message, args, prefix) => {
         return message.delete().then(async () => {
             await message.author.send("You're not a staff member authorized to use this command.");
             }).catch((e) => {});
-            if(!targetmember) return message.channel.send("Command usage:\n`!jail <@user/uid> <reason>`");
+            if(!targetmember) return message.channel.send("Command usage:\n`!unjail <@user/uid>`");
         if (message.channel.parent.id === "934728381294063616"){
             if(message.channel.id === "934731088570494976") return message.delete()
             await message.react('✅')

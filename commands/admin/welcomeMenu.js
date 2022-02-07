@@ -1,4 +1,4 @@
-const { WebhookClient, MessageEmbed, MessageActionRow, MessageButton } = require('discord.js')
+const { WebhookClient, MessageEmbed } = require('discord.js')
 
 module.exports.run = async (client, message, args, prefix) => {
   if (message.member.roles.cache.has("839717564128690197")) {
@@ -6,22 +6,6 @@ module.exports.run = async (client, message, args, prefix) => {
       id: '865439061242150962',
       token: 'ivEQeO2RDTGWVHo_BRVwfnEa48qd8hJIo0v8duRMViJagQDhM2qQIF9ZZJl2dROduUYL'
     });
-    const row = new MessageActionRow().addComponents(
-      new MessageButton()
-        .setLabel("Click to verify")
-        .setStyle("PRIMARY")
-        .setEmoji("✅")
-        .setCustomId("verify")
-        .setDisabled("false"),
-      new MessageButton()
-        .setLabel("Read the rules!")
-        .setStyle("LINK")
-        .setEmoji("📜")
-        .setURL(
-          "https://discord.com/channels/839708279973478430/839896314963296277/922492282928762890"
-        )
-        .setDisabled("false"),
-    );
     const rule_intro = new MessageEmbed()
       .setColor('#ffd100')
       .setTitle('Welcome to the server!')
@@ -36,13 +20,7 @@ module.exports.run = async (client, message, args, prefix) => {
     const rule3 = new MessageEmbed()
       .setColor('#ffd100')
       .setDescription("8. Sometimes conversations get heated, so take a break if you're feeling stressed. If the Admins/Mods think that a discussion is taking a turn for the worse, we may mute you temporarily for your own good or block the chat for a few minutes so things can cool down. Be loving at all times\n\n" + `9. Attempts at converting your fellow Christian are NOT allowed. We’re not here to pull believers from one church to another. However discussions on the merits of different denominations are allowed, but blatant conversion attempts are not. We like to focus on the Union with Christ here. (You may discuss, civilly, why you believe a denomination to be wrong or discuss why you believe it to be the truth. But, saying "Become <denomination>" is not allowed. If it is felt you are, too frequently, starting debates on why your denomination is correct, you will be spoken with and further action will be taken from there)\n\n` + "10. Non-Christians who come in looking for a fight or to simply push their ideas will be removed. Coming into the server without the intention to focus on Christ will not be tolerated. Toxic members may be kicked or banned without warning if staff feels you are a detriment to the server.\n\n11. Denomination bashing is a violation of server policy. In order to prevent this from happening, we ask that members maintain respect of each other’s denomination. Be aware of Rule 9, as well as the importance in maintaining LOVE for one another. We're all part of the body of Christ.\n\n12. These rules are not all of which governs this server. Moderators have discretion to act when it is felt an action is detrimental to the well being of the server and its members. Love others as Christ loves you. Failure to follow any of these rules may result in a mute, kick, or permaban.")
-    const verifyMsg = new MessageEmbed()
-      .setColor("#ffd100")
-      .setTitle("VERIFICATION")
-      .setDescription("By tapping on the blue button below, you agree to the rules and regulations stated above.\nIf the bot is offline, immediately contact the moderators.")
-      .setFooter({ text:"© FaithChatt Forum" });
     wc.send({ embeds: [rule_intro, rule1, rule2, rule3] });
-    message.channel.send({ embeds: [verifyMsg], components: [row] })
   } else return;
 };
 
