@@ -4,7 +4,7 @@ const { MessageEmbed } = require('discord.js');
 client.on('guildMemberAdd', member => {
   const welcomeEmbed = new MessageEmbed()
     .setTitle("Welcome to FaithChatt Forum!")
-    .setDescription(`Thank you for joining us here on Discord. We are here to provide Bible studies to the entire world, fellowship with friends, Christian discipleship, and to share the gospel daily. Thanks for helping us proclaim the love of Jesus Christ virtually. Don't forget to read the <#839896314963296277> and click the button, or you will be unable to type anything. Also, don't forget to check out our <#843352934595166239>`)
+    .setDescription(`Thank you for joining us here on Discord. We are here to provide Bible studies to the entire world, fellowship with friends, Christian discipleship, and to share the gospel daily. Thanks for helping us proclaim the love of Jesus Christ virtually. Don't forget to read the <#839896314963296277>, then head over to <#940054019425075250>. Also, don't forget to check out our <#843352934595166239>`)
     .setImage('https://media1.giphy.com/media/z1kL3TjrK278E6EhZF/giphy.gif?cid=790b7611e06601e976e82fa774ae08ceab4bd86a1f6672ea&rid=giphy.gif&ct=g')
     .setColor("#ffd100")
     .setFooter({ text: "© FaithChatt Forum" })
