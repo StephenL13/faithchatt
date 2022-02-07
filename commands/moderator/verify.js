@@ -7,6 +7,9 @@ module.exports.run = async (client, message, args, prefix) => {
         const unverified = message.guild.roles.cache.get('940052640472109117')
         let targetmember = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         if(message.channel.parentId == "940053879264006165") {
+            if(!moderatorrole) return message.delete().then(async () => {
+                await message.author.send("You're not a staff member authorized to use this command.");
+                }).catch((e) => {});
             const embed = new MessageEmbed()
                 .setTitle("Congratulations! You have been verified.")
                 .setDescription("To get your roles, please visit the <#922188972854231160> channel.")
@@ -15,10 +18,7 @@ module.exports.run = async (client, message, args, prefix) => {
                 .setFooter({ text:"© FaithChatt Forum" });
             if(!args[0]) return message.channel.send('Correct command usage:\n\`!verify <@user/userid>\`').catch(e => {})
             if(!targetmember) return message.channel.send('**Please mention a user.**\n\nCorrect command usage:\n\`!verify <@user/userid>\`').catch(e => {})
-            if(!moderatorrole) return message.delete().then(async () => {
-                await message.author.send("You're not a staff member authorized to use this command.");
-                }).catch((e) => {});
-            if(!targetmember.roles.cache.has(memberrole)) return message.channel.send("⚠ Member has been already verified!")
+            if(targetmember.roles.cache.has(memberrole)) return message.channel.send("⚠ Member has been already verified!")
             await message.react('✅')
             await targetmember.roles.add(memberrole).then(() => targetmember.roles.remove(unverified)).catch(e => {})
             await targetmember.send({ embeds: [embed] }).catch(e => console.log(`⚠ I'm confirming ${targetmember}'s verification, but his/her DMs are closed!`))
