@@ -18,7 +18,8 @@ module.exports.run = async (client, message, args, prefix) => {
             .setColor("#ffd100")
             .setFooter({ text:"© FaithChatt Forum" });
         
-        if (!moderatorrole) return message.delete().then(async () => {
+        if(!targetmember) return message.reply('Correct command usage:\n\`!verify <@user/userid>\`').catch(e => {})
+        if(!moderatorrole) return message.delete().then(async () => {
             await message.author.send("You're not a staff member authorized to use this command.");
             }).catch((e) => {});
         if(!targetmember.roles.cache.has(memberrole)) return message.channel.send("⚠ Member has been already verified!")
