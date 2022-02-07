@@ -18,10 +18,13 @@ module.exports.run = async (client, message, args, prefix) => {
                 .setFooter({ text:"© FaithChatt Forum" });
             if(!args[0]) return message.channel.send('Correct command usage:\n\`!verify <@user/userid>\`').catch(e => {})
             if(!targetmember) return message.channel.send('**Please mention a user.**\n\nCorrect command usage:\n\`!verify <@user/userid>\`').catch(e => {})
-            if(targetmember.roles.cache.has(memberrole)) return message.channel.send("⚠ Member has been already verified!")
-            await message.react('✅')
-            await targetmember.roles.add(memberrole).then(() => targetmember.roles.remove(unverified)).catch(e => {})
-            await targetmember.send({ embeds: [embed] }).catch(e => console.log(`⚠ I'm confirming ${targetmember}'s verification, but his/her DMs are closed!`))
+            if(targetmember.roles.cache.has(memberrole)) {
+                message.channel.send("⚠ Member has been already verified!")
+            } else {
+                await message.react('✅')
+                await targetmember.roles.add(memberrole).then(() => targetmember.roles.remove(unverified)).catch(e => {})
+                await targetmember.send({ embeds: [embed] }).catch(e => console.log(`⚠ I'm confirming ${targetmember}'s verification, but his/her DMs are closed!`)) 
+            }
         } else {
             await message.author.send("You can only execute the `!verify` on the verification gate text channel category.").catch(e => {})
             return message.delete()
