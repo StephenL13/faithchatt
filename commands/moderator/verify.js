@@ -2,7 +2,7 @@ const { MessageEmbed } = require('discord.js')
 
 module.exports.run = async (client, message, args, prefix) => {
     if(message.member.permissions.has("MANAGE_ROLES")) {
-        if(!message.channel.parent.id === "940053879264006165") {
+        if(!message.channel.parent.id == "940053879264006165") {
             return message.delete().then(async() => {
                 await message.author.send("You can only execute this on the verification gate.").catch(e => {})
             }).catch(e => {})
