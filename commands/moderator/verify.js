@@ -23,7 +23,7 @@ module.exports.run = async (client, message, args, prefix) => {
             await targetmember.roles.add(memberrole).then(() => targetmember.roles.remove(unverified)).catch(e => {})
             await targetmember.send({ embeds: [embed] }).catch(e => console.log(`⚠ I'm confirming ${targetmember}'s verification, but his/her DMs are closed!`))
         } else {
-            await message.author.send("You can only execute this on the verification gate.").catch(e => {})
+            await message.author.send("You can only execute the `!verify` on the verification gate text channel category.").catch(e => {})
             return message.delete()
         }
     } else {
