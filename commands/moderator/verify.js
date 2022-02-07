@@ -17,8 +17,8 @@ module.exports.run = async (client, message, args, prefix) => {
             .setThumbnail("https://cdn.discordapp.com/attachments/855630577105502228/904092673353334884/FaithChatt_Halo.png")
             .setColor("#ffd100")
             .setFooter({ text:"© FaithChatt Forum" });
-        
-        if(!targetmember) return message.reply('Correct command usage:\n\`!verify <@user/userid>\`').catch(e => {})
+        if(!args[0]) return message.reply('Correct command usage:\n\`!verify <@user/userid>\`').catch(e => {})
+        if(!targetmember) return message.reply('**Please mention a user.**\n\nCorrect command usage:\n\`!verify <@user/userid>\`').catch(e => {})
         if(!moderatorrole) return message.delete().then(async () => {
             await message.author.send("You're not a staff member authorized to use this command.");
             }).catch((e) => {});
