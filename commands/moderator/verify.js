@@ -39,6 +39,8 @@ module.exports.run = async(client, message, args, prefix) => {
             await message.delete();
             await message.author.send('The verify command should work ONLY on verification tickets opened by a user.').catch(e => {})
         }
+    } else {
+        await message.delete();
     }
 }
 
