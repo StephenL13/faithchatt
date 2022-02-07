@@ -10,7 +10,7 @@ module.exports.run = async(client, message, args, prefix) => {
         .setDescription(`1. What made you come to the server?\n2. Where did you find the invite link?\n3. What is your age and gender?\n4. How do you describe God as?\n5. Ping an active staff member once you're done.\n\n**To all staff members:**\nIf they're good enough to join, you may execute this command:\n\`!verify <@user/userid>\``)
         .setImage('https://media1.giphy.com/media/z1kL3TjrK278E6EhZF/giphy.gif?cid=790b7611e06601e976e82fa774ae08ceab4bd86a1f6672ea&rid=giphy.gif&ct=g')
         .setColor("#ffd100")
-        .setAuthor({ text: "© FaithChatt Forum" })
+        .setFooter({ text: "© FaithChatt Forum" })
     await webhook.send({ content: "Welcome to FaithChatt Forum! Please read the <#940060373783035944> then head back to this channel for answering the questions.", embeds: [embed] })
 }
 
