@@ -1,6 +1,6 @@
 const client = require('../index.js').client
 
-const faithchatt = client.guilds.cache.get('')
+const faithchatt = client.guilds.cache.get('839708279973478430')
 setInterval(() => {
     const humanMemberCount = faithchatt.members.cache.filter(member => !member.user.bot);
     const humanMemberChannel = faithchatt.channels.cache.get('940128360347074600')
