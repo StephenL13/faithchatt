@@ -6,7 +6,7 @@ module.exports.run = async(client, message, args, prefix) => {
     const unverified = message.guild.roles.cache.get('940052640472109117')
     const pending = message.guild.roles.cache.get('940281435644911656')
     if(message.guild.roles.cache.has(moderatorrole)) {
-        if(message.channel.parentId === '940053879264006165') {
+        if(message.channel.parent.id === '940053879264006165') {
             if(!args[0]) return message.channel.send('Correct command usage:\n\`!verify <@user/userid>\`').catch(e => {})
             try {
                 const targetmember = message.mentions.members.first() || message.guild.members.cache.get(args[0])
