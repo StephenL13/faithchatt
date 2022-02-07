@@ -12,7 +12,7 @@ client.on('interactionCreate', async interaction => {
 
             const ticketembed = new MessageEmbed()
                 .setTitle('Verification Questions')
-                .setDescription(`1. What made you come to the server?\n2. Where did you find the invite link?\n3. What is your age and gender?\n4. How do you describe God as?\n5. Ping an active staff member once you're done.\n\n**To all staff members:**\nIf they're good enough to join, you may execute this command:\n\`!verify <@user/userid>\`\n\`!closeverify\` - Applicable if the member has either been verified or has left the server.`)
+                .setDescription(`1. What made you come to the server?\n2. Where did you find the invite link?\n3. What is your age and gender?\n4. Tell us the story of your faith.\n5. Ping an active staff member once you're done.\n\n**To all staff members:**\nIf they're good enough to join, you may execute this command:\n\`!verify <@user/userid>\`\n\`!closeverify\` - Applicable if the member has either been verified or has left the server.`)
                 .setThumbnail('https://cdn.discordapp.com/attachments/855630577105502228/904092673353334884/FaithChatt_Halo.png')
                 .setColor("#ffd100")
                 .setFooter({ text: "© FaithChatt Forum" })
