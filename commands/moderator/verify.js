@@ -5,7 +5,7 @@ module.exports.run = async(client, message, args, prefix) => {
     const memberrole = message.guild.roles.cache.get('839720518213959701')
     const unverified = message.guild.roles.cache.get('940052640472109117')
     const pending = message.guild.roles.cache.get('940281435644911656')
-    if(message.guild.roles.cache.has(moderatorrole)) {
+    if(message.guild.roles.cache.has('871058889339207681')) {
         if(message.channel.parent.id === '940053879264006165') {
             if(!args[0]) return message.channel.send('Correct command usage:\n\`!verify <@user/userid>\`').catch(e => {})
             try {
@@ -13,7 +13,7 @@ module.exports.run = async(client, message, args, prefix) => {
                 if (!targetmember) {
                     return message.channel.send('**Please mention a user.**\n\nCorrect command usage:\n\`!verify <@user/userid>\`').catch(e => {})
                 } else {
-                    if(!targetmember.roles.cache.has(memberrole)) {
+                    if(!targetmember.roles.cache.has('839720518213959701')) {
                         const embed = new MessageEmbed()
                             .setTitle("Congratulations! You have been verified.")
                             .setDescription("To get your roles, please visit the <#922188972854231160> channel.")

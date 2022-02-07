@@ -7,6 +7,7 @@ client.on('interactionCreate', async interaction => {
             const moderatorrole = interaction.guild.roles.cache.get('871058889339207681')
             const unverified = interaction.guild.roles.cache.get('940052640472109117')
             const pending = interaction.guild.roles.cache.get('940281435644911656')
+            const memberrole = interaction.guild.roles.cache.get('839720518213959701')
             const everyone = interaction.guild.roles.cache.find(r => r.name === "@everyone")
 
             const ticketembed = new MessageEmbed()
@@ -17,7 +18,7 @@ client.on('interactionCreate', async interaction => {
                 .setFooter({ text: "© FaithChatt Forum" })
             let ticketname = interaction.user.tag
 
-            if(interaction.member.roles.cache.has(pending)) {
+            if(interaction.member.roles.cache.has('940281435644911656')) {
                 return interaction.reply({ content: "You have already created a ticket!", ephemeral: true })
             } else {
                 await interaction.member.roles.add(pending).catch(e => {})
@@ -26,6 +27,12 @@ client.on('interactionCreate', async interaction => {
                     parent: "940053879264006165",
                     topic: `Verification ticket`
                 })
+                await verifychannel.permissionOverwrites.set([
+                    { id: interaction.member.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES"] },
+                    { id: memberrole.id, deny: ["VIEW_CHANNEL"] },
+                    { id: moderatorrole.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"] },
+                    { id: everyone.id, deny: ["VIEW_CHANNEL"] }
+                ])
                 verifychannel.send({ content: `${interaction.user}`, embeds: [ticketembed] })
             }
         }
