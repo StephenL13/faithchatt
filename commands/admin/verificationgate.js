@@ -11,7 +11,7 @@ module.exports.run = async(client, message, args, prefix) => {
         .setImage('https://media1.giphy.com/media/z1kL3TjrK278E6EhZF/giphy.gif?cid=790b7611e06601e976e82fa774ae08ceab4bd86a1f6672ea&rid=giphy.gif&ct=g')
         .setColor("#ffd100")
         .setFooter({ text: "© FaithChatt Forum" })
-    await webhook.send({ content: "Welcome to FaithChatt Forum! Please read the <#940060373783035944> then head back to this channel for answering the questions.", embeds: [embed] })
+    await webhook.send({ content: "Welcome to FaithChatt Forum! Please read the <#839896314963296277> then head back to this channel for answering the questions.", embeds: [embed] })
 }
 
 module.exports.command = {
