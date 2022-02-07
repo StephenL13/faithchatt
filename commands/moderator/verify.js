@@ -6,7 +6,7 @@ module.exports.run = async (client, message, args, prefix) => {
         const memberrole = message.guild.roles.cache.get('839720518213959701')
         const unverified = message.guild.roles.cache.get('940052640472109117')
         let targetmember = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
-        if(!message.channel.parent == "940053879264006165") {
+        if(!message.channel.parent == "940053879264006165") { // ano na HAHAHHA
             await message.author.send("You can only execute this on the verification gate.").catch(e => {})
             return message.delete()
         } else {
