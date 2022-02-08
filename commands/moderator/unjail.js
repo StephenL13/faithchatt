@@ -20,7 +20,7 @@ module.exports.run = async (client, message, args, prefix) => {
         } else return console.log(`${message.author.tag} executed in a non-jail ticket.`)
     } else {
         message.delete();
-        message.author.send('You are not a staff member authorized to use this command.')
+        message.author.send('You are not a staff member authorized to use this command.').catch(e => {})
     }
 }
 

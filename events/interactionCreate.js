@@ -28,7 +28,7 @@ client.on('interactionCreate', async interaction => {
                     topic: `Verification ticket`
                 })
                 await verifychannel.permissionOverwrites.set([
-                    { id: interaction.user.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES"] },
+                    { id: interaction.user.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES"], deny: ["EMBED_LINKS", "ATTACH_FILES"] },
                     { id: memberrole.id, deny: ["VIEW_CHANNEL"] },
                     { id: pending.id, deny: ["VIEW_CHANNEL"] },
                     { id: unverified.id, deny: ["VIEW_CHANNEL"] },

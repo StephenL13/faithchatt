@@ -20,7 +20,7 @@ module.exports.run = async (client, message, args, prefix) => {
             topic: "Jail ticket for "+ticketname
         })
         await jailchannel.permissionOverwrites.set([
-            { id: targetmember.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES"] },
+            { id: targetmember.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES"], deny: ["EMBED_LINKS", "ATTACH_FILES"] },
             { id: memberrole.id, deny: ["VIEW_CHANNEL"] },
             { id: moderatorrole.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"] },
             { id: everyone.id, deny: ["VIEW_CHANNEL"] }
@@ -31,10 +31,10 @@ module.exports.run = async (client, message, args, prefix) => {
             .setDescription(`👤 **Suspect:** \`${targetmember.user.tag}\`\n🔒 **Reason:** \`${reason}\`\n\nYou have been restricted access to all channels as of the moment. Please consider talking to our mods if you're deemed to be acting detrimently in the server. Leaving and rejoining the server to bypass the mute will result into a permanent sanction.`)
             .setFooter({ text: targetmember.user.id })
             .setColor('#ff0000')
-        jailchannel.send({ content: `${targetmember}`, embeds: [channelembed] })
+        jailchannel.send({ content: `${targetmember}`, embeds: [channelembed] }).catch(e=>{})
     } else {
         message.delete();
-        message.author.send('You are not a staff member authorized to use this command.')
+        message.author.send('You are not a staff member authorized to use this command.').catch(e=>{})
     }
 }
 
