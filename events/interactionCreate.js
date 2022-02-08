@@ -30,6 +30,8 @@ client.on('interactionCreate', async interaction => {
                 await verifychannel.permissionOverwrites.set([
                     { id: interaction.member.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES"] },
                     { id: memberrole.id, deny: ["VIEW_CHANNEL"] },
+                    { id: pending.id, deny: ["VIEW_CHANNEL"] },
+                    { id: unverified.id, deny: ["VIEW_CHANNEL"] },
                     { id: moderatorrole.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"] },
                     { id: everyone.id, deny: ["VIEW_CHANNEL"] }
                 ])
