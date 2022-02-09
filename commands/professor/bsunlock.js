@@ -25,9 +25,10 @@ module.exports.run = async(client, message, args, prefix) => {
 
    } else {
        message.delete();
-
-       errorEmbed.setDescription('Professors/Facilitators/Staff Members only have the authority to use this command.')
-       message.author.send({ embeds: [errorEmbed] }).catch(e => {})
+       const inaccessEmbed = new MessageEmbed()
+       .setColor("#ff0000")
+       .setDescription('You are not a staff member authorized to use this command.')
+       message.author.send({ embeds: [inaccessEmbed] }).catch(e => {})
    }
 }
 

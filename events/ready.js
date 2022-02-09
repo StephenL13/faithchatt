@@ -5,5 +5,5 @@ client.on('ready', () => {
   console.log('The bot is ready!')
   
   // initialize slash commands, disabled atm
-  // createCmd(client)
+  // createCmd(client, "839708279973478430")
 });

@@ -34,7 +34,10 @@ module.exports.run = async (client, message, args, prefix) => {
         jailchannel.send({ content: `${targetmember}`, embeds: [channelembed] }).catch(e=>{})
     } else {
         message.delete();
-        message.author.send('You are not a staff member authorized to use this command.').catch(e=>{})
+        const inaccessEmbed = new MessageEmbed()
+        .setColor("#ff0000")
+        .setDescription('You are not a staff member authorized to use this command.')
+        message.author.send({ embeds: [inaccessEmbed] }).catch(e => {})
     }
 }
 

@@ -45,7 +45,11 @@ module.exports.run = async(client, message, args, prefix) => {
             await message.author.send('The verify command should work ONLY on verification tickets opened by a user.').catch(e => {})
         }
     } else {
-        await message.delete();
+        message.delete();
+        const inaccessEmbed = new MessageEmbed()
+        .setColor("#ff0000")
+        .setDescription('You are not a staff member authorized to use this command.')
+        message.author.send({ embeds: [inaccessEmbed] }).catch(e => {})
     }
 }
 
