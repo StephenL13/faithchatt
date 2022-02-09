@@ -9,9 +9,9 @@ client.on('guildMemberAdd', member => {
     .setColor("#ffd100")
     .setFooter({ text: "© FaithChatt Forum" })
     member.send({ embeds: [welcomeEmbed] }).then(() => {
-      member.roles.add('940052640472109117').catch(e => {})
-      member.roles.add('908240970523492353').catch(e => {})
-      member.roles.add('929740383892672552').catch(e => {})
+    member.roles.add('940052640472109117').catch(e => {})
+    member.roles.add('908240970523492353').catch(e => {})
+    member.roles.add('929740383892672552').catch(e => {})
     }).catch(e => {})
 })
 
@@ -25,11 +25,11 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
         .setThumbnail(newMember.user.displayAvatarURL({ dynamic: true }))
         .setFooter({text: `UID: ${newMember.user.id}`})
         .setTimestamp()
-      client.channels.cache.get(`839722094798700555`).send({ content: `<@&912259335881650176>, ${newMember} has arrived!`, embeds: [welcome] });
+      client.channels.cache.get(`839722094798700555`).send({ content: `<@&912259335881650176>, ${newMember} has arrived!`, embeds: [welcome] }).catch(e=>{});
     };
   };
 });
 
 client.on('guildMemberBan', member => {
-  member.guilds.channels.cache.get('839958256264544266').send(`**${member.tag} is exiled as of the moment. **`).catch(e=>{})
+  client.channels.cache.get('839958256264544266').send(`**__${member.tag}__ is exiled due to breaking one of the rules.**`).catch(e=>{})
 })

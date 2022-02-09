@@ -24,7 +24,5 @@ client.on('ready', () => {
         humanMemberChannel.setName(`👥: ${humanMemberCount} | 🟢: ${onlineCount}`)
         boosterChannel.setName(`💜 Boosters: ${boosterCount}`)
         gsChannel.setName(`😇 Samaritans: ${gsCount}`)
-
-        console.log('Member count is updating... (15 mins. interval)')
-    }, 1000 * 60 * 15)
+    }, 1000 * 60 * 5)
 })

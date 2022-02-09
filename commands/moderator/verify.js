@@ -26,6 +26,11 @@ module.exports.run = async(client, message, args, prefix) => {
                             targetmember.roles.remove(pending).catch(e => {})
                         }).catch(e => {})
                         await targetmember.send({ embeds: [embed] }).catch(e => console.log(`⚠ I'm confirming ${targetmember}'s verification, but his/her DMs are closed!`)) 
+                        await message.reply(`${targetmember} is now verified!\n**Channel will be closing in five seconds.**`).then(() => {
+                            setTimeout(() => {
+                                message.channel.delete()
+                            }, 5000)
+                        })
                     } else {
                         await message.react('❌')
                         await message.reply('⚠ Member has been already verified!').then(msg => {setTimeout(() => msg.delete(), 5000)})
