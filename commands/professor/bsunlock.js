@@ -19,7 +19,6 @@ module.exports.run = async(client, message, args, prefix) => {
             message.channel.send({ embeds: [successEmbed] })
         } else {
             message.delete()
-
             errorEmbed.setDescription('This command is only accessible to the Bible Study/Sermon Text Chatt.')
             message.author.send({ embeds: [errorEmbed] }).catch(e => {})
         }
