@@ -9,6 +9,7 @@ require('http').createServer((req, res) => res.end('Bot is alive!')).listen(3000
 client.commands = new Discord.Collection()
 client.events = new Discord.Collection()
 client.aliases = new Discord.Collection()
+client.slashCmds = new Discord.Collection()
 module.exports.client = client
 
 // COMMAND HANDLER
@@ -35,22 +36,39 @@ fs.readdirSync(`./commands/`).forEach(dir => {
   });
 })
 
-// EVENT HANDLER
-fs.readdirSync(`./events/`).forEach(file => {
-  var jsFiles = fs.readdirSync('./events').filter(f => f.split(".").pop() === "js");
-  if (jsFiles.length <= 0) return console.log("[EVENT HANDLER] - ~~Yet to be loaded or no avail~~");
-  let check = false
-  jsFiles.forEach(event => {
-    const eventsGet = require(`./events/${event}`);
+// SLASH COMMANDS
+fs.readdirSync(`./slashcommands/`).forEach(dir => {
+  fs.readdir(`./slashcommands/${dir}`, (err, files) => {
+    if (err) throw err;
 
-    try {
-      client.events.set(eventsGet.name, eventsGet)
-      if (check == true) {
-        console.log(`[EVENT HANDLER] - ${event} is now loaded!`);
-        check = false;
+    var jsFiles = files.filter(f => f.split(".").pop() === "js");
+    if (jsFiles.length <= 0) return console.log("[SLASH CMD HANDLER] - ~~Yet to be loaded or no avail~~");
+
+    jsFiles.forEach(file => {
+      var fileGet = require(`./slashcommands/${dir}/${file}`);
+      console.log(`[SLASH CMD HANDLER] - ${file} is now loaded!`)
+
+      try {
+        client.slashCmds.set(fileGet.command.name, fileGet)
+      } catch (err) {
+        return console.log(err);
       }
+    });
+  });
+})
+
+// EVENT HANDLER
+fs.readdirSync('./events/').forEach(file => {
+  var jsFiles = fs.readdirSync('./events/').filter(f => f.split(".").pop() === "js")
+  if(jsFiles.length <= 0) return console.log("[EVENT HANDLER] - ~~Yet to be loaded or no avail~~");
+
+  jsFiles.forEach(file => {
+    const eventGet = require(`./events/${file}`)
+    console.log(`[EVENT HANDLER] - ${file} is now loaded!`)
+    try {
+      client.events.set(eventGet.name, eventGet)
     } catch (error) {
       return console.log(error)
     }
-  });
-});
+  })
+})

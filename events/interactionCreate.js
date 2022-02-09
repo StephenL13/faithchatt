@@ -2,6 +2,13 @@ const client = require('../index.js').client
 const { MessageEmbed } = require('discord.js')
 
 client.on('interactionCreate', async interaction => {
+    // SLASH COMMAND HANDLER
+    if(interaction.isCommand()) {
+        let slashCmds = client.slashCmds.get(interaction.commandName)
+        if (slashCmds) slashCmds.run(client, interaction)
+    }
+
+    // THE SYSTEM
     if(interaction.isButton){
         if(interaction.customId == "verifyticket"){
             const moderatorrole = interaction.guild.roles.cache.get('871058889339207681')
