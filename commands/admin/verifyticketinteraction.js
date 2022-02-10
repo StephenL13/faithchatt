@@ -26,7 +26,8 @@ module.exports.run = async(client, message, args, prefix) => {
         );
         const embed = new MessageEmbed()
             .setTitle('Welcome to FaithChatt!')
-            .setDescription('Thank you for joining us here on Discord. We are here to provide Bible studies to the entire world, fellowship with friends, Christian discipleship, and to share the gospel daily. Thanks for helping us proclaim the love of Jesus Christ virtually.')
+            .setDescription('Thank you for joining us here on Discord. We are here to provide Bible studies to the entire world, fellowship with friends, Christian discipleship, and to share the gospel daily. Thanks for helping us proclaim the love of Jesus Christ virtually.\n\n**If you have problems with the verification ticket creation. Immediately contact the moderators.**')
+            .setThumbnail("https://cdn2.iconfinder.com/data/icons/unigrid-phantom-multimedia-vol-5/60/020_246_mail_email_envelope_message_ok_check_final_step_verification-512.png")
             .setImage('https://media1.giphy.com/media/z1kL3TjrK278E6EhZF/giphy.gif?cid=790b7611e06601e976e82fa774ae08ceab4bd86a1f6672ea&rid=giphy.gif&ct=g')
             .setFooter({ text: '© FaithChatt Forum' })
             .setColor('#ffd100')
