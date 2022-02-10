@@ -1,6 +1,6 @@
 module.exports.run = async(client, message, args, prefix) => {
     if(message.author.id == "136292974379270144") {
-        client.emit('guildMemberBan', message.member)
+        client.emit('guildBanAdd', message.member)
     } else return message.delete()
 }
 
