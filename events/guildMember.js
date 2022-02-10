@@ -30,6 +30,6 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
   };
 });
 
-client.on('guildMemberBan', member => {
-  client.channels.cache.get('839958256264544266').send(`**__${member.tag}__ is exiled due to breaking one of the rules.**`).catch(e=>{})
+client.on('guildBanAdd', async(guild, user) => {
+  client.channels.cache.get('839958256264544266').send(`Unfortunately, **__${user.tag}__** is exiled due to breaking one of the rules.\nWe hope and remember for their reconsideration of repentance and submission to the Gospel of Christ.`).catch(e=>{})
 })
