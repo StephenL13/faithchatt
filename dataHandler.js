@@ -7,23 +7,12 @@ async function createCmd(client, guildId) {
         },
 
         {
-            name: "modhelp",
-            description: "Staff member commands",
+            name: "pray",
+            description: "Send an anonymous prayer request!",
             options: [{
-                name: "category",
+                name: "petition",
                 type: "STRING",
-                description: "Select which category would you like to see.",
-                required: true,
-                choices: [
-                    {
-                        name: "Basic Moderation",
-                        value: "moderation"
-                    },
-                    {
-                        name: "Role Commands",
-                        value: "rolecmd"
-                    }
-                ]
+                required: true
             }]
         }
     ]
