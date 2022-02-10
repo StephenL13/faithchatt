@@ -9,8 +9,9 @@ client.on('messageCreate', async message => {
     }
 
     if(foundInText) {
-        await message.reply("**❌ Watch your language. Swearing is NOT allowed!**").catch(e=>{})
+        await message.reply("**❌ Watch your language. Swearing is NOT allowed!**").then((m => {
+            setTimeout(() => m.delete(), 10000).catch(e=>{})
+        })).catch(e=>{})
         await message.delete().catch(e=>{})
-        setTimeout(m => m.delete(), 10000).catch(e=>{})
     }
 })
