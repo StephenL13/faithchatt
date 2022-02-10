@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/')
+// const { SlashCommandBuilder } = require('@discordjs/builders')
 async function createCmd(client, guildId) {
     const data = [
         // Ping command
