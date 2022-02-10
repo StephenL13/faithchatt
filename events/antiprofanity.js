@@ -6,7 +6,7 @@ const profanity = ["anal","anus","arse","ass","bitch","b1tch","ballsack","bastar
 client.on('messageCreate', async message => {
     let foundInText = false
     for (let i in profanity) {
-        if(message.content.toLowerCase.includes(word[i])) foundInText = true
+        if(message.content.toLowerCase.includes(profanity[i])) foundInText = true
     }
 
     if(foundInText) {
