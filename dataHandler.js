@@ -1,10 +1,18 @@
-// const { SlashCommandBuilder } = require('@discordjs/builders')
+const { SlashCommandBuilder } = require('@discordjs/builders')
 async function createCmd(client, guildId) {
     const data = [
-        // Ping command
         {
             name: "ping",
-            description: "Pings a bot with miliseconds"
+            description: "Serves a bot ping"
+        },
+        {
+            name: "pray",
+            description: "Sends an anonymous prayer",
+            options: {
+                name: "text",
+                description: "Pleace your petition here.",
+                type: "STRING"
+            }
         }
     ]
 
