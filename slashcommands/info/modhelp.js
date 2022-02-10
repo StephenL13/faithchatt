@@ -52,7 +52,7 @@ module.exports.run = async (client, interaction) => {
                 await interaction.reply({ embeds: [
                     new MessageEmbed()
                     .setTitle("Professor/Facilitator Commands")
-                    .setDescription("**BIBLE STUDY TEXT CHANNEL**\N\`!bslock\` - Locks the Bible Study text channel\n\`!bsunlock\` - Unlocks the Bible Study text channel\n\n**CRAIG RECORDING TOOL**\n\`<@272937604339466240> join or record\` - Starts audio recording\n\`<@272937604339466240> leave or stop\` - Stops audio recording")
+                    .setDescription("**BIBLE STUDY TEXT CHANNEL**\n\`!bslock\` - Locks the Bible Study text channel\n\`!bsunlock\` - Unlocks the Bible Study text channel\n\n**CRAIG RECORDING TOOL**\n\`<@272937604339466240> join or record\` - Starts audio recording\n\`<@272937604339466240> leave or stop\` - Stops audio recording")
                     .setColor("#ffd100")
                     .setFooter({ text: "© FaithChatt Forum" })
                 ], ephemeral: true })
