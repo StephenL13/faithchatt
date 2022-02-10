@@ -22,28 +22,6 @@ async function createCmd(client, guildId) {
                 }
             ]
         },
-        {
-            name: "modhelp",
-            description: "Serves a bot ping",
-            options: [
-                {
-                    name: "category",
-                    description: "Select the help category here.",
-                    type: "STRING",
-                    required: true,
-                    choices: [
-                        {
-                            name: "Basic Moderation",
-                            value: "moderation"
-                        }, 
-                        {
-                            name: "Role Commands",
-                            value: "rolecmds"
-                        }
-                    ]
-                }
-            ]
-        },
     ]
 
     await client.guilds.cache.get(guildId)?.commands.set(data)
