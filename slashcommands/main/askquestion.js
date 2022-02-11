@@ -1,11 +1,11 @@
-const { MessageEmbed } = require('discord.js') // Discord stuff
-const moment = require('moment') // time and date
+const { MessageEmbed } = require('discord.js')
+const moment = require('moment')
 module.exports.run = async (client, interaction) => {
     const slashCmdString = interaction.options.getString("text")
     const textChannel = client.channels.cache.get("839724682134683649")
     let simpledate = await moment().format('l')
 
-    await interaction.reply({ content: "**Your question has been sent!**\n\n*NOTE: Should there be any submissions that is against the rules, it will be removed immediately.*"}).catch(e=>console.log(e))
+    await interaction.reply({ content: "**Your question has been sent!**\n\n*NOTE: Should there be any submissions that is against the rules, it will be removed immediately.*", ephemeral: true }).catch(e=>console.log(e))
     await textChannel.send({ embeds: [
         new MessageEmbed()
         .setColor('#ffd100')
