@@ -13,11 +13,7 @@ module.exports.run = async (client, interaction) => {
         .setTitle("A new question has been submitted!")
         .setDescription(slashCmdString)
         .setFooter({ text: "© FaithChatt Forum" })
-    ]}).startThread({
-        name: `${interaction.user.username} | ${simpledate}`,
-        autoArchiveDuration: 1440,
-        rateLimitPerUser: 10
-    })
+    ]})
 }
 
 module.exports.command = {
