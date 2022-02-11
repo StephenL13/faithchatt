@@ -1,5 +1,5 @@
-const { MessageEmbed } = requir('discord.js')
-const moment = require('moment')
+const { MessageEmbed } = require('discord.js') // Discord stuff
+const moment = require('moment') // time and date
 module.exports.run = async (client, interaction) => {
     const slashCmdString = interaction.options.getString("text")
     const textChannel = client.channels.cache.get("839724682134683649")
