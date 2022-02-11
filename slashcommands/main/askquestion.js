@@ -6,7 +6,7 @@ module.exports.run = async (client, interaction) => {
     let simpledate = await moment().format('l')
 
     await interaction.reply({ content: "**Your question has been sent!**\n\n*NOTE: Should there be any submissions that is against the rules, it will be removed immediately.*", ephemeral: true }).catch(e=>console.log(e))
-    await textChannel.send({ embeds: [
+    let output = await textChannel.send({ embeds: [
         new MessageEmbed()
         .setColor('#ffd100')
         .setAuthor({ name: interaction.user.tag, iconURL: interaction.user.displayAvatarURL() })
@@ -14,6 +14,12 @@ module.exports.run = async (client, interaction) => {
         .setDescription(slashCmdString)
         .setFooter({ text: "© FaithChatt Forum" })
     ]})
+    let msgfetch = await textChannel.messages.fetch(output.id)
+    await msgfetch.startThread({
+        name: `${interaction.user.username} | ${simpledate}`,
+        autoArchiveDuration: 1440,
+        rateLimitPerUser: 10
+    })
 }
 
 module.exports.command = {
