@@ -5,6 +5,18 @@ async function createCmd(client, guildId) {
             description: "Serves a bot ping"
         },
         {
+            name: "askquestion",
+            description: "Submit a question anything related to faith and more!",
+            options: [
+                {
+                    name: "text",
+                    description: "Place your question here.",
+                    type: "STRING",
+                    required: true
+                }
+            ]
+        },
+        {
             name: "pray",
             description: "Sends a prayer request.",
             options: [
