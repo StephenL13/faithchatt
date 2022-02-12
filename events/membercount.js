@@ -21,7 +21,6 @@ client.on('ready', () => {
         humanMemberChannel.setName(`👥: ${humanMemberCount} | 🟢: ${onlineCount}`)
         boosterChannel.setName(`💜 Boosters: ${boosterCount}`)
         gsChannel.setName(`😇 Samaritans: ${gsCount}`)
-        console.log('Member count initialized.')
     }
 
     initCount()
