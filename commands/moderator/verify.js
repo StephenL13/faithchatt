@@ -1,11 +1,11 @@
 const { MessageEmbed } = require('discord.js')
 
 module.exports.run = async(client, message, args, prefix) => {
-    const moderatorrole = message.guild.roles.cache.get('871058889339207681')
+    const moderatorrole = message.guild.roles.cache.has('871058889339207681')
     const memberrole = message.guild.roles.cache.get('839720518213959701')
     const unverified = message.guild.roles.cache.get('940052640472109117')
     const pending = message.guild.roles.cache.get('940281435644911656')
-    if(message.member.roles.cache.has('871058889339207681')) {
+    if(moderatorrole) {
         if(message.channel.parent.id === '940053879264006165') {
             if(!args[0]) return message.channel.send('Correct command usage:\n\`!verify <@user/userid>\`').catch(e => {})
             try {
@@ -26,11 +26,6 @@ module.exports.run = async(client, message, args, prefix) => {
                             targetmember.roles.remove(pending).catch(e => {})
                         }).catch(e => {})
                         await targetmember.send({ embeds: [embed] }).catch(e => console.log(`⚠ I'm confirming ${targetmember}'s verification, but his/her DMs are closed!`)) 
-                        await message.reply(`${targetmember} is now verified!\n**Channel will be closing in five seconds.**`).then(() => {
-                            setTimeout(() => {
-                                message.channel.delete()
-                            }, 5000)
-                        })
                     } else {
                         await message.react('❌')
                         await message.reply('⚠ Member has been already verified!').then(msg => {setTimeout(() => msg.delete(), 5000)})
@@ -45,11 +40,7 @@ module.exports.run = async(client, message, args, prefix) => {
             await message.author.send('The verify command should work ONLY on verification tickets opened by a user.').catch(e => {})
         }
     } else {
-        message.delete();
-        const inaccessEmbed = new MessageEmbed()
-        .setColor("#ff0000")
-        .setDescription('You are not a staff member authorized to use this command.')
-        message.author.send({ embeds: [inaccessEmbed] }).catch(e => {})
+        await message.delete();
     }
 }
 
