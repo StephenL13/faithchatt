@@ -1,6 +1,7 @@
 module.exports.run = async (client, message, args, prefix) => {
     if(message.member.permissions.has("MANAGE_ROLES")) {
         let targetmember = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
+        const memberrole = message.guild.roles.cache.get('839720518213959701')
         const mutedrole = message.guild.roles.cache.get('859912959660785667')
         const moderatorrole = message.guild.roles.cache.get('871058889339207681')
 
@@ -14,7 +15,8 @@ module.exports.run = async (client, message, args, prefix) => {
             await message.react('✅')
             await message.channel.send("**Member unjailed! The channel will be closed in five seconds.**")
             setTimeout(() => {
-                targetmember.roles.remove(mutedrole);
+                targetmember.roles.remove(mutedrole).catch(e=>{});
+                targetmember.roles.add(memberrole).catch(e=>{})
                 message.channel.delete()
             }, 5000)
         } else return console.log(`${message.author.tag} executed in a non-jail ticket.`)
