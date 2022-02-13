@@ -31,7 +31,16 @@ module.exports.run = async (client, message, args, prefix) => {
             .setDescription(`👤 **Suspect:** \`${targetmember.user.tag}\`\n🔒 **Reason:** \`${reason}\`\n\nYou have been restricted access to all channels as of the moment. Please consider talking to our mods if you're deemed to be acting detrimently in the server. Leaving and rejoining the server to bypass the mute will result into a permanent sanction.`)
             .setFooter({ text: targetmember.user.id })
             .setColor('#ff0000')
-        jailchannel.send({ content: `${targetmember}`, embeds: [channelembed] }).catch(e=>{})
+        await message.react('🔒').then(() => {
+            targetmember.send({ embeds: [
+                new MessageEmbed()
+                .setTitle("You have been jailed!")
+                .setDescription(`👤 **Suspect:** \`${targetmember.user.tag}\`\n🔒 **Reason:** \`${reason}\`\n\nYou have been restricted access to all channels as of the moment. Thus, a jail ticket is created for you. ${jailchannel}`)
+                .setFooter({ text: targetmember.user.id })
+                .setColor('#ff0000')
+            ] }).catch(() => {})
+        }).catch(() => {})
+        await jailchannel.send({ content: `${targetmember}`, embeds: [channelembed] }).catch(e=>{})
     } else {
         message.delete();
         const inaccessEmbed = new MessageEmbed()
