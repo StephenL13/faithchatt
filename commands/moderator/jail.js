@@ -36,16 +36,22 @@ module.exports.run = async (client, message, args, prefix) => {
                 new MessageEmbed()
                 .setTitle("You have been jailed!")
                 .setDescription(`👤 **Suspect:** \`${targetmember.user.tag}\`\n🔒 **Reason:** \`${reason}\`\n\nYou have been restricted access to all channels as of the moment. Thus, a jail ticket is created for you. ${jailchannel}`)
-                .setFooter({ text: targetmember.user.id })
+                .setFooter({ text: `UID: ${targetmember.user.id}` })
                 .setColor('#ff0000')
             ] }).catch(() => {})
         }).catch(() => {})
+        await message.channel.send({ embeds: [
+            new MessageEmbed()
+                .setDescription(`🔒 **${targetMember.user.tag}** has been jailed!`)
+                .setFooter({ text: `UID: ${targetmember.user.id}` })
+                .setColor('#ff0000')
+        ] })
         await jailchannel.send({ content: `${targetmember}`, embeds: [channelembed] }).catch(e=>{})
     } else {
         message.delete();
         const inaccessEmbed = new MessageEmbed()
         .setColor("#ff0000")
-        .setDescription('You are not a staff member authorized to use this command.')
+        .setDescription('❌ You are not a staff member authorized to use this command.')
         message.author.send({ embeds: [inaccessEmbed] }).catch(e => {})
     }
 }
