@@ -15,7 +15,7 @@ module.exports.run = async(client, message, args, prefix) => {
         .setThumbnail("https://cdn.discordapp.com/attachments/855630577105502228/904092673353334884/FaithChatt_Halo.png")
         .setColor("#ffd100")
         .setFooter({ text:"© FaithChatt Forum" });
-    await message.author.send({ embeds: [embed], components: [link] }).catch(e=>{message.reply("**❌ Notice: Your DMs are closed!**S").catch(e=>{})})
+    await message.channel.send({ embeds: [embed], components: [link] }).catch(e=>{})
 }
 
 module.exports.command = {

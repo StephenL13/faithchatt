@@ -49,6 +49,10 @@ async function createCmd(client, guildId) {
                             value: "moderation"
                         },
                         {
+                            name: "Verification Tickets",
+                            value: "verification"
+                        },
+                        {
                             name: "Role Commands",
                             value: "rolecmds"
                         },

@@ -17,6 +17,17 @@ module.exports.run = async (client, interaction) => {
                     new MessageEmbed()
                     .setTitle("Basic Moderation Commands")
                     .setDescription(`\`?warn [member] [reason] - warn\`\n\`?kick [member] [reason]\` - kick\n\`?ban [member] [reason]\` - ban\n\`?purge [count]\` - max. 1000 messages\n\`?purge [count] [user]\`\n\`!jail <@user/uid> <reason>\` - jail\n\`!unjail <@user/uid>\` - Unjail the repenting user\n\`!closejail\` - Only applicable for those who left the server\n\n\`?avatar [@user/userid]\` - User's avatar\n\`?poll [message] "[choice1]" "[choice2]"\` - Create a poll (10 max. choices)\n\`?poll show [message ID/link]\` - Results of a poll`)
+                    .setImage('https://i.imgur.com/IDkJbsi.png')
+                    .setColor("#ffd100")
+                    .setFooter({ text: "© FaithChatt Forum" })
+                ], ephemeral: true })
+            } break;
+            case "verification": {
+                await interaction.reply({ embeds: [
+                    new MessageEmbed()
+                    .setTitle("Verification")
+                    .setDescription("\`!verify <@user/userid>\`\n\`!closeverify\`")
+                    .setImage('https://i.imgur.com/mqf4MsX.png')
                     .setColor("#ffd100")
                     .setFooter({ text: "© FaithChatt Forum" })
                 ], ephemeral: true })
