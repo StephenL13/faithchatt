@@ -11,5 +11,5 @@ module.exports.run = async (client, interaction) => {
 }
 
 module.exports.command = {
-    name: "ping"
+    name: "help"
 }
