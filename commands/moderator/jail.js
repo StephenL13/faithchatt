@@ -30,7 +30,7 @@ module.exports.run = async (client, message, args, prefix) => {
         const channelembed = new MessageEmbed()
             .setTitle("You have been jailed!")
             .setDescription(`👤 **Suspect:** \`${targetmember.user.tag}\`\n🔒 **Reason:** \`${reason}\`\n\nYou have been restricted access to all channels as of the moment. Leaving and rejoining the server to bypass the mute will result into a permanent sanction.`)
-            setFooter({ text: `UID: ${targetmember.user.id}` })
+            .setFooter({ text: `UID: ${targetmember.user.id}` })
             .setColor('#ff0000')
         await message.react('🔒').then(() => {
             targetmember.send({ embeds: [
