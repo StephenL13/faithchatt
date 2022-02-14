@@ -1,7 +1,9 @@
 const { MessageEmbed } = require('discord.js')
 module.exports.run = async (client, message, args, prefix) => {
     let moderator = message.member.roles.cache.has('871058889339207681')
+    const bstext = '839953010142871552'
 
+    if(message.channel.id === bstext) return message.delete().catch(e=>{})
     if(message.member.permissions.has("MANAGE_ROLES")) {
       if (moderator) {
         const lockEmbed = new MessageEmbed()
