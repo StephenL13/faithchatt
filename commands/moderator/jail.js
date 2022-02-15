@@ -18,10 +18,10 @@ module.exports.run = async (client, message, args, prefix) => {
         let jailchannel = await message.guild.channels.create("jail-"+ticketname, {
             type: "GUILD_TEXT",
             parent: "934728381294063616",
-            topic: "Jail ticket for "+ticketname
+            topic: targetmember.user.id
         })
         await jailchannel.permissionOverwrites.set([
-            { id: targetmember.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES"], deny: ["EMBED_LINKS", "ATTACH_FILES"] },
+            { id: targetmember.user.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES"], deny: ["EMBED_LINKS", "ATTACH_FILES"] },
             { id: memberrole.id, deny: ["VIEW_CHANNEL"] },
             { id: moderatorrole.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"] },
             { id: everyone.id, deny: ["VIEW_CHANNEL"] }

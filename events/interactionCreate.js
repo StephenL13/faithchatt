@@ -32,7 +32,7 @@ client.on('interactionCreate', async interaction => {
                 let verifychannel = await interaction.guild.channels.create(ticketname, {
                     type: "GUILD_TEXT",
                     parent: "940053879264006165",
-                    topic: `Verification ticket`
+                    topic: interaction.user.id
                 })
                 await verifychannel.permissionOverwrites.set([
                     { id: interaction.user.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES"], deny: ["EMBED_LINKS", "ATTACH_FILES"] },
