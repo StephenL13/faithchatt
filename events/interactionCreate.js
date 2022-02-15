@@ -26,7 +26,7 @@ client.on('interactionCreate', async interaction => {
             let ticketname = interaction.user.tag
 
             if(interaction.member.roles.cache.has('940281435644911656')) {
-                return interaction.reply({ content: "You have already created a ticket! If you have problems, immediately contact/DM the moderators.", ephemeral: true })
+                return interaction.reply({ content: "You have already created a ticket! If you have problems, immediately contact/DM the moderators.", ephemeral: true }).catch(e=>{})
             } else {
                 await interaction.member.roles.add(pending).catch(e => {})
                 let verifychannel = await interaction.guild.channels.create(ticketname, {
@@ -42,8 +42,8 @@ client.on('interactionCreate', async interaction => {
                     { id: moderatorrole.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"] },
                     { id: everyone.id, deny: ["VIEW_CHANNEL"] }
                 ])
-                verifychannel.send({ content: `${interaction.user}`, embeds: [ticketembed] })
-                return interaction.reply({ content: `Ticket created! Please check ${verifychannel}`, ephemeral: true })
+                verifychannel.send({ content: `${interaction.user}`, embeds: [ticketembed] }).catch(e=>{})
+                return interaction.reply({ content: `Ticket created! Please check ${verifychannel}`, ephemeral: true }).catch(e=>{})
             }
         }
     }
