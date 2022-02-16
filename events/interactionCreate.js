@@ -11,15 +11,15 @@ client.on('interactionCreate', async interaction => {
     // THE SYSTEM
     if(interaction.isButton){
         if(interaction.customId == "verifyticket"){
-            const moderatorrole = interaction.guild.roles.cache.get('871058889339207681')
-            const unverified = interaction.guild.roles.cache.get('940052640472109117')
-            const pending = interaction.guild.roles.cache.get('940281435644911656')
-            const memberrole = interaction.guild.roles.cache.get('839720518213959701')
-            const everyone = interaction.guild.roles.cache.find(r => r.name === "@everyone")
+            const moderatorrole = interaction.user.roles.cache.get('871058889339207681')
+            const unverified = interaction.user.roles.cache.get('940052640472109117')
+            const pending = interaction.user.roles.cache.get('940281435644911656')
+            const memberrole = interaction.user.roles.cache.get('839720518213959701')
+            const everyone = interaction.user.roles.cache.find(r => r.name === "@everyone")
 
             const ticketembed = new MessageEmbed()
                 .setTitle('Verification Questions')
-                .setDescription(`1. What made you come to the server?\n2. Where did you find the invite link?\n3. What is your age and gender?\n4. What is your story of coming to the faith?\n5. Ping an active staff member once you're done.\n\n**To all staff members:**\nIf they're good enough to join, you may execute this command:\n\`!verify <@user/userid>\` - Approve the verification\n\`!closeverify\` - Applicable if the member has left the server.`)
+                .setDescription(`1. What made you come to the server?\n2. Where did you find the invite link?\n3. What is your age and gender?\n4. What is your story of coming to the faith?\n5. Ping an active staff member once you're done.`)
                 .setThumbnail('https://cdn.discordapp.com/attachments/855630577105502228/904092673353334884/FaithChatt_Halo.png')
                 .setColor("#ffd100")
                 .setFooter({ text: "© FaithChatt Forum" })
