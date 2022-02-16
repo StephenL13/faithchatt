@@ -1,7 +1,8 @@
+const { textId, rolesId } = require('../../variablehandler.js')
 const { MessageEmbed } = require('discord.js')
-const professorRole = '843151409167073350'
-const facilitatorRole = '903033680497365033'
-const bstext = '839953010142871552'
+const professorRole = rolesId.professor
+const facilitatorRole = rolesid.facilitatorRole
+const bstext = textId.biblestudy
 
 module.exports.run = async(client, message, args, prefix) => {
     const errorEmbed = new MessageEmbed()

@@ -1,25 +1,26 @@
+const { parentId, rolesId } = require('../../variablehandler.js')
 const { MessageEmbed } = require('discord.js')
 module.exports.run = async (client, message, args, prefix) => {
     if(message.member.permissions.has("MANAGE_ROLES")) {
         let targetmember = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         let reason = args.slice(1).join(" ")
-        const memberrole = message.guild.roles.cache.get('839720518213959701')
-        const mutedrole = message.guild.roles.cache.get('859912959660785667')
-        const moderatorrole = message.guild.roles.cache.get('871058889339207681')
+        const memberrole = message.guild.roles.cache.get(rolesId.member)
+        const mutedrole = message.guild.roles.cache.get(rolesId.muted)
+        const moderatorrole = message.guild.roles.cache.get(rolesId.staff)
         const everyone = message.guild.roles.cache.find(r => r.name === "@everyone")
 
-        if(!message.member.roles.cache.has('871058889339207681')) return message.delete().then(async() => {
+        if(!message.member.roles.cache.has(rolesId.staff)) return message.delete().then(async() => {
             await message.author.send("You're not a staff member authorized to use this command.")
         }).catch(e => {})
         if(!targetmember) return message.channel.send("Command usage:\n`!jail <@user/uid> <reason>`")
-        if(targetmember.roles.cache.has('859912959660785667')) return message.reply("The member has been already jailed!")
+        if(targetmember.roles.cache.has(rolesId.muted)) return message.reply("The member has been already jailed!")
         if(!reason) return message.channel.send("Please supply a reason of the suspect.\n`!jail <@user/uid> <reason>`")
         await targetmember.roles.add(mutedrole).catch(e=>{})
         await targetmember.roles.remove(memberrole).catch(e=>{})
         let ticketname = targetmember.user.tag
         let jailchannel = await message.guild.channels.create("jail-"+ticketname, {
             type: "GUILD_TEXT",
-            parent: "934728381294063616",
+            parent: parentId.jail,
             topic: targetmember.user.id
         })
         await jailchannel.permissionOverwrites.set([

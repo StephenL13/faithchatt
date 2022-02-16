@@ -1,11 +1,9 @@
+const { textId, rolesId } = require('../../variablehandler.js')
 const { MessageEmbed } = require("discord.js");
 module.exports.run = async (client, message, args, prefix) => {
-  let moderator = message.member.roles.cache.has("871058889339207681");
-  const bstext = '839953010142871552'
-
-  if(message.channel.id === bstext) return message.delete().catch(e=>{})
+  if(message.channel.id === textId.biblestudy) return message.delete().catch(e=>{})
   if(message.member.permissions.has("MANAGE_ROLES")){
-    if (moderator) {
+    if (message.member.roles.cache.has(rolesId.staff)) {
       const lockEmbed = new MessageEmbed()
         .setColor("#FF0000")
         .setTitle("🔐 Channel is unlocked.")
