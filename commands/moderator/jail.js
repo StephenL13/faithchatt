@@ -8,9 +8,11 @@ module.exports.run = async (client, message, args, prefix) => {
         const moderatorrole = message.guild.roles.cache.get('871058889339207681')
         const everyone = message.guild.roles.cache.find(r => r.name === "@everyone")
 
-        if(!moderatorrole) return message.delete().then(async() => {await message.author.send("You're not a staff member authorized to use this command.")}).catch(e => {})
+        if(!message.member.roles.cache.has('871058889339207681')) return message.delete().then(async() => {
+            await message.author.send("You're not a staff member authorized to use this command.")
+        }).catch(e => {})
         if(!targetmember) return message.channel.send("Command usage:\n`!jail <@user/uid> <reason>`")
-        if(targetmember.roles.cache.has(mutedrole)) return message.reply("The member has been already jailed!")
+        if(targetmember.roles.cache.has('859912959660785667')) return message.reply("The member has been already jailed!")
         if(!reason) return message.channel.send("Please supply a reason of the suspect.\n`!jail <@user/uid> <reason>`")
         await targetmember.roles.add(mutedrole).catch(e=>{})
         await targetmember.roles.remove(memberrole).catch(e=>{})

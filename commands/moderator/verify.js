@@ -1,15 +1,16 @@
 const { MessageEmbed } = require('discord.js')
 
 module.exports.run = async(client, message, args, prefix) => {
-    const moderatorrole = message.member.roles.cache.has('871058889339207681')
+    const moderatorrole = message.member.roles.cache.get('871058889339207681')
     const memberrole = message.member.roles.cache.get('839720518213959701')
     const unverified = message.member.roles.cache.get('940052640472109117')
     const pending = message.member.roles.cache.get('940281435644911656')
+    const targetmember = message.mentions.members.first() || message.guild.members.cache.get(args[0])
+
     if(moderatorrole) {
         if(message.channel.parent.id === '940053879264006165') {
             if(!args[0]) return message.channel.send('Correct command usage:\n\`!verify <@user/userid>\`').catch(e => {})
             try {
-                const targetmember = message.mentions.members.first() || message.guild.members.cache.get(args[0])
                 if (!targetmember) {
                     return message.channel.send('**Please mention a user.**\n\nCorrect command usage:\n\`!verify <@user/userid>\`').catch(e => {})
                 } else {
@@ -48,6 +49,10 @@ module.exports.run = async(client, message, args, prefix) => {
         }
     } else {
         await message.delete();
+        const inaccessEmbed = new MessageEmbed()
+        .setColor("#ff0000")
+        .setDescription('❌ You are not a staff member authorized to use this command.')
+        await message.author.send({ embeds: [inaccessEmbed] }).catch(e => {})
     }
 }
 
