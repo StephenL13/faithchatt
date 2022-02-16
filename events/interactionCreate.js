@@ -11,11 +11,11 @@ client.on('interactionCreate', async interaction => {
     // THE SYSTEM
     if(interaction.isButton){
         if(interaction.customId == "verifyticket"){
-            const moderatorrole = interaction.user.roles.cache.get('871058889339207681')
-            const unverified = interaction.user.roles.cache.get('940052640472109117')
-            const pending = interaction.user.roles.cache.get('940281435644911656')
-            const memberrole = interaction.user.roles.cache.get('839720518213959701')
-            const everyone = interaction.user.roles.cache.find(r => r.name === "@everyone")
+            const moderatorrole = interaction.member.roles.cache.get('871058889339207681')
+            const unverified = interaction.member.roles.cache.get('940052640472109117')
+            const pending = interaction.member.roles.cache.get('940281435644911656')
+            const memberrole = interaction.member.roles.cache.get('839720518213959701')
+            const everyone = interaction.member.roles.cache.find(r => r.name === "@everyone")
 
             const ticketembed = new MessageEmbed()
                 .setTitle('Verification Questions')
