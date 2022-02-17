@@ -10,11 +10,11 @@ module.exports.run = async (client, interaction) => {
 
     const embed = new MessageEmbed()
         .setColor('#ffd100')
-        .setAuthor({ name: interaction.user.tag, iconURL: interaction.user.displayAvatarURL() })
+        .setAuthor({ name: "A new anonymous prayer request has been sent!" })
         .setThumbnail(praylogo)
         .setDescription(slashCmdString)
         .setFooter({ text: "© FaithChatt Forum" })
-    await interaction.reply({ content: "**Your prayer request has been sent!**", ephemeral: true })
+    await interaction.reply({ content: "**Your anonymous prayer request has been sent!**", ephemeral: true })
     switch (pingPrayerWarrior) {
         case true: {
             await textChannel.send({ content:`<@&${roleIdPrayerWarrior}>`, embeds: [embed] })
