@@ -1,10 +1,11 @@
 const { textId, rolesId } = require('../../variablehandler.js')
 const { MessageEmbed } = require('discord.js')
-const professorRole = rolesId.professor
-const facilitatorRole = rolesId.facilitatorRole
-const bstext = textId.biblestudy
 
 module.exports.run = async(client, message, args, prefix) => {
+    const professorRole = rolesId.professor
+    const facilitatorRole = rolesId.facilitator
+    const memberrole = message.member.roles.cache.get(rolesId.member)
+    const bstext = textId.biblestudy
     const errorEmbed = new MessageEmbed()
         .setColor('#FF0000')
         .setFooter({ text: '© FaithChatt Forum' });
@@ -14,9 +15,8 @@ module.exports.run = async(client, message, args, prefix) => {
         .setFooter({ text:"© FaithChatt Forum" });
     if(message.member.roles.cache.has({ professorRole, facilitatorRole }) || message.member.permissions.has("MANAGE_ROLES")) {
         if(message.channel.id === bstext){
-            message.channel.permissionOverwrites.edit(message.guild.id, {
-                "SEND_MESSAGES": null
-            })
+            await message.channel.permissionOverwrites.edit(message.guild.id, { "SEND_MESSAGES": false })
+            await message.channel.permissionOverwrites.edit(memberrole.id, { "SEND_MESSAGES": false })
             message.channel.send({ embeds: [successEmbed] })
         } else {
             message.delete()
