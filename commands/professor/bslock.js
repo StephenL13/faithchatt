@@ -3,6 +3,7 @@ const { MessageEmbed } = require('discord.js')
 
 const professorRole = rolesId.professor
 const facilitatorRole = rolesId.facilitator
+const bstext = textId.biblestudy
 
 module.exports.run = async(client, message, args, prefix) => {
     const errorEmbed = new MessageEmbed()
@@ -14,7 +15,7 @@ module.exports.run = async(client, message, args, prefix) => {
         .setImage('https://media1.giphy.com/media/z1kL3TjrK278E6EhZF/giphy.gif?cid=790b7611e06601e976e82fa774ae08ceab4bd86a1f6672ea&rid=giphy.gif&ct=g')
         .setFooter({ text:"© FaithChatt Forum" });
     if(message.member.roles.cache.has({ professorRole, facilitatorRole }) || message.member.permissions.has("MANAGE_ROLES")) {
-        if(message.channel.id === textId.biblestudy){
+        if(message.channel.id === bstext){
             message.channel.permissionOverwrites.edit(message.guild.id, {
                 "SEND_MESSAGES": false
             })
