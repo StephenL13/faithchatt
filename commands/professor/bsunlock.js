@@ -15,8 +15,8 @@ module.exports.run = async(client, message, args, prefix) => {
         .setFooter({ text:"© FaithChatt Forum" });
     if(message.member.roles.cache.has({ professorRole, facilitatorRole }) || message.member.permissions.has("MANAGE_ROLES")) {
         if(message.channel.id === bstext){
-            await message.channel.permissionOverwrites.edit(message.guild.id, { "SEND_MESSAGES": false })
-            await message.channel.permissionOverwrites.edit(memberrole.id, { "SEND_MESSAGES": false })
+            await message.channel.permissionOverwrites.edit(message.guild.id, { "SEND_MESSAGES": null })
+            await message.channel.permissionOverwrites.edit(memberrole.id, { "SEND_MESSAGES": null })
             message.channel.send({ embeds: [successEmbed] })
         } else {
             message.delete()
