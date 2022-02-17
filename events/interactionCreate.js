@@ -1,5 +1,6 @@
 const client = require('../index.js').client
 const { MessageEmbed } = require('discord.js')
+const { textId, parentId, rolesId } = require('../../variablehandler.js');
 
 client.on('interactionCreate', async interaction => {
     // SLASH COMMAND HANDLER
@@ -11,10 +12,10 @@ client.on('interactionCreate', async interaction => {
     // THE SYSTEM
     if(interaction.isButton){
         if(interaction.customId == "verifyticket"){
-            const moderatorrole = interaction.guild.roles.cache.get('871058889339207681')
-            const unverified = interaction.guild.roles.cache.get('940052640472109117')
-            const pending = interaction.guild.roles.cache.get('940281435644911656')
-            const memberrole = interaction.guild.roles.cache.get('839720518213959701')
+            const moderatorrole = interaction.guild.roles.cache.get(rolesId.staff)
+            const unverified = interaction.guild.roles.cache.get(rolesId.unverified)
+            const pending = interaction.guild.roles.cache.get(rolesId.pending)
+            const memberrole = interaction.guild.roles.cache.get(rolesId.member)
             const everyone = interaction.guild.roles.cache.find(r => r.name === "@everyone")
 
             const ticketembed = new MessageEmbed()
@@ -25,13 +26,13 @@ client.on('interactionCreate', async interaction => {
                 .setFooter({ text: "© FaithChatt Forum" })
             let ticketname = interaction.user.tag
 
-            if(interaction.member.roles.cache.has('940281435644911656')) {
+            if(interaction.member.roles.cache.has(rolesId.pending)) {
                 return interaction.reply({ content: "You have already created a ticket! If you have problems, immediately contact/DM the moderators.", ephemeral: true }).catch(e=>{})
             } else {
                 await interaction.member.roles.add(pending).catch(e => {})
                 let verifychannel = await interaction.guild.channels.create(ticketname, {
                     type: "GUILD_TEXT",
-                    parent: "940053879264006165",
+                    parent: parentId.verification,
                     topic: interaction.user.id
                 })
                 await verifychannel.permissionOverwrites.set([

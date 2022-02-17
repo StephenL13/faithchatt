@@ -2,9 +2,9 @@ const { textId, parentId, rolesId } = require('../../variablehandler.js')
 const { MessageEmbed } = require('discord.js')
 
 module.exports.run = async(client, message, args, prefix) => {
-    const memberrole = message.member.roles.cache.get(rolesId.member)
-    const unverified = message.member.roles.cache.get(rolesId.unverified)
-    const pending = message.member.roles.cache.get(rolesId.pending)
+    const memberrole = message.guild.roles.cache.get(rolesId.member)
+    const unverified = message.guild.roles.cache.get(rolesId.unverified)
+    const pending = message.guild.roles.cache.get(rolesId.pending)
     const targetmember = message.mentions.members.first() || message.guild.members.cache.get(args[0])
 
     if(message.member.roles.cache.has(rolesId.staff)) {
