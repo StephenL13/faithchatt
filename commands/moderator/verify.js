@@ -26,7 +26,7 @@ module.exports.run = async(client, message, args, prefix) => {
                             targetmember.roles.remove(unverified).catch(e => {})
                             targetmember.roles.remove(pending).catch(e => {})
                         }).catch(e => {})
-                        await targetmember.send({ embeds: [embed] }).catch(e => console.log(`⚠ I'm confirming ${targetmember}'s verification, but his/her DMs are closed!`))
+                        await targetmember.send({ embeds: [embed] }).catch(e => console.log(`⚠ I'm confirming ${targetmember.user.tag}'s verification, but his/her DMs are closed!`))
                         await message.reply({ content: `${targetmember} is now verified!\n**The channel will be closed in five seconds.**` })
                             .then(() => {
                                 setTimeout(() => {
