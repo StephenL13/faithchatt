@@ -16,7 +16,7 @@ const biblestudy = "839953010142871552"
 const prayer = "839722222162804736"
 
 // STAFF-EXCLUSIVE
-
+const suggest = "943205296891920444"
 const jailcmds = "934731088570494976"
 
 module.exports = {
@@ -26,5 +26,5 @@ module.exports = {
     events, introduction, general, askquestion, biblestudy, prayer,
     
     // STAFF
-    jailcmds
+    jailcmds, suggest
 }
