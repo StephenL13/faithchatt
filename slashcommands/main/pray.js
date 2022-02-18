@@ -1,12 +1,13 @@
 const { MessageEmbed } = require('discord.js')
+const { textId, rolesId } = require('../../variablehandler.js')
 
 module.exports.run = async (client, interaction) => {
     const praylogo = "https://i.pinimg.com/originals/cf/46/d3/cf46d3c5d059e2e802faa904686d3bfc.png"
     
     const slashCmdString = interaction.options.getString("text")
     const pingPrayerWarrior = interaction.options.getBoolean("ping")
-    const textChannel = client.channels.cache.get('839722222162804736')
-    const roleIdPrayerWarrior = "844787634030772224"
+    const textChannel = client.channels.cache.get(textId.prayer)
+    const roleIdPrayerWarrior = rolesId.prayerwarrior
 
     const embed = new MessageEmbed()
         .setColor('#ffd100')

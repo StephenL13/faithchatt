@@ -1,8 +1,9 @@
 const { MessageEmbed } = require('discord.js')
+const { textId } = require('../../variablehandler.js')
 const moment = require('moment')
 module.exports.run = async (client, interaction) => {
     const slashCmdString = interaction.options.getString("text")
-    const textChannel = client.channels.cache.get("839724682134683649")
+    const textChannel = client.channels.cache.get(textId.askquestion)
     let simpledate = await moment().format('l')
 
     await interaction.reply({ content: "**Your question has been sent!**\n\n*NOTE: Should there be any submissions that is against the rules, it will be removed immediately.*", ephemeral: true }).catch(e=>console.log(e))
