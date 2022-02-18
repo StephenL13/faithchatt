@@ -2,7 +2,7 @@ const faithchatt = require('../../variablehandler')
 const { MessageEmbed } = require('discord.js')
 
 module.exports.run = async (client, interaction) => {
-    const slashCmdString = interaction.options.getstring("text")
+    const slashCmdString = interaction.options.getString("text")
     const textChannel = client.channels.cache.get(faithchatt.textId.suggest)
 
     await interaction.reply({ content: "**Your suggestion has been sent!**", ephemeral: true }).catch(e=>console.log(e))
