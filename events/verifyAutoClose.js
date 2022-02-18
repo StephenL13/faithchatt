@@ -5,7 +5,7 @@ client.on('guildMemberRemove', async member => {
     let ticketclose = await member.guild.channels.cache.find(c => c.topic === `${member.id}`)
     if(ticketclose) {
         if(ticketclose.parentId === faithchatt.parentId.verification) {
-            ticketclose.send("Member has left the server! Type `!closeverify`.")
+            ticketclose.delete()
         }
     }
 })
