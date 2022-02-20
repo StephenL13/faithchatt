@@ -8,6 +8,7 @@ module.exports.run = async(client, message, args, prefix) => {
     const targetmember = message.mentions.members.first() || message.guild.members.cache.get(args[0])
 
     if(message.member.roles.cache.has(rolesId.staff)) {
+        if(message.channel.id === textId.verify) return message.delete()
         if(message.channel.parent.id === parentId.verification) {
             if(!args[0]) return message.channel.send('Correct command usage:\n\`!verify <@user/userid>\`').catch(e => {})
             try {
@@ -22,14 +23,13 @@ module.exports.run = async(client, message, args, prefix) => {
                             .setColor("#ffd100")
                             .setFooter({ text:"© FaithChatt Forum" });
                         await message.react('✅')
-                        await targetmember.roles.add(memberrole).then(() => {
-                            targetmember.roles.remove(unverified).catch(e => {})
-                            targetmember.roles.remove(pending).catch(e => {})
-                        }).catch(e => {})
                         await targetmember.send({ embeds: [embed] }).catch(e => console.log(`⚠ I'm confirming ${targetmember.user.tag}'s verification, but his/her DMs are closed!`))
                         await message.reply({ content: `${targetmember} is now verified!\n**The channel will be closed in five seconds.**` })
                             .then(() => {
                                 setTimeout(() => {
+                                    targetmember.roles.add(memberrole).catch(e => {})
+                                    targetmember.roles.remove(unverified).catch(e => {})
+                                    targetmember.roles.remove(pending).catch(e => {})
                                     message.channel.delete()
                                 }, 5000)
                             })

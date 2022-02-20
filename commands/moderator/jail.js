@@ -25,6 +25,7 @@ module.exports.run = async (client, message, args, prefix) => {
         })
         await jailchannel.permissionOverwrites.set([
             { id: targetmember.user.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES"], deny: ["EMBED_LINKS", "ATTACH_FILES"] },
+            { id: mutedrole.id, deny: ["EMBED_LINKS", "ATTACH_FILES"] },
             { id: memberrole.id, deny: ["VIEW_CHANNEL"] },
             { id: moderatorrole.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"] },
             { id: everyone.id, deny: ["VIEW_CHANNEL"] }
