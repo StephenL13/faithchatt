@@ -52,7 +52,7 @@ async function createCmd(client, guildId) {
         },
         {
             name: "modhelp",
-            description: "Serves a bot ping",
+            description: "A handbook of staff-only commands",
             options: [
                 {
                     name: "category",
