@@ -8,7 +8,7 @@ client.on('guildMemberRemove', async member => {
             autoclose.delete()
         } else if(autoclose.parentId === faithchatt.parentId.jail) {
             if(member.roles.cache.has(faithchatt.rolesId.muted)) {
-                autoclose.send({ content: "**Member has left the jail. Staff decision will be implemented.**"})
+                autoclose.send({ content: `**A jailed member left. Staff has now the floor to implement for a decision.**\n\n\`${member.user.tag}\` - \`${member.user.id}\``}).catch(e => console.log(e))
             }
         }
     }
