@@ -4,10 +4,15 @@ const moment = require('moment')
 module.exports.run = async (client, interaction) => {
     const slashCmdString = interaction.options.getString("text")
     const textChannel = client.channels.cache.get(textId.askquestion)
-    let simpledate = await moment().format('l')
+    let simpledate = await moment().format('M-D-YYYY')
 
-    await interaction.reply({ content: "**Your question has been sent!**\n\n*NOTE: Should there be any submissions that is against the rules, it will be removed immediately.*", ephemeral: true }).catch(e=>console.log(e))
-    let output = await textChannel.send({ embeds: [
+    await interaction.reply({ embeds: [
+        new MessageEmbed()
+        .setColor('#ffd100')
+        .setTitle('Your question has been sent!')
+        .setDescription('*NOTE: Should there be any submissions that is against the rules, it will be removed immediately.*')
+    ], ephemeral: true }).catch(e=>console.log(e))
+    let output = await textChannel.send({ content: `${interaction.user}`, embeds: [
         new MessageEmbed()
         .setColor('#ffd100')
         .setAuthor({ name: interaction.user.tag, iconURL: interaction.user.displayAvatarURL() })
@@ -19,7 +24,7 @@ module.exports.run = async (client, interaction) => {
     await msgfetch.startThread({
         name: `${interaction.user.username} | ${simpledate}`,
         autoArchiveDuration: 1440,
-        rateLimitPerUser: 10
+        rateLimitPerUser: 5
     })
 }
 

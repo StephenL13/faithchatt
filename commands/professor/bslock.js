@@ -10,8 +10,9 @@ module.exports.run = async(client, message, args, prefix) => {
         .setColor('#FF0000')
         .setFooter({ text: '© FaithChatt Forum' });
     const successEmbed = new MessageEmbed()
+        .setTitle('<:Unstaged:880650957925519441> Bible study channel is now locked.')
         .setColor('#ffd100')
-        .setDescription(`<:Unstaged:880650957925519441> **Bible study channel is now locked.**\n\nTune in next time by [checking out our schedules](https://discord.com/channels/839708279973478430/839965374967054386/936968689608163388) on <#${textId.events}>. Thanks for joining with us. God bless you.`)
+        .setDescription(`Tune in next time by [checking out our schedules](https://discord.com/channels/839708279973478430/839965374967054386/936968689608163388) on <#${textId.events}>. For the meantime, you can also check out our radio station channels Moody Radio, RefNet, and Worship Radio.\n\nThanks for joining with us. God bless you.`)
         .setImage('https://media1.giphy.com/media/z1kL3TjrK278E6EhZF/giphy.gif?cid=790b7611e06601e976e82fa774ae08ceab4bd86a1f6672ea&rid=giphy.gif&ct=g')
         .setFooter({ text:"© FaithChatt Forum" });
     if(message.member.roles.cache.has({ professorRole, facilitatorRole }) || message.member.permissions.has("MANAGE_ROLES")) {

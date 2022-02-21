@@ -11,7 +11,8 @@ module.exports.run = async(client, message, args, prefix) => {
         .setFooter({ text: '© FaithChatt Forum' });
     const successEmbed = new MessageEmbed()
         .setColor("#ffff00")
-        .setDescription("<:Staged:880649462492569651> Session is about to start in a few moments.\nHead over to <#840942889340239914> and study the Word with us!")
+        .setTitle('<:Staged:880649462492569651> Session is about to start in a few moments.')
+        .setDescription("Head over to <#840942889340239914> and study the Word with us!")
         .setFooter({ text:"© FaithChatt Forum" });
     if(message.member.roles.cache.has({ professorRole, facilitatorRole }) || message.member.permissions.has("MANAGE_ROLES")) {
         if(message.channel.id === bstext){
