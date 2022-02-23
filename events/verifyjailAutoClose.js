@@ -8,7 +8,7 @@ client.on('guildMemberRemove', async member => {
             const messages = await memChannel.messages.fetch()
             const arrayMessages = await messages.filter(msg => !msg.length).reverse()
             const text = await arrayMessages.map(m=>`${m.author.tag}: ${m.content}`).join("\n")
-            const logChannel = await client.channels.cache.get(textId.verifylog)
+            const logChannel = await client.channels.cache.get(faithchatt.textId.verifylog)
             await logChannel.send({ 
                 content: `\`\`\`\n${text}\`\`\``,
                 embeds: [
