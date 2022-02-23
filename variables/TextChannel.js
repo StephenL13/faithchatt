@@ -18,6 +18,7 @@ const prayer = "839722222162804736"
 // STAFF-EXCLUSIVE
 const suggest = "943205296891920444"
 const jailcmds = "934731088570494976"
+const verifylog = "945850862662737920"
 
 module.exports = {
     welcome, goodbye, rules, roles, verify, confidentiality,
@@ -26,5 +27,5 @@ module.exports = {
     events, introduction, general, askquestion, biblestudy, prayer,
     
     // STAFF
-    jailcmds, suggest
+    jailcmds, suggest, verifylog
 }
