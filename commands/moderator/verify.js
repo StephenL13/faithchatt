@@ -30,7 +30,15 @@ module.exports.run = async(client, message, args, prefix) => {
                                 const arrayMessages = await messages.filter(msg => !msg.length).reverse()
                                 const text = await arrayMessages.map(m=>`${m.author.tag}: ${m.content}`).join("\n")
                                 const logChannel = await client.channels.cache.get(textId.verifylog)
-                                await logChannel.send({ content: `\`\`\`\n${text}\`\`\`` })
+                                await logChannel.send({ 
+                                    content: `\`\`\`\n${text}\`\`\``,
+                                    embeds: [
+                                        new MessageEmbed()
+                                        .setColor('#00FF00')
+                                        .setDescription(`👤 **User:** \`${targetmember.user.tag}\`\n📜 **ID:** \`${targetmember.user.id}\``)
+                                        .setThumbnail(targetmember.user.displayAvatarURL())
+                                    ]
+                                })
                                 setTimeout(() => {
                                     targetmember.roles.add(memberrole).catch(e => {})
                                     targetmember.roles.remove(unverified).catch(e => {})

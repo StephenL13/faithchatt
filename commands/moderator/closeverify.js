@@ -6,6 +6,18 @@ module.exports.run = async (client, message, args, prefix) => {
             if(message.channel.id === textId.verify) return message.delete()
             await message.react('✅')
             await message.channel.send("**The channel will be closed in five seconds.**")
+            const messages = await message.channel.messages.fetch()
+            const arrayMessages = await messages.filter(msg => !msg.length).reverse()
+            const text = await arrayMessages.map(m=>`${m.author.tag}: ${m.content}`).join("\n")
+            const logChannel = await client.channels.cache.get(textId.verifylog)
+            await logChannel.send({ 
+                content: `\`\`\`\n${text}\`\`\``,
+                embeds: [
+                    new MessageEmbed()
+                    .setColor('#00FF00')
+                    .setDescription(`Ticket closed upon staff decision.`)
+                ]
+            })
             setTimeout(() => {
                 message.channel.delete()
             }, 5000)
