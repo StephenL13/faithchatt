@@ -4,8 +4,6 @@ module.exports.run = async (client, message, args, prefix) => {
     if(message.member.permissions.has("MANAGE_ROLES") || message.member.roles.cache.has(rolesId.staff)) {
         if (message.channel.parent.id === parentId.verification){
             if(message.channel.id === textId.verify) return message.delete()
-            await message.react('✅')
-            await message.channel.send("**The channel will be closed in five seconds.**")
             const messages = await message.channel.messages.fetch()
             const arrayMessages = await messages.filter(msg => !msg.length).reverse()
             const text = await arrayMessages.map(m=>`${m.author.tag}: ${m.content}`).join("\n")
@@ -18,6 +16,8 @@ module.exports.run = async (client, message, args, prefix) => {
                     .setDescription(`Ticket closed upon staff decision.`)
                 ]
             })
+            await message.react('✅')
+            await message.channel.send("**The channel will be closed in five seconds.**")
             setTimeout(() => {
                 message.channel.delete()
             }, 5000)

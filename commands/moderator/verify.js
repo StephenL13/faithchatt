@@ -24,25 +24,24 @@ module.exports.run = async(client, message, args, prefix) => {
                             .setFooter({ text:"© FaithChatt Forum" });
                         await message.react('✅')
                         await targetmember.send({ embeds: [embed] }).catch(e => console.log(`⚠ I'm confirming ${targetmember.user.tag}'s verification, but his/her DMs are closed!`))
-                        await message.reply({ content: `${targetmember} is now verified!\n**The channel will be closed in five seconds.**` })
-                            .then(async() => {
-                                const messages = await message.channel.messages.fetch()
-                                const arrayMessages = await messages.filter(msg => !msg.length).reverse()
-                                const text = await arrayMessages.map(m=>`${m.author.tag}: ${m.content}`).join("\n")
-                                const logChannel = await client.channels.cache.get(textId.verifylog)
-                                await logChannel.send({ 
-                                    content: `\`\`\`\n${text}\`\`\``,
-                                    embeds: [
-                                        new MessageEmbed()
-                                        .setColor('#00FF00')
-                                        .setDescription(`👤 **User:** \`${targetmember.user.tag}\`\n📜 **ID:** \`${targetmember.user.id}\`\n\nVerification successful.`)
-                                        .setThumbnail(targetmember.user.displayAvatarURL())
-                                    ]
-                                })
+                        const messages = await message.channel.messages.fetch()
+                        const arrayMessages = await messages.filter(msg => !msg.length).reverse()
+                        const text = await arrayMessages.map(m=>`${m.author.tag}: ${m.content}`).join("\n")
+                        const logChannel = await client.channels.cache.get(textId.verifylog)
+                        await logChannel.send({ 
+                            content: `\`\`\`\n${text}\`\`\``,
+                            embeds: [
+                                new MessageEmbed()
+                                .setColor('#00FF00')
+                                .setDescription(`👤 **User:** \`${targetmember.user.tag}\`\n📜 **ID:** \`${targetmember.user.id}\`\n\nVerification successful.`)
+                                .setThumbnail(targetmember.user.displayAvatarURL())
+                            ]
+                        }).then(async() => {
+                                await message.reply({ content: `${targetmember} is now verified!\n**The channel will be closed in five seconds.**` })
                                 setTimeout(() => {
-                                    targetmember.roles.add(memberrole).catch(e => {})
                                     targetmember.roles.remove(unverified).catch(e => {})
                                     targetmember.roles.remove(pending).catch(e => {})
+                                    targetmember.roles.add(memberrole).catch(e => {})
                                     message.channel.delete()
                                 }, 5000)
                             })
