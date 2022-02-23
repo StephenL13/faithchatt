@@ -28,8 +28,6 @@ module.exports.run = async (client, interaction) => {
     })
     newThread.members.add('394019914157129728')
     newThread.members.add('204255221017214977')
-    newThread.members.add('349394562336292876')
-    newThread.members.add('361033318273384449')
 }
 
 module.exports.command = {
