@@ -15,7 +15,8 @@ client.on('guildMemberRemove', async member => {
                 embeds: [
                     new MessageEmbed()
                     .setColor('#FF0000')
-                    .setDescription(`Ticket closed for member who left.`)
+                    .setDescription(`👤 **User:** \`${member.user.tag}\`\n📜 **ID:** \`${member.user.id}\`\n\nMember has left the server.`)
+                    .setThumbnail(member.user.displayAvatarURL())
                 ]
             })
             memChannel.send({ content: "**Member has left the server. Channel closes in five seconds.**" })
