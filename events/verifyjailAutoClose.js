@@ -1,5 +1,6 @@
 const client = require(`../index.js`).client
 const faithchatt = require('../variablehandler.js') // Lists all IDs of channels, categories, and roles
+const { MessageEmbed } = require('discord.js')
 
 client.on('guildMemberRemove', async member => {
     let memChannel = await member.guild.channels.cache.find(c => c.topic === `${member.id}`)
