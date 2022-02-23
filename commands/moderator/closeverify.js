@@ -12,7 +12,7 @@ module.exports.run = async (client, message, args, prefix) => {
                 content: `\`\`\`\n${text}\`\`\``,
                 embeds: [
                     new MessageEmbed()
-                    .setColor('#00FF00')
+                    .setColor('#FF0000')
                     .setDescription(`Ticket closed upon staff decision.`)
                 ]
             })
