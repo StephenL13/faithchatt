@@ -26,7 +26,7 @@ module.exports.run = async(client, message, args, prefix) => {
                         await targetmember.send({ embeds: [embed] }).catch(e => console.log(`⚠ I'm confirming ${targetmember.user.tag}'s verification, but his/her DMs are closed!`))
                         const messages = await message.channel.messages.fetch()
                         const arrayMessages = await messages.filter(msg => !msg.length).reverse()
-                        const text = await arrayMessages.map(m=>`${m.author.tag}: ${m.content}`).join("\n\n")
+                        const text = await arrayMessages.map(m=>`${m.author.tag}: ${m.content}`).join("\n")
                         const logChannel = await client.channels.cache.get(textId.verifylog)
                         await logChannel.send({ 
                             content: `\`\`\`\n${text}\`\`\``,
