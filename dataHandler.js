@@ -9,6 +9,10 @@ async function createCmd(client, guildId) {
             description: "A list of all FaithChatt Bot commands"
         },
         {
+            name: "topic",
+            description: "Start a new topic that prescribes the Christian faith."
+        },
+        {
             name: "askquestion",
             description: "Submit a question anything related to faith and more!",
             options: [
