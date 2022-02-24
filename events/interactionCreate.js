@@ -1,6 +1,6 @@
 const client = require('../index.js').client
 const { MessageEmbed } = require('discord.js')
-const { textId, parentId, rolesId } = require('../variablehandler.js');
+const faithchatt = require('../dataHandler.js')
 
 client.on('interactionCreate', async interaction => {
     // SLASH COMMAND HANDLER
@@ -11,11 +11,11 @@ client.on('interactionCreate', async interaction => {
 
     // THE SYSTEM
     if(interaction.isButton){
-        if(interaction.customId == "verifyticket"){
-            const moderatorrole = interaction.guild.roles.cache.get(rolesId.staff)
-            const unverified = interaction.guild.roles.cache.get(rolesId.unverified)
-            const pending = interaction.guild.roles.cache.get(rolesId.pending)
-            const memberrole = interaction.guild.roles.cache.get(rolesId.member)
+        if(interaction.customId == "verifyStart"){
+            const moderatorrole = interaction.guild.roles.cache.get(faithchatt.rolesId.staff)
+            const unverified = interaction.guild.roles.cache.get(faithchatt.rolesId.unverified)
+            const pending = interaction.guild.roles.cache.get(faithchatt.rolesId.pending)
+            const memberrole = interaction.guild.roles.cache.get(faithchatt.rolesId.member)
             const everyone = interaction.guild.roles.cache.find(r => r.name === "@everyone")
 
             const ticketembed = new MessageEmbed()
@@ -26,13 +26,13 @@ client.on('interactionCreate', async interaction => {
                 .setFooter({ text: "© FaithChatt Forum" })
             let ticketname = interaction.user.tag
 
-            if(interaction.member.roles.cache.has(rolesId.pending)) {
+            if(interaction.member.roles.cache.has(faithchatt.rolesId.pending)) {
                 return interaction.reply({ content: "You have already created a ticket! If you have problems, immediately contact/DM the moderators.", ephemeral: true }).catch(e=>{})
             } else {
                 await interaction.member.roles.add(pending).catch(e => {})
                 let verifychannel = await interaction.guild.channels.create(ticketname, {
                     type: "GUILD_TEXT",
-                    parent: parentId.verification,
+                    parent: faithchatt.parentId.verification,
                     topic: interaction.user.id
                 })
                 await verifychannel.permissionOverwrites.set([

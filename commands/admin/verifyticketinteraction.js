@@ -6,7 +6,7 @@ module.exports.run = async(client, message, args, prefix) => {
     } else {
         const row = new MessageActionRow().addComponents(
             new MessageButton()
-                .setCustomId('verifyticket')
+                .setCustomId('verifyStart')
                 .setLabel('Verify here!')
                 .setEmoji('✅')
                 .setStyle('SUCCESS')
