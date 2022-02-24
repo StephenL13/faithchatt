@@ -1,5 +1,6 @@
 const { textId, parentId, rolesId } = require('../../variablehandler.js')
-const { MessageEmbed } = require('discord.js')
+const { MessageEmbed, MessageAttachment } = require('discord.js')
+const moment = require('moment')
 
 module.exports.run = async(client, message, args, prefix) => {
     const memberrole = message.guild.roles.cache.get(rolesId.member)
@@ -24,28 +25,46 @@ module.exports.run = async(client, message, args, prefix) => {
                             .setFooter({ text:"© FaithChatt Forum" });
                         await message.react('✅')
                         await targetmember.send({ embeds: [embed] }).catch(e => console.log(`⚠ I'm confirming ${targetmember.user.tag}'s verification, but his/her DMs are closed!`))
-                        const messages = await message.channel.messages.fetch()
-                        const arrayMessages = await messages.filter(msg => !msg.length).reverse()
-                        const text = await arrayMessages.map(m=>`${m.author.tag}: ${m.content}`).join("\n")
-                        const logChannel = await client.channels.cache.get(textId.verifylog)
-                        await logChannel.send({ 
-                            content: `\`\`\`\n${text}\`\`\``,
-                            embeds: [
-                                new MessageEmbed()
-                                .setColor('#00FF00')
-                                .setDescription(`👤 **User:** \`${targetmember.user.tag}\`\n📜 **ID:** \`${targetmember.user.id}\`\n\nVerification successful.`)
-                                .setThumbnail(targetmember.user.displayAvatarURL())
-                            ]
-                        }).then(async() => {
-                                await message.reply({ content: `${targetmember} is now verified!\n**The channel will be closed in five seconds.**` })
-                                setTimeout(() => {
-                                    targetmember.roles.remove(unverified).catch(e => {})
-                                    targetmember.roles.remove(pending).catch(e => {})
-                                    targetmember.roles.add(memberrole).catch(e => {})
-                                    message.channel.delete()
-                                }, 5000)
-                            })
-                            .catch(e => {}) 
+                        async function logAction() {
+                            const messages = await message.channel.messages.fetch()
+                            const arrayMessages = await messages.filter(msg => !msg.length).reverse()
+                            const text = await arrayMessages.map(m=>`${m.author.tag}: ${m.content}`).join("\n")
+                            const logChannel = await client.channels.cache.get(textId.verifylog)
+                            if(text.length >= 2000) {
+                                const timestamp = await moment().format("M-D-YYYY, HH-mm")
+                                const fileAttach = new MessageAttachment(Buffer.from(text), `VerifyLog - ${timestamp}.txt`)
+                                await logChannel.send({
+                                    content: "Channel is over 2000 characters. Thus, a generated file.",
+                                    files: [fileAttach],
+                                    embeds: [
+                                        new MessageEmbed()
+                                        .setColor('#00FF00')
+                                        .setDescription(`👤 **User:** \`${targetmember.user.tag}\`\n📜 **ID:** \`${targetmember.user.id}\`\n\nVerification successful.`)
+                                        .setThumbnail(targetmember.user.displayAvatarURL())
+                                    ]
+                                })
+                            } else {
+                                await logChannel.send({ 
+                                    content: `\`\`\`\n${text}\`\`\``,
+                                    embeds: [
+                                        new MessageEmbed()
+                                        .setColor('#00FF00')
+                                        .setDescription(`👤 **User:** \`${targetmember.user.tag}\`\n📜 **ID:** \`${targetmember.user.id}\`\n\nVerification successful.`)
+                                        .setThumbnail(targetmember.user.displayAvatarURL())
+                                    ]
+                                })
+                            }
+                        }
+                        logAction().then(async() => {
+                            await message.reply({ content: `${targetmember} is now verified!\n**The channel will be closed in five seconds.**` })
+                            setTimeout(() => {
+                                targetmember.roles.remove(unverified).catch(e => {})
+                                targetmember.roles.remove(pending).catch(e => {})
+                                targetmember.roles.add(memberrole).catch(e => {})
+                                message.channel.delete()
+                            }, 5000)
+                        })
+                        .catch(e => {}) 
                     } else {
                         await message.react('❌')
                         await message.reply('⚠ Member has been already verified!').then(msg => {setTimeout(() => msg.delete(), 5000)})

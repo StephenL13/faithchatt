@@ -1,24 +1,44 @@
 const client = require(`../index.js`).client
 const faithchatt = require('../variablehandler.js') // Lists all IDs of channels, categories, and roles
-const { MessageEmbed } = require('discord.js')
+const { MessageEmbed, MessageAttachment } = require('discord.js')
+const moment = require('moment')
 
 client.on('guildMemberRemove', async member => {
     let memChannel = await member.guild.channels.cache.find(c => c.topic === `${member.id}`)
     if(memChannel) {
         if(memChannel.parentId === faithchatt.parentId.verification) {
-            const messages = await memChannel.messages.fetch()
-            const arrayMessages = await messages.filter(msg => !msg.length).reverse()
-            const text = await arrayMessages.map(m=>`${m.author.tag}: ${m.content}`).join("\n")
-            const logChannel = await client.channels.cache.get(faithchatt.textId.verifylog)
-            await logChannel.send({ 
-                content: `\`\`\`\n${text}\`\`\``,
-                embeds: [
-                    new MessageEmbed()
-                    .setColor('#FF0000')
-                    .setDescription(`👤 **User:** \`${member.user.tag}\`\n📜 **ID:** \`${member.user.id}\`\n\nMember has left the server.`)
-                    .setThumbnail(member.user.displayAvatarURL())
-                ]
-            })
+            async function logAction() {
+                const messages = await memChannel.messages.fetch()
+                const arrayMessages = await messages.filter(msg => !msg.length).reverse()
+                const text = await arrayMessages.map(m=>`${m.author.tag}: ${m.content}`).join("\n")
+                const logChannel = await client.channels.cache.get(faithchatt.textId.verifylog)
+
+                if(text.length >= 2000) {
+                    const timestamp = await moment().format("M-D-YYYY, HH:mm")
+                    const fileAttach = new MessageAttachment(Buffer.from(text), `VerifyLog - ${timestamp}.txt`)
+                    await logChannel.send({ 
+                        content: `Channel is over 2000 characters. Thus, a generated file.`,
+                        files: [fileAttach],
+                        embeds: [
+                            new MessageEmbed()
+                            .setColor('#FF0000')
+                            .setDescription(`👤 **User:** \`${member.user.tag}\`\n📜 **ID:** \`${member.user.id}\`\n\nMember has left the server.`)
+                            .setThumbnail(member.user.displayAvatarURL())
+                        ]
+                    })
+                } else {
+                    await logChannel.send({ 
+                        content: `\`\`\`\n${text}\`\`\``,
+                        embeds: [
+                            new MessageEmbed()
+                            .setColor('#FF0000')
+                            .setDescription(`👤 **User:** \`${member.user.tag}\`\n📜 **ID:** \`${member.user.id}\`\n\nMember has left the server.`)
+                            .setThumbnail(member.user.displayAvatarURL())
+                        ]
+                    })
+                }
+            }
+            logAction()
             memChannel.send({ content: "**Member has left the server. Channel closes in five seconds.**" })
             setTimeout(() => {
                 memChannel.delete()
