@@ -1,6 +1,6 @@
 const client = require('../index.js').client
 const { MessageEmbed } = require('discord.js')
-const faithchatt = require('../dataHandler.js')
+const faithchatt = require('../variablehandler.js')
 
 client.on('interactionCreate', async interaction => {
     // SLASH COMMAND HANDLER
