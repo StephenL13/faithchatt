@@ -31,7 +31,7 @@ module.exports.run = async(client, message, args, prefix) => {
                             const text = await arrayMessages.map(m=>`${m.author.tag}: ${m.content}`).join("\n")
                             const logChannel = await client.channels.cache.get(textId.verifylog)
                             if(text.length >= 2000) {
-                                const timestamp = await moment().format("M-D-YYYY, HH-mm")
+                                const timestamp = await moment().format("M-D-YYYY, HH:mm")
                                 const fileAttach = new MessageAttachment(Buffer.from(text), `VerifyLog - ${timestamp}.txt`)
                                 await logChannel.send({
                                     content: "Channel is over 2000 characters. Thus, a generated file.",
