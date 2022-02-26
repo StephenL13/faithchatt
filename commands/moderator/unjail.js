@@ -1,4 +1,8 @@
 const { textId, parentId, rolesId } = require('../../variablehandler.js');
+const { MessageEmbed, MessageAttachment } = require('discord.js')
+const moment = require('moment')
+
+
 module.exports.run = async (client, message, args, prefix) => {
     if(message.member.permissions.has("MANAGE_ROLES")) {
         let targetmember = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
@@ -12,6 +16,34 @@ module.exports.run = async (client, message, args, prefix) => {
             if(!targetmember) return message.channel.send("Command usage:\n`!unjail <@user/uid>`");
         if (message.channel.parent.id === parentId.jail){
             if(message.channel.id === textId.jailcmds) return message.delete()
+            const messages = await message.channel.messages.fetch();
+            const arrayMessages = await messages.filter(msg => !msg.length).reverse();
+            const text = await arrayMessages.map(m=>`${m.author.tag}: ${m.content}`).join("\n")
+            const logChannel = client.channels.cache.get(textId.moderatorLog)
+            if(text.length >= 2000) {
+                const timestamp = await moment().format("M-D-YYYY, HH:mm")
+                const fileAttach = new MessageAttachment(Buffer.from(text), `VerifyLog - ${timestamp}.txt`)
+                await logChannel.send({
+                    content: "Channel is over 2000 characters. Thus, a generated file.",
+                    files: [fileAttach],
+                    embeds: [
+                        new MessageEmbed()
+                        .setColor('#ffd100')
+                        .setDescription(`👤 **User:** \`${targetmember.user.tag}\`\n📜 **ID:** \`${targetmember.user.id}`)
+                        .setThumbnail(targetmember.user.displayAvatarURL())
+                    ]
+                })
+            } else {
+                await logChannel.send({ 
+                    content: `\`\`\`\n${text}\`\`\``,
+                    embeds: [
+                        new MessageEmbed()
+                        .setColor('#ffd100')
+                        .setDescription(`👤 **User:** \`${targetmember.user.tag}\`\n📜 **ID:** \`${targetmember.user.id}`)
+                        .setThumbnail(targetmember.user.displayAvatarURL())
+                    ]
+                })
+            }
             await message.react('✅')
             await message.channel.send("**Member unjailed! The channel will be closed in five seconds.**")
             setTimeout(() => {
