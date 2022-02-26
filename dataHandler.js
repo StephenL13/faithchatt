@@ -98,6 +98,8 @@ async function createCmd(client, guildId) {
         },
     ]
 
+    const voidArray = []
+
     await client.guilds.cache.get(guildId)?.commands.set(data)
     //await client.application?.commands.set(data) 
 }
