@@ -19,7 +19,7 @@ module.exports.run = async (client, message, args, prefix) => {
             const messages = await message.channel.messages.fetch();
             const arrayMessages = await messages.filter(msg => !msg.length).reverse();
             const text = await arrayMessages.map(m=>`${m.author.tag}: ${m.content}`).join("\n")
-            const logChannel = client.channels.cache.get(textId.moderatorLog)
+            const logChannel = client.channels.cache.get(textId.jailLog)
             if(text.length >= 2000) {
                 const timestamp = await moment().format("M-D-YYYY, HH:mm")
                 const fileAttach = new MessageAttachment(Buffer.from(text), `VerifyLog - ${timestamp}.txt`)
