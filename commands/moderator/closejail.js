@@ -19,7 +19,6 @@ module.exports.run = async (client, message, args, prefix) => {
                         new MessageEmbed()
                         .setColor('#ffd100')
                         .setDescription(`Jailed member has left the server or was immediately closed under the custom staff decision.`)
-                        .setThumbnail(targetmember.user.displayAvatarURL())
                     ]
                 })
             } else {
@@ -29,7 +28,6 @@ module.exports.run = async (client, message, args, prefix) => {
                         new MessageEmbed()
                         .setColor('#ffd100')
                         .setDescription(`Jailed member has left the server or was immediately closed under the custom staff decision.`)
-                        .setThumbnail(targetmember.user.displayAvatarURL())
                     ]
                 })
             }
