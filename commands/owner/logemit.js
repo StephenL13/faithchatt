@@ -3,7 +3,7 @@ const { MessageAttachment } = require('discord.js')
 const moment = require('moment')
 
 module.exports.run = async(client, message, args, prefix) => {
-    if(message.author.id === "") {
+    if(message.author.id === "136292974379270144") {
         let messageCollection = new Discord.Collection();
         let channelMessages = await message.channel.messages.fetch({ limit: 100 }).catch(err => console.log(err));
         messageCollection = await messageCollection.concat(channelMessages);

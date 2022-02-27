@@ -1,17 +1,27 @@
-const client = require(`../index.js`).client
-const faithchatt = require('../variablehandler.js') // Lists all IDs of channels, categories, and roles
-const { MessageEmbed, MessageAttachment } = require('discord.js')
-const moment = require('moment')
+const client = require(`../index.js`).client;
+const faithchatt = require('../variablehandler.js'); // Lists all IDs of channels, categories, and roles
+const Discord = require('discord.js');
+const { MessageEmbed, MessageAttachment } = require('discord.js');
+const moment = require('moment');
 
 client.on('guildMemberRemove', async member => {
     let memChannel = await member.guild.channels.cache.find(c => c.topic === `${member.id}`)
     if(memChannel) {
         if(memChannel.parentId === faithchatt.parentId.verification) {
             async function logAction() {
-                const messages = await memChannel.messages.fetch()
-                const arrayMessages = await messages.filter(msg => !msg.length).reverse()
-                const text = await arrayMessages.map(m=>`${m.author.tag}: ${m.content}`).join("\n")
-                const logChannel = await client.channels.cache.get(faithchatt.textId.verifylog)
+                let messageCollection = new Discord.Collection();
+                let channelMessages = await message.channel.messages.fetch({ limit: 100 }).catch(err => console.log(err));
+                messageCollection = await messageCollection.concat(channelMessages);
+                while (channelMessages.size === 100) {
+                    let lastMessageId = await channelMessages.lastKey();
+                    channelMessages = await message.channel.messages.fetch({ limit: 100, before: lastMessageId }).catch(err => console.log(err));
+                    if (channelMessages) {
+                        messageCollection = await messageCollection.concat(channelMessages);
+                    };
+                };
+                let msgs = await messageCollection.filter(msg => !msg.length).reverse();
+                const text = await msgs.map(m=>`${m.author.tag}: ${m.content}`).join("\n")
+                const logChannel = client.channels.cache.get(faithchatt.textId.verifyLog)
 
                 if(text.length >= 2000) {
                     const timestamp = await moment().format("M-D-YYYY, HH:mm")

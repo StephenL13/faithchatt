@@ -1,4 +1,5 @@
 const { textId, parentId, rolesId } = require('../../variablehandler.js')
+const Discord = require('discord.js')
 const { MessageEmbed, MessageAttachment } = require('discord.js')
 const moment = require('moment')
 module.exports.run = async (client, message, args, prefix) => {
@@ -6,10 +7,22 @@ module.exports.run = async (client, message, args, prefix) => {
         if (message.channel.parent.id === parentId.verification){
             if(message.channel.id === textId.verify) return message.delete()
             async function logAction() {
-                const messages = await message.channel.messages.fetch()
-                const arrayMessages = await messages.filter(msg => !msg.length).reverse()
-                const text = await arrayMessages.map(m=>`${m.author.tag}: ${m.content}`).join("\n")
-                const logChannel = await client.channels.cache.get(textId.verifylog)
+                let messageCollection = new Discord.Collection();
+                let channelMessages = await message.channel.messages.fetch({ limit: 100 }).catch(err => console.log(err));
+                messageCollection = await messageCollection.concat(channelMessages);
+                while (channelMessages.size === 100) {
+                    let lastMessageId = await channelMessages.lastKey();
+                    channelMessages = await message.channel.messages.fetch({ limit: 100, before: lastMessageId }).catch(err => console.log(err));
+                    if (channelMessages) {
+                        messageCollection = await messageCollection.concat(channelMessages);
+                    };
+                };
+                let msgs = await messageCollection.filter(msg => !msg.length).reverse();
+                const text = await msgs.map(m=>`${m.author.tag}: ${m.content}`).join("\n")
+                const logChannel = client.channels.cache.get(textId.verifyLog)
+                const closeEmbed = new MessageEmbed()
+                    .setColor('#FF0000')
+                    .setDescription(`Ticket closed upon staff decision.`)
 
                 if(text.length >= 2000) {
                     const timestamp = await moment().format("M-D-YYYY, HH:mm")
@@ -17,20 +30,12 @@ module.exports.run = async (client, message, args, prefix) => {
                     await logChannel.send({
                         content: "Channel is over 2000 characters. Thus, a generated file.",
                         files: [fileAttach],
-                        embeds: [
-                            new MessageEmbed()
-                            .setColor('#FF0000')
-                            .setDescription(`Ticket closed upon staff decision.`)
-                        ]
+                        embeds: [closeEmbed]
                     })
                 } else {
                     await logChannel.send({ 
                         content: `\`\`\`\n${text}\`\`\``,
-                        embeds: [
-                            new MessageEmbed()
-                            .setColor('#FF0000')
-                            .setDescription(`Ticket closed upon staff decision.`)
-                        ]
+                        embeds: [closeEmbed]
                     })
                 }
             }

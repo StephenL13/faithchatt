@@ -1,4 +1,5 @@
 const { textId, parentId, rolesId } = require('../../variablehandler.js')
+const Discord = require('discord.js')
 const { MessageEmbed, MessageAttachment } = require('discord.js')
 const moment = require('moment')
 
@@ -26,32 +27,35 @@ module.exports.run = async(client, message, args, prefix) => {
                         await message.react('✅')
                         await targetmember.send({ embeds: [embed] }).catch(e => console.log(`⚠ I'm confirming ${targetmember.user.tag}'s verification, but his/her DMs are closed!`))
                         async function logAction() {
-                            const messages = await message.channel.messages.fetch()
-                            const arrayMessages = await messages.filter(msg => !msg.length).reverse()
-                            const text = await arrayMessages.map(m=>`${m.author.tag}: ${m.content}`).join("\n")
-                            const logChannel = await client.channels.cache.get(textId.verifylog)
+                            let messageCollection = new Discord.Collection();
+                            let channelMessages = await message.channel.messages.fetch({ limit: 100 }).catch(err => console.log(err));
+                            messageCollection = await messageCollection.concat(channelMessages);
+                            while (channelMessages.size === 100) {
+                                let lastMessageId = await channelMessages.lastKey();
+                                channelMessages = await message.channel.messages.fetch({ limit: 100, before: lastMessageId }).catch(err => console.log(err));
+                                if (channelMessages) {
+                                    messageCollection = await messageCollection.concat(channelMessages);
+                                };
+                            };
+                            let msgs = await messageCollection.filter(msg => !msg.length).reverse();
+                            const text = await msgs.map(m=>`${m.author.tag}: ${m.content}`).join("\n")
+                            const logChannel = client.channels.cache.get(textId.verifyLog)
+                            const successEmbed = new MessageEmbed()
+                                .setColor('#00FF00')
+                                .setDescription(`👤 **User:** \`${targetmember.user.tag}\`\n📜 **ID:** \`${targetmember.user.id}\`\n\nVerification successful.`)
+                                .setThumbnail(targetmember.user.displayAvatarURL())
                             if(text.length >= 2000) {
                                 const timestamp = await moment().format("M-D-YYYY, HH:mm")
                                 const fileAttach = new MessageAttachment(Buffer.from(text), `VerifyLog - ${timestamp}.txt`)
-                                await logChannel.send({
+                                await logChannel.send({ 
                                     content: "Channel is over 2000 characters. Thus, a generated file.",
-                                    files: [fileAttach],
-                                    embeds: [
-                                        new MessageEmbed()
-                                        .setColor('#00FF00')
-                                        .setDescription(`👤 **User:** \`${targetmember.user.tag}\`\n📜 **ID:** \`${targetmember.user.id}\`\n\nVerification successful.`)
-                                        .setThumbnail(targetmember.user.displayAvatarURL())
-                                    ]
+                                    embeds: [successEmbed],
+                                    files: [fileAttach] 
                                 })
                             } else {
                                 await logChannel.send({ 
-                                    content: `\`\`\`\n${text}\`\`\``,
-                                    embeds: [
-                                        new MessageEmbed()
-                                        .setColor('#00FF00')
-                                        .setDescription(`👤 **User:** \`${targetmember.user.tag}\`\n📜 **ID:** \`${targetmember.user.id}\`\n\nVerification successful.`)
-                                        .setThumbnail(targetmember.user.displayAvatarURL())
-                                    ]
+                                    content: `\`\`\`\n${text}\`\`\`` ,
+                                    embeds: [successEmbed]
                                 })
                             }
                         }

@@ -63,5 +63,5 @@ module.exports.run = async (client, message, args, prefix) => {
 
 module.exports.command = {
     name: "jail",
-    aliases:[]
+    aliases: ["excommunicate", "arrest"]
 }
