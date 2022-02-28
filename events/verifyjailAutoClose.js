@@ -10,11 +10,11 @@ client.on('guildMemberRemove', async member => {
         if(memChannel.parentId === faithchatt.parentId.verification) {
             async function logAction() {
                 let messageCollection = new Discord.Collection();
-                let channelMessages = await message.channel.messages.fetch({ limit: 100 }).catch(err => console.log(err));
+                let channelMessages = await memChannel.messages.fetch({ limit: 100 }).catch(err => console.log(err));
                 messageCollection = await messageCollection.concat(channelMessages);
                 while (channelMessages.size === 100) {
                     let lastMessageId = await channelMessages.lastKey();
-                    channelMessages = await message.channel.messages.fetch({ limit: 100, before: lastMessageId }).catch(err => console.log(err));
+                    channelMessages = await memChannel.messages.fetch({ limit: 100, before: lastMessageId }).catch(err => console.log(err));
                     if (channelMessages) {
                         messageCollection = await messageCollection.concat(channelMessages);
                     };
