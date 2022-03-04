@@ -26,6 +26,12 @@ module.exports.run = async (client, message, args, prefix) => {
                     .setDescription(`👤 **User:** \`${unvMem.user.tag}\`\n📜 **ID:** \`${unvMem.user.id}\`\n\nMember has failed to accomplished the verification, upon the decision of the staff.`)
                     .setThumbnail(unvMem.user.displayAvatarURL())
                 await unvMem.roles.remove(rolesId.pending)
+                await unvMem.send({ embeds: [
+                    new MessageEmbed()
+                        .setTitle("The ticket has been closed.")
+                        .setDescription(`You haven't responded to the verification channel with a set of questions given to you since a couple of days. To re-apply, click "Verify Here". Thank you.`)
+                        .setFooter({ text: "© FaithChatt Forum" })
+                ] })
                 if(text.length >= 2000) {
                     const timestamp = await moment().format("M-D-YYYY, HH:mm")
                     const fileAttach = new MessageAttachment(Buffer.from(text), `VerifyLog - ${timestamp}.txt`)
