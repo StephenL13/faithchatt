@@ -33,16 +33,16 @@ client.on('interactionCreate', async interaction => {
                 let verifychannel = await interaction.guild.channels.create(ticketname, {
                     type: "GUILD_TEXT",
                     parent: faithchatt.parentId.verification,
-                    topic: interaction.user.id
+                    topic: interaction.user.id,
+                    permissionOverwrites: [
+                        { id: interaction.user.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES"], deny: ["EMBED_LINKS", "ATTACH_FILES"] },
+                        { id: memberrole.id, deny: ["VIEW_CHANNEL"] },
+                        { id: pending.id, deny: ["VIEW_CHANNEL"] },
+                        { id: unverified.id, deny: ["VIEW_CHANNEL"] },
+                        { id: moderatorrole.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"] },
+                        { id: everyone.id, deny: ["VIEW_CHANNEL"] }
+                    ]
                 })
-                await verifychannel.permissionOverwrites.set([
-                    { id: interaction.user.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES"], deny: ["EMBED_LINKS", "ATTACH_FILES"] },
-                    { id: memberrole.id, deny: ["VIEW_CHANNEL"] },
-                    { id: pending.id, deny: ["VIEW_CHANNEL"] },
-                    { id: unverified.id, deny: ["VIEW_CHANNEL"] },
-                    { id: moderatorrole.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"] },
-                    { id: everyone.id, deny: ["VIEW_CHANNEL"] }
-                ])
                 verifychannel.send({ content: `${interaction.user}`, embeds: [ticketembed] }).catch(e=>{})
                 return interaction.reply({ content: `Ticket created! Please check ${verifychannel}`, ephemeral: true }).catch(e=>{})
             }

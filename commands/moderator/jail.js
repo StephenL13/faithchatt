@@ -22,15 +22,15 @@ module.exports.run = async (client, message, args, prefix) => {
         let jailchannel = await message.guild.channels.create("jail-"+ticketname, {
             type: "GUILD_TEXT",
             parent: parentId.jail,
-            topic: targetmember.user.id
+            topic: targetmember.user.id,
+            permissionOverwrites: [
+                { id: targetmember.user.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES"], deny: ["EMBED_LINKS", "ATTACH_FILES"] },
+                { id: mutedrole.id, deny: ["EMBED_LINKS", "ATTACH_FILES"] },
+                { id: memberrole.id, deny: ["VIEW_CHANNEL"] },
+                { id: moderatorrole.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"] },
+                { id: everyone.id, deny: ["VIEW_CHANNEL"] }
+            ]
         })
-        await jailchannel.permissionOverwrites.set([
-            { id: targetmember.user.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES"], deny: ["EMBED_LINKS", "ATTACH_FILES"] },
-            { id: mutedrole.id, deny: ["EMBED_LINKS", "ATTACH_FILES"] },
-            { id: memberrole.id, deny: ["VIEW_CHANNEL"] },
-            { id: moderatorrole.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"] },
-            { id: everyone.id, deny: ["VIEW_CHANNEL"] }
-        ])
         console.log(`🚨 Member has been jailed:\nMember: ${targetmember.user.tag}\nReason: ${reason}`)
         const channelembed = new MessageEmbed()
             .setTitle("You have been jailed!")
