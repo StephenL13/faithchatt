@@ -28,8 +28,8 @@ module.exports.run = async (client, message, args, prefix) => {
                 await unvMem.roles.remove(rolesId.pending)
                 await unvMem.send({ embeds: [
                     new MessageEmbed()
-                        .setTitle("The ticket has been closed.")
-                        .setDescription(`You haven't responded to the verification channel with a set of questions given to you since a couple of days. To re-apply, click "Verify Here". Thank you.`)
+                        .setTitle("Verification ticket has been closed.")
+                        .setDescription(`To re-apply, be sure to re-read the rules and click "Verify Here". Thank you.`)
                         .setFooter({ text: "© FaithChatt Forum" })
                 ] })
                 if(text.length >= 2000) {
