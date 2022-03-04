@@ -7,6 +7,7 @@ module.exports.run = async (client, message, args, prefix) => {
         if (message.channel.parent.id === parentId.verification){
             if(message.channel.id === textId.verify) return message.delete()
             async function logAction() {
+                let unvMem = message.guild.members.cache.get(message.channel.topic)
                 let messageCollection = new Discord.Collection();
                 let channelMessages = await message.channel.messages.fetch({ limit: 100 }).catch(err => console.log(err));
                 messageCollection = await messageCollection.concat(channelMessages);
@@ -22,8 +23,8 @@ module.exports.run = async (client, message, args, prefix) => {
                 const logChannel = client.channels.cache.get(textId.verifyLog)
                 const closeEmbed = new MessageEmbed()
                     .setColor('#FF0000')
-                    .setDescription(`Ticket closed upon staff decision.`)
-
+                    .setDescription(`👤 **User:** \`${unvMem.user.tag}\`\n📜 **ID:** \`${unvMem.user.id}\`\n\nMember has failed to accomplished the verification, upon the decision of the staff.`)
+                    .setThumbnail(unvMem.user.displayAvatarURL())
                 if(text.length >= 2000) {
                     const timestamp = await moment().format("M-D-YYYY, HH:mm")
                     const fileAttach = new MessageAttachment(Buffer.from(text), `VerifyLog - ${timestamp}.txt`)
