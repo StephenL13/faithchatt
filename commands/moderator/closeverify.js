@@ -25,6 +25,7 @@ module.exports.run = async (client, message, args, prefix) => {
                     .setColor('#FF0000')
                     .setDescription(`👤 **User:** \`${unvMem.user.tag}\`\n📜 **ID:** \`${unvMem.user.id}\`\n\nMember has failed to accomplished the verification, upon the decision of the staff.`)
                     .setThumbnail(unvMem.user.displayAvatarURL())
+                await unvMem.roles.remove(rolesId.pending)
                 if(text.length >= 2000) {
                     const timestamp = await moment().format("M-D-YYYY, HH:mm")
                     const fileAttach = new MessageAttachment(Buffer.from(text), `VerifyLog - ${timestamp}.txt`)
