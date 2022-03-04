@@ -1,4 +1,4 @@
-const { parentId, rolesId } = require('../../variablehandler.js')
+const { textId, parentId, rolesId } = require('../../variablehandler.js')
 const { MessageEmbed } = require('discord.js')
 module.exports.run = async (client, message, args, prefix) => {
     if(message.member.permissions.has("MANAGE_ROLES")) {
@@ -8,6 +8,7 @@ module.exports.run = async (client, message, args, prefix) => {
         const mutedrole = message.guild.roles.cache.get(rolesId.muted)
         const moderatorrole = message.guild.roles.cache.get(rolesId.staff)
         const everyone = message.guild.roles.cache.find(r => r.name === "@everyone")
+        const modlog = message.guild.roles.cache.get(textId.modLog)
 
         if(!message.member.roles.cache.has(rolesId.staff)) return message.delete().then(async() => {
             await message.author.send("You're not a staff member authorized to use this command.")
@@ -49,6 +50,12 @@ module.exports.run = async (client, message, args, prefix) => {
             new MessageEmbed()
                 .setDescription(`🔒 **${targetmember.user.tag}** has been jailed!`)
                 .setFooter({ text: `UID: ${targetmember.user.id}` })
+                .setColor('#ff0000')
+        ] })
+        await modlog.send({ embeds: [
+            new MessageEmbed()
+                .setDescription(`👤 **User:** \`${targetmember.user.tag}\`\n\`${targetmember.user.id}\`\n🔒 **Reason:** \`${reason}\`\n\n👮‍♂️ **Moderator**: \`${message.author.tag}\``)
+                .setFooter({ text: `Jailed UID: ${targetmember.user.id}` })
                 .setColor('#ff0000')
         ] })
         await jailchannel.send({ content: `${targetmember}`, embeds: [channelembed] }).catch(e=>{})

@@ -20,6 +20,7 @@ const suggest = "943205296891920444"
 const jailedRules = "947181368218112000"
 const verifyLog = "945850862662737920"
 const jailLog = "946951985767280710"
+const modLog = "943746033828106260"
 
 module.exports = {
     welcome, goodbye, rules, roles, verify, confidentiality,
@@ -28,5 +29,5 @@ module.exports = {
     events, introduction, general, askquestion, biblestudy, prayer,
     
     // STAFF
-    jailedRules, suggest, verifyLog, jailLog
+    jailedRules, suggest, verifyLog, jailLog, modLog
 }
