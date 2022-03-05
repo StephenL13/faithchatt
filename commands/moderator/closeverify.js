@@ -25,7 +25,7 @@ module.exports.run = async (client, message, args, prefix) => {
                     .setColor('#FF0000')
                     .setDescription(`👤 **User:** \`${unvMem.user.tag}\`\n📜 **ID:** \`${unvMem.user.id}\`\n\nMember has failed to accomplished the verification, upon the decision of the staff.`)
                     .setThumbnail(unvMem.user.displayAvatarURL())
-                await unvMem.roles.remove(rolesId.pending)
+                await unvMem.roles.remove(rolesId.pending).catch(e=>{})
                 await unvMem.send({ embeds: [
                     new MessageEmbed()
                         .setTitle("Verification ticket has been closed.")
