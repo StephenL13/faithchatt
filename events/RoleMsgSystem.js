@@ -28,6 +28,22 @@ client.on('guildMemberUpdate', async (oldMember, newMember) => {
         .setTimestamp()
       client.channels.cache.get(faithchatt.textId.general).send({ content: `<@&${faithchatt.rolesId.welcomeping}>, ${newMember} has arrived!`, embeds: [welcome] }).catch(e=>{});
     };
+    if (!oldMember.roles.cache.has(faithchatt.rolesId.booster) && newMember.roles.cache.has(faithchatt.rolesId.booster)) {
+      const boosterDM = new MessageEmbed()
+        .setColor(`#f47fff`)
+        .setTitle('Thank you for boosting!')
+        .setDescription(`<a:boost:859414318771470377> This will help FaithChatt expand our abilities in making our fellow members interactive all for the glory of God!`)
+      newMember.send({ embeds: [boosterDM] })
+      client.channels.cache.get(faithcnatt.textId.booster).send({ 
+        content: `${newMember}`,
+        embeds: [{
+          title: "Member has boosted our server!",
+          description: `Thank you and may God bless you, **${newMember.user.tag}**!`,
+          color: 0xf47fff,
+          footer: { text: "© FaithChatt Forum" }
+        }]
+      }) 
+    }
   };
 });
 

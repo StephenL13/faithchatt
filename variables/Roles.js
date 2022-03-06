@@ -9,6 +9,7 @@ var muted = "859912959660785667"
 // MISCELLANEOUS
 var prayerwarrior = "844787634030772224"
 var welcomeping = "912259335881650176"
+var booster = "852783343376269323"
 var divPing = "908240970523492353"
 var divProfile = "929740383892672552"
 
@@ -20,6 +21,6 @@ var facilitator = "903033680497365033"
 module.exports = {
     unverified, pending,
     member, muted, divPing, divProfile,
-    prayerwarrior, welcomeping,
+    prayerwarrior, welcomeping, booster,
     staff, professor, facilitator
 }

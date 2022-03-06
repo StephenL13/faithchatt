@@ -8,6 +8,7 @@ const confidentiality = "843352934595166239"
 
 const introduction = "839725174912057354"
 const general = "839722094798700555"
+const booster = "857405594951221288"
 const askquestion = "839724682134683649"
 
 // EVENTS (incl. intercession)
@@ -27,6 +28,7 @@ module.exports = {
     
     // PUBLIC CHANNELS
     events, introduction, general, askquestion, biblestudy, prayer,
+    booster,
     
     // STAFF
     jailedRules, suggest, verifyLog, jailLog, modLog
