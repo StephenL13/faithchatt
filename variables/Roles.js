@@ -4,6 +4,7 @@ var pending = "940281435644911656"
 
 // BASE MEMBER
 var member = "839720518213959701"
+var regular = "839720156065169449"
 var muted = "859912959660785667"
 
 // MISCELLANEOUS
@@ -20,7 +21,7 @@ var facilitator = "903033680497365033"
 
 module.exports = {
     unverified, pending,
-    member, muted, divPing, divProfile,
+    member, regular, muted, divPing, divProfile,
     prayerwarrior, welcomeping, booster,
     staff, professor, facilitator
 }

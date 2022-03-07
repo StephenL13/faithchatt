@@ -5,6 +5,7 @@ module.exports.run = async (client, message, args, prefix) => {
         let targetmember = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         let reason = args.slice(1).join(" ")
         const memberrole = message.guild.roles.cache.get(rolesId.member)
+        const regularrole = message.guild.roles.cache.get(rolesId.regular)
         const mutedrole = message.guild.roles.cache.get(rolesId.muted)
         const moderatorrole = message.guild.roles.cache.get(rolesId.staff)
         const everyone = message.guild.roles.cache.find(r => r.name === "@everyone")
@@ -18,6 +19,7 @@ module.exports.run = async (client, message, args, prefix) => {
         if(!reason) return message.channel.send("Please supply a reason of the suspect.\n`!jail <@user/uid> <reason>`")
         await targetmember.roles.add(mutedrole).catch(e=>{})
         await targetmember.roles.remove(memberrole).catch(e=>{})
+        await targetmember.roles.remove()
         let ticketname = targetmember.user.tag
         let jailchannel = await message.guild.channels.create("jail-"+ticketname, {
             type: "GUILD_TEXT",
