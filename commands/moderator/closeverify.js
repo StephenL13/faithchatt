@@ -32,7 +32,7 @@ module.exports.run = async (client, message, args, prefix) => {
                         .setDescription(`To re-apply, be sure to re-read the rules and click "Verify Here". Thank you.`)
                         .setColor("#FF0000")
                         .setFooter({ text: "© FaithChatt Forum" })
-                ] })
+                ] }).catch(e=>{})
                 if(text.length >= 2000) {
                     const timestamp = await moment().format("M-D-YYYY, HH:mm")
                     const fileAttach = new MessageAttachment(Buffer.from(text), `VerifyLog - ${timestamp}.txt`)
