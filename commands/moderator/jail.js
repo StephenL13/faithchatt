@@ -8,7 +8,7 @@ module.exports.run = async (client, message, args, prefix) => {
         const mutedrole = message.guild.roles.cache.get(rolesId.muted)
         const moderatorrole = message.guild.roles.cache.get(rolesId.staff)
         const everyone = message.guild.roles.cache.find(r => r.name === "@everyone")
-        const modlog = message.guild.roles.cache.get(textId.modLog)
+        const modlog = message.guild.channels.cache.get(textId.modLog)
 
         if(!message.member.roles.cache.has(rolesId.staff)) return message.delete().then(async() => {
             await message.author.send("You're not a staff member authorized to use this command.")
