@@ -19,7 +19,7 @@ module.exports.run = async (client, message, args, prefix) => {
         if(!reason) return message.channel.send("Please supply a reason of the suspect.\n`!jail <@user/uid> <reason>`")
         await targetmember.roles.add(mutedrole).catch(e=>{})
         await targetmember.roles.remove(memberrole).catch(e=>{})
-        await targetmember.roles.remove()
+        await targetmember.roles.remove(regularrole).catch(e=>{})
         let ticketname = targetmember.user.tag
         let jailchannel = await message.guild.channels.create("jail-"+ticketname, {
             type: "GUILD_TEXT",
