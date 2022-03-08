@@ -1,5 +1,5 @@
 const { textId, parentId, rolesId } = require('../../variablehandler.js');
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed, MessageAttachment } = require('discord.js');
 const Discord = require('discord.js');
 const moment = require('moment');
 
