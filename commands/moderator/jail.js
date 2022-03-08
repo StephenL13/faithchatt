@@ -57,7 +57,7 @@ module.exports.run = async (client, message, args, prefix) => {
         await modlog.send({ embeds: [
             new MessageEmbed()
                 .setDescription(`👤 **User:** \`${targetmember.user.tag}\`\n\`${targetmember.user.id}\`\n🔒 **Reason:** \`${reason}\`\n\n👮‍♂️ **Moderator**: \`${message.author.tag}\``)
-                .setFooter({ text: `Jailed UID: ${targetmember.user.id}` })
+                .setFooter({ text: `Moderator UID: ${message.author.id}` })
                 .setColor('#ff0000')
         ] })
         await jailchannel.send({ content: `${targetmember}`, embeds: [channelembed] }).catch(e=>{})
