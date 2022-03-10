@@ -28,7 +28,6 @@ client.on('interactionCreate', async interaction => {
             if(interaction.member.roles.cache.has(faithchatt.rolesId.pending)) {
                 return interaction.reply({ content: "You have already created a ticket! If you have problems, immediately contact/DM the moderators.", ephemeral: true }).catch(e=>{})
             } else {
-                await interaction.member.roles.add(pending).catch(e => {})
                 let verifychannel = await interaction.guild.channels.create(ticketname, {
                     type: "GUILD_TEXT",
                     parent: faithchatt.parentId.verification,
