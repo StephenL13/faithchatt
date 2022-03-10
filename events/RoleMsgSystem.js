@@ -16,21 +16,6 @@ client.on('guildMemberAdd', async member => {
     }).catch(e => {})
 })
 
-client.on('guildMemberUpdate', async (oldMember, newMember) => {
-  if (oldMember.roles.cache.size !== newMember.roles.cache.size) {
-    if (!oldMember.roles.cache.has(faithchatt.rolesId.member) && newMember.roles.cache.has(faithchatt.rolesId.member)) {
-      const welcome = new MessageEmbed()
-        .setColor("#ffd100")
-        .setTitle(`Welcome to FaithChatt!`)
-        .setDescription(`Be sure to check out our <#${faithchatt.textId.roles}> and review our <#${faithchatt.textId.confidentiality}> as you begin working with us. It gives you access to specific channels, a new color, and important reminders pings.\n\nYou may also want to review our <#${faithchatt.textId.introduction}> and share a little bit about yourself. We make it easy and even provide a template to follow. Thanks for joining.`)
-        .setThumbnail(newMember.user.displayAvatarURL({ dynamic: true }))
-        .setFooter({text: `UID: ${newMember.user.id}`})
-        .setTimestamp()
-      client.channels.cache.get(faithchatt.textId.general).send({ content: `<@&${faithchatt.rolesId.welcomeping}>, ${newMember} has arrived!`, embeds: [welcome] }).catch(e=>{});
-    }; 
-  };
-});
-
 client.on('guildBanAdd', async member => {
   client.channels.cache.get(faithchatt.textId.goodbye).send(`Unfortunately, **__${member.user.tag}__** is exiled due to breaking one of the rules.\nWe hope and remember for their repentance and submission to the Gospel of Christ.`).catch(e=>{})
 })

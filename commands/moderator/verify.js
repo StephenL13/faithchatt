@@ -6,7 +6,6 @@ const moment = require('moment')
 module.exports.run = async(client, message, args, prefix) => {
     const memberrole = message.guild.roles.cache.get(rolesId.member)
     const unverified = message.guild.roles.cache.get(rolesId.unverified)
-    const pending = message.guild.roles.cache.get(rolesId.pending)
     const targetmember = message.mentions.members.first() || message.guild.members.cache.get(args[0])
 
     if(message.member.roles.cache.has(rolesId.staff)) {
@@ -63,15 +62,22 @@ module.exports.run = async(client, message, args, prefix) => {
                             await message.reply({ content: `${targetmember} is now verified!\n**The channel will be closed in five seconds.**` })
                             setTimeout(() => {
                                 targetmember.roles.remove(unverified).catch(e => {})
-                                targetmember.roles.remove(pending).catch(e => {})
                                 targetmember.roles.add(memberrole).catch(e => {})
+                                const welcome = new MessageEmbed()
+                                    .setColor("#ffd100")
+                                    .setTitle(`Welcome to FaithChatt!`)
+                                    .setDescription(`Be sure to check out our <#${textId.roles}> and review our <#${textId.confidentiality}> as you begin working with us. It gives you access to specific channels, a new color, and important reminders pings.\n\nYou may also want to review our <#${textId.introduction}> and share a little bit about yourself. We make it easy and even provide a template to follow. Thanks for joining.`)
+                                    .setThumbnail(targetmember.user.displayAvatarURL({ dynamic: true }))
+                                    .setFooter({text: `UID: ${targetmember.user.id}`})
+                                    .setTimestamp()
+                                client.channels.cache.get(textId.general).send({ content: `<@&${rolesId.welcomeping}>, ${targetmember} has arrived!`, embeds: [welcome] }).catch(e=>{});
                                 message.channel.delete()
                             }, 5000)
                         })
-                        .catch(e => {}) 
+                        .catch(e => {})
                     } else {
                         await message.react('❌')
-                        await message.reply('⚠ Member has been already verified!').then(msg => {setTimeout(() => msg.delete(), 5000)})
+                        await message.reply('⚠ Member has been already verified!')
                     }
                 }
             } catch (e) {
