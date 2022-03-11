@@ -49,7 +49,7 @@ module.exports.run = async (client, message, args, prefix) => {
                     embeds: [
                         new MessageEmbed()
                         .setColor('#ffd100')
-                        .setDescription(`👤 **User:** \`${targetmember.user.tag}\`\n📜 **ID:** \`${targetmember.user.id}`)
+                        .setDescription(`👤 **User:** \`${targetmember.user.tag}\`\n📜 **ID:** \`${targetmember.user.id}\``)
                         .setThumbnail(targetmember.user.displayAvatarURL())
                     ]
                 })

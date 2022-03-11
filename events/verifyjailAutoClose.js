@@ -1,13 +1,17 @@
 const client = require(`../index.js`).client;
-const faithchatt = require('../variablehandler.js'); // Lists all IDs of channels, categories, and roles
 const Discord = require('discord.js');
 const { MessageEmbed, MessageAttachment } = require('discord.js');
+const faithchatt = require('../variablehandler.js'); // Lists all IDs of channels, categories, and roles
+const schema = require('../model/botconfig.js')
 const moment = require('moment');
 
 client.on('guildMemberRemove', async member => {
     let memChannel = await member.guild.channels.cache.find(c => c.topic === `${member.id}`)
     if(memChannel) {
         if(memChannel.parentId === faithchatt.parentId.verification) {
+            let data = await schema.findOne({ guildId: member.guild.id });
+            if(!data) return;
+
             async function logAction() {
                 let messageCollection = new Discord.Collection();
                 let channelMessages = await memChannel.messages.fetch({ limit: 100 }).catch(err => console.log(err));
@@ -48,11 +52,23 @@ client.on('guildMemberRemove', async member => {
                     })
                 }
             }
-            logAction()
-            memChannel.send({ content: "**Member has left the server. Channel closes in five seconds.**" })
-            setTimeout(() => {
-                memChannel.delete()
-            }, 5000)
+            
+            switch(data.verifyAutoClose) {
+                case true: {
+                    logAction()
+                    memChannel.send({ content: "**Member has left the server. Channel closes in five seconds.**" })
+                    setTimeout(() => {
+                        memChannel.delete()
+                    }, 5000)
+                };
+                break;
+                case false: {
+                    logAction()
+                    memChannel.send({ content: `**Member has left the server. You can manually type \`!closeverify\`.**\n\n\`${member.user.tag}\` - \`${member.user.id}\`` })
+                };
+                break;
+                default: return;
+            };
         } else if(memChannel.parentId === faithchatt.parentId.jail) {
             if(member.roles.cache.has(faithchatt.rolesId.muted)) {
                 memChannel.send({ content: `**A jailed member left. Staff has now the floor to implement for a decision.**\n\n\`${member.user.tag}\` - \`${member.user.id}\``}).catch(e => console.log(e))

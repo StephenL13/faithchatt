@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
     guildId: { type: String, required: true },
-    lockStatus: { type: Boolean }
+    verifyAutoClose: { type: Boolean }
 });
 
-module.exports = mongoose.model('joinlock-value', schema)
+module.exports = mongoose.model('botconfig-values', schema)

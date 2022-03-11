@@ -21,30 +21,51 @@ module.exports.run = async (client, message, args, prefix) => {
                 let msgs = await messageCollection.filter(msg => !msg.length).reverse();
                 const text = await msgs.map(m=>`${m.author.tag}: ${m.content}`).join("\n")
                 const logChannel = client.channels.cache.get(textId.verifyLog)
-                const closeEmbed = new MessageEmbed()
+                if(unvmem) {
+                    const closeEmbed = new MessageEmbed()
                     .setColor('#FF0000')
-                    .setDescription(`👤 **User:** \`${unvMem.user.tag}\`\n📜 **ID:** \`${unvMem.user.id}\`\n\nMember has failed to accomplished the verification, upon the decision of the staff.`)
+                    .setDescription(`👤 **User:** \`${unvMem.user.tag}\`\n📜 **ID:** \`${unvMem.user.id}\`\n\nMember has failed to accomplish the verification, upon the decision of the staff.`)
                     .setThumbnail(unvMem.user.displayAvatarURL())
-                await unvMem.send({ embeds: [
-                    new MessageEmbed()
-                        .setTitle("Verification ticket has been closed due to inactivity.")
-                        .setDescription(`To re-apply, be sure to re-read the rules and click "Verify Here". Thank you.`)
-                        .setColor("#FF0000")
-                        .setFooter({ text: "© FaithChatt Forum" })
-                ] }).catch(e=>{})
-                if(text.length >= 2000) {
-                    const timestamp = await moment().format("M-D-YYYY, HH:mm")
-                    const fileAttach = new MessageAttachment(Buffer.from(text), `VerifyLog - ${timestamp}.txt`)
-                    await logChannel.send({
-                        content: "Channel is over 2000 characters. Thus, a generated file.",
-                        files: [fileAttach],
-                        embeds: [closeEmbed]
-                    })
+                    await unvMem.send({ embeds: [
+                        new MessageEmbed()
+                            .setTitle("Verification ticket has been closed due to inactivity.")
+                            .setDescription(`To re-apply, be sure to re-read the rules and click "Verify Here". Thank you.`)
+                            .setColor("#FF0000")
+                            .setFooter({ text: "© FaithChatt Forum" })
+                    ] }).catch(e=>{})
+                    if(text.length >= 2000) {
+                        const timestamp = await moment().format("M-D-YYYY, HH:mm")
+                        const fileAttach = new MessageAttachment(Buffer.from(text), `VerifyLog - ${timestamp}.txt`)
+                        await logChannel.send({
+                            content: "Channel is over 2000 characters. Thus, a generated file.",
+                            files: [fileAttach],
+                            embeds: [closeEmbed]
+                        })
+                    } else {
+                        await logChannel.send({ 
+                            content: `\`\`\`\n${text}\`\`\``,
+                            embeds: [closeEmbed]
+                        })
+                    }
                 } else {
-                    await logChannel.send({ 
-                        content: `\`\`\`\n${text}\`\`\``,
-                        embeds: [closeEmbed]
-                    })
+                    const closeEmbed = new MessageEmbed()
+                    .setColor('#FF0000')
+                    .setDescription(`Member has left the server and failed to accomplish the verification. Ticket was closed manually.`)
+                    .setThumbnail(unvMem.user.displayAvatarURL())
+                    if(text.length >= 2000) {
+                        const timestamp = await moment().format("M-D-YYYY, HH:mm")
+                        const fileAttach = new MessageAttachment(Buffer.from(text), `VerifyLog - ${timestamp}.txt`)
+                        await logChannel.send({
+                            content: "Channel is over 2000 characters. Thus, a generated file.",
+                            files: [fileAttach],
+                            embeds: [closeEmbed]
+                        })
+                    } else {
+                        await logChannel.send({ 
+                            content: `\`\`\`\n${text}\`\`\``,
+                            embeds: [closeEmbed]
+                        })
+                    }
                 }
             }
 
