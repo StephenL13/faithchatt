@@ -91,6 +91,10 @@ async function createCmd(client, guildId) {
                         {
                             name: "Application Forms",
                             value: "application"
+                        },
+                        { 
+                            name: "Server Bot Settings",
+                            value: "config"
                         }
                     ]
                 }

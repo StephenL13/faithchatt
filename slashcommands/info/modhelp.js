@@ -77,6 +77,12 @@ module.exports.run = async (client, interaction) => {
                     .setFooter({ text: "© FaithChatt Forum" })
                 ], ephemeral: true })
             } break;
+            case "config": {
+                await interaction.reply({ embeds: [
+                    new MessageEmbed()
+                    .setAuthor({ name: "To learn more, type !config." })
+                ], ephemeral: true })
+            }
         }
     }
 }
