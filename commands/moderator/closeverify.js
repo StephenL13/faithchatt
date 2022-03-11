@@ -21,7 +21,7 @@ module.exports.run = async (client, message, args, prefix) => {
                 let msgs = await messageCollection.filter(msg => !msg.length).reverse();
                 const text = await msgs.map(m=>`${m.author.tag}: ${m.content}`).join("\n")
                 const logChannel = client.channels.cache.get(textId.verifyLog)
-                if(unvmem) {
+                if(unvMem) {
                     const closeEmbed = new MessageEmbed()
                     .setColor('#FF0000')
                     .setDescription(`👤 **User:** \`${unvMem.user.tag}\`\n📜 **ID:** \`${unvMem.user.id}\`\n\nMember has failed to accomplish the verification, upon the decision of the staff.`)
