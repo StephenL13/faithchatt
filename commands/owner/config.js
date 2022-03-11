@@ -22,7 +22,13 @@ module.exports.run = async(client, message, args, prefix) => {
                 .setTitle("Bot config successful.")
                 .setColor("#ffd100")
             
-            if(!config) return message.channel.send("No data entered.")
+            if(!config) return message.channel.send({ embeds: [
+                new MessageEmbed()
+                .setTitle("List of Sub-Commands")
+                .setAuthor({ name: "Command usage: !config [name] [on/off]" })
+                .setDescriptiion('\`autoclose\` - Automatically closes the verification ticket if member leaves.')
+                .setColor('#ffd100')
+            ] })
             switch(config) {
                 case "autoclose": {
                     if(boolString === 'on') {
