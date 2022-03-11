@@ -26,7 +26,7 @@ module.exports.run = async(client, message, args, prefix) => {
                 new MessageEmbed()
                 .setTitle("List of Sub-Commands")
                 .setAuthor({ name: "Command usage: !config [name] [on/off]" })
-                .setDescriptiion('\`autoclose\` - Automatically closes the verification ticket if member leaves.')
+                .setDescription('\`autoclose\` - Automatically closes the verification ticket if member leaves.')
                 .setColor('#ffd100')
             ] })
             switch(config) {
