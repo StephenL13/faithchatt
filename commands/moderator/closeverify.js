@@ -51,7 +51,6 @@ module.exports.run = async (client, message, args, prefix) => {
                     const closeEmbed = new MessageEmbed()
                     .setColor('#FF0000')
                     .setDescription(`Member has left the server and failed to accomplish the verification. Ticket was closed manually.`)
-                    .setThumbnail(unvMem.user.displayAvatarURL())
                     if(text.length >= 2000) {
                         const timestamp = await moment().format("M-D-YYYY, HH:mm")
                         const fileAttach = new MessageAttachment(Buffer.from(text), `VerifyLog - ${timestamp}.txt`)
