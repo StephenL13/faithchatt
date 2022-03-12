@@ -25,18 +25,6 @@ async function createCmd(client, guildId) {
             ]
         },
         {
-            name: "suggest",
-            description: "Please suggest anything privately to the staff team.",
-            options: [
-                {
-                    name: "text",
-                    description: "Place your query here.",
-                    type: "STRING",
-                    required: true
-                }
-            ]
-        },
-        {
             name: "pray",
             description: "Sends a prayer request.",
             options: [

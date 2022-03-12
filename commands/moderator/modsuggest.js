@@ -1,11 +1,17 @@
 const faithchatt = require('../../variablehandler')
 const { MessageEmbed } = require('discord.js')
 
-module.exports.run = async (client, interaction) => {
-    const slashCmdString = interaction.options.getString("text")
+module.exports.run = async (client, message, args, prefix) => {
+    const staffPermCheck = message.member.permissions.has("MANAGE_ROLES") && message.member.roles.cache.has(faithchatt.rolesId.staff)
+
+    if(!staffPermCheck) message.delete().then(async() => {
+        await message.author.send({ content: "You are not a staff member allowed to use this command." })
+    }).catch(e => {})
+
     const textChannel = client.channels.cache.get(faithchatt.textId.suggest)
 
-    await interaction.reply({ content: "**Your suggestion has been sent!**", ephemeral: true }).catch(e=>console.log(e))
+    await message.delete();
+    await message.author.send({ content: "**Your suggestion has been sent!**", ephemeral: true }).catch(e=>console.log(e))
     await textChannel.send({ embeds: [
         new MessageEmbed()
         .setColor('#ffd100')
@@ -20,5 +26,6 @@ module.exports.run = async (client, interaction) => {
 }
 
 module.exports.command = {
-    name: "suggest"
+    name: "modsuggest",
+    aliases: []
 }
