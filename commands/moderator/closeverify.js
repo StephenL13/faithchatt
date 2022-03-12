@@ -72,7 +72,7 @@ module.exports.run = async (client, message, args, prefix) => {
             logAction()
             await message.react('✅')
             await message.channel.send("**The channel will be closed in five seconds.**")
-            setTimeout(() => {
+            setTimeout(async() => {
                 try {
                     await schema.findOne({ userId: unvMem.user.id }).then(async() => {
                         await schema.deleteOne({ userId: unvMem.user.id })
