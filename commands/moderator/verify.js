@@ -61,7 +61,7 @@ module.exports.run = async(client, message, args, prefix) => {
                         }
                         logAction().then(async() => {
                             await message.reply({ content: `${targetmember} is now verified!\n**The channel will be closed in five seconds.**` })
-                            setTimeout(() => {
+                            setTimeout(async() => {
                                 targetmember.roles.remove(unverified).catch(e => {})
                                 targetmember.roles.add(memberrole).catch(e => {})
                                 const welcome = new MessageEmbed()
