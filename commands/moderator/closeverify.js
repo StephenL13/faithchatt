@@ -1,7 +1,7 @@
 const { textId, parentId, rolesId } = require('../../variablehandler.js')
 const Discord = require('discord.js')
 const { MessageEmbed, MessageAttachment } = require('discord.js')
-const schema = require('../model/ticket.js')
+const schema = require('../../model/ticket.js')
 const moment = require('moment')
 module.exports.run = async (client, message, args, prefix) => {
     if(message.member.permissions.has("MANAGE_ROLES") || message.member.roles.cache.has(rolesId.staff)) {
