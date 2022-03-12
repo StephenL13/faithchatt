@@ -1,6 +1,7 @@
 const { textId, parentId, rolesId } = require('../../variablehandler.js')
 const Discord = require('discord.js')
 const { MessageEmbed, MessageAttachment } = require('discord.js')
+const schema = require('../model/ticket.js')
 const moment = require('moment')
 module.exports.run = async (client, message, args, prefix) => {
     if(message.member.permissions.has("MANAGE_ROLES") || message.member.roles.cache.has(rolesId.staff)) {
@@ -72,6 +73,13 @@ module.exports.run = async (client, message, args, prefix) => {
             await message.react('✅')
             await message.channel.send("**The channel will be closed in five seconds.**")
             setTimeout(() => {
+                try {
+                    await schema.findOne({ userId: unvMem.user.id }).then(async() => {
+                        await schema.deleteOne({ userId: unvMem.user.id })
+                    });
+                } catch (error) { 
+                    console.log(error) 
+                }
                 message.channel.delete()
             }, 5000)
         } else return console.log(`${message.author.tag} executed in a non-verification ticket.`)

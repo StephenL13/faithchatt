@@ -56,6 +56,13 @@ client.on('guildMemberRemove', async member => {
             switch(data.verifyAutoClose) {
                 case true: {
                     logAction()
+                    try {
+                        await schema.findOne({ userId: unvMem.user.id }).then(async() => {
+                            await schema.deleteOne({ userId: unvMem.user.id })
+                        });
+                    } catch (error) { 
+                        console.log(error) 
+                    }
                     memChannel.send({ content: "**Member has left the server. Channel closes in five seconds.**" })
                     setTimeout(() => {
                         memChannel.delete()
@@ -64,6 +71,13 @@ client.on('guildMemberRemove', async member => {
                 break;
                 case false: {
                     logAction()
+                    try {
+                        await schema.findOne({ userId: unvMem.user.id }).then(async() => {
+                            await schema.deleteOne({ userId: unvMem.user.id })
+                        });
+                    } catch (error) { 
+                        console.log(error) 
+                    }
                     memChannel.send({ content: `**Member has left the server. You can manually type \`!closeverify\`.**\n\n\`${member.user.tag}\` - \`${member.user.id}\`` })
                 };
                 break;
