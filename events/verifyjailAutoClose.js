@@ -58,8 +58,8 @@ client.on('guildMemberRemove', async member => {
                 case true: {
                     logAction()
                     try {
-                        await schema2.findOne({ userId: unvMem.user.id }).then(async() => {
-                            await schema2.deleteOne({ userId: unvMem.user.id })
+                        await schema2.findOne({ userId: member.user.id }).then(async() => {
+                            await schema2.deleteOne({ userId: member.user.id })
                         });
                     } catch (error) { 
                         console.log(error) 
@@ -73,8 +73,8 @@ client.on('guildMemberRemove', async member => {
                 case false: {
                     logAction()
                     try {
-                        await schema2.findOne({ userId: unvMem.user.id }).then(async() => {
-                            await schema2.deleteOne({ userId: unvMem.user.id })
+                        await schema2.findOne({ userId: member.user.id }).then(async() => {
+                            await schema2.deleteOne({ userId: member.user.id })
                         });
                     } catch (error) { 
                         console.log(error) 

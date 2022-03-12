@@ -71,8 +71,8 @@ module.exports.run = async (client, message, args, prefix) => {
 
             logAction()
             try {
-                await schema.findOne({ userId: unvMem.user.id }).then(async() => {
-                    await schema.deleteOne({ userId: unvMem.user.id })
+                await schema.findOne({ userId: unvMem.id }).then(async() => {
+                    await schema.deleteOne({ userId: unvMem.id })
                 });
             } catch (error) { 
                 console.log(error) 
