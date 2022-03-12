@@ -2,14 +2,15 @@ const client = require(`../index.js`).client;
 const Discord = require('discord.js');
 const { MessageEmbed, MessageAttachment } = require('discord.js');
 const faithchatt = require('../variablehandler.js'); // Lists all IDs of channels, categories, and roles
-const schema = require('../model/botconfig.js')
+const schema1 = require('../model/botconfig.js')
+const schema2 = require('../model/ticket.js')
 const moment = require('moment');
 
 client.on('guildMemberRemove', async member => {
     let memChannel = await member.guild.channels.cache.find(c => c.topic === `${member.id}`)
     if(memChannel) {
         if(memChannel.parentId === faithchatt.parentId.verification) {
-            let data = await schema.findOne({ guildId: member.guild.id });
+            let data = await schema1.findOne({ guildId: member.guild.id });
             if(!data) return;
 
             async function logAction() {
@@ -57,8 +58,8 @@ client.on('guildMemberRemove', async member => {
                 case true: {
                     logAction()
                     try {
-                        await schema.findOne({ userId: unvMem.user.id }).then(async() => {
-                            await schema.deleteOne({ userId: unvMem.user.id })
+                        await schema2.findOne({ userId: unvMem.user.id }).then(async() => {
+                            await schema2.deleteOne({ userId: unvMem.user.id })
                         });
                     } catch (error) { 
                         console.log(error) 
@@ -72,8 +73,8 @@ client.on('guildMemberRemove', async member => {
                 case false: {
                     logAction()
                     try {
-                        await schema.findOne({ userId: unvMem.user.id }).then(async() => {
-                            await schema.deleteOne({ userId: unvMem.user.id })
+                        await schema2.findOne({ userId: unvMem.user.id }).then(async() => {
+                            await schema2.deleteOne({ userId: unvMem.user.id })
                         });
                     } catch (error) { 
                         console.log(error) 

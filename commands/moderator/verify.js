@@ -1,7 +1,7 @@
 const { textId, parentId, rolesId } = require('../../variablehandler.js')
 const { MessageEmbed, MessageAttachment } = require('discord.js')
 const Discord = require('discord.js')
-const schema = require('../model/ticket.js')
+const schema = require('../../model/ticket.js')
 const moment = require('moment')
 
 module.exports.run = async(client, message, args, prefix) => {
