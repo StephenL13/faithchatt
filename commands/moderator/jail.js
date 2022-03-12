@@ -6,8 +6,12 @@ module.exports.run = async (client, message, args, prefix) => {
         let reason = args.slice(1).join(" ")
         const memberrole = message.guild.roles.cache.get(rolesId.member)
         const regularrole = message.guild.roles.cache.get(rolesId.regular)
+
         const legalrole = message.guild.roles.cache.get(rolesId.legal)
         const underagerole = message.guild.roles.cache.get(rolesId.underage)
+        const malerole = message.guild.roles.cache.get(rolesId.male)
+        const femalerole = message.guild.roles.cache.get(rolesId.female)
+
         const mutedrole = message.guild.roles.cache.get(rolesId.muted)
         const moderatorrole = message.guild.roles.cache.get(rolesId.staff)
         const everyone = message.guild.roles.cache.find(r => r.name === "@everyone")
@@ -22,6 +26,8 @@ module.exports.run = async (client, message, args, prefix) => {
         await targetmember.roles.add(mutedrole).catch(e=>{})
         await targetmember.roles.remove(memberrole).catch(e=>{})
         await targetmember.roles.remove(regularrole).catch(e=>{})
+        await targetmember.roles.remove(malerole).catch(e=>{})
+        await targetmember.roles.remove(femalerole).catch(e=>{})
         await targetmember.roles.remove(legalrole).catch(e=>{})
         await targetmember.roles.remove(underagerole).catch(e=>{})
         let ticketname = targetmember.user.tag
