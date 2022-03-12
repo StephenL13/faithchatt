@@ -17,7 +17,7 @@ module.exports.run = async(client, message, args, prefix) => {
         .setTitle('<:Staged:880649462492569651> Session is about to start in a few moments.')
         .setDescription("Head over to <#840942889340239914> and study the Word with us!")
         .setFooter({ text:"© FaithChatt Forum" });
-    if(message.member.roles.cache.has({ professorRole, facilitatorRole }) || message.member.permissions.has("MANAGE_ROLES")) {
+    if(message.member.roles.cache.has({ professorRole, facilitatorRole }) || message.member.roles.cache.has(rolesId.staff)) {
         if(message.channel.id === bstext){
             await message.channel.permissionOverwrites.edit(message.guild.id, { "SEND_MESSAGES": null })
             await message.channel.permissionOverwrites.edit(moderatorRole.id, { "SEND_MESSAGES": true })

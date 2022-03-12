@@ -18,7 +18,7 @@ module.exports.run = async(client, message, args, prefix) => {
         .setDescription(`For more upcoming bible studies, please check the **📅 Events** tab.\nIn the meantime, you can also check out our radio station channels Moody Radio, RefNet, and Worship Radio.\n\nThanks for joining with us. God bless you.`)
         .setImage('https://media1.giphy.com/media/z1kL3TjrK278E6EhZF/giphy.gif?cid=790b7611e06601e976e82fa774ae08ceab4bd86a1f6672ea&rid=giphy.gif&ct=g')
         .setFooter({ text:"© FaithChatt Forum" });
-    if(message.member.roles.cache.has({ professorRole, facilitatorRole }) || message.member.permissions.has("MANAGE_ROLES")) {
+    if(message.member.roles.cache.has({ professorRole, facilitatorRole }) || message.member.roles.cache.has(rolesId.staff)) {
         if(message.channel.id === bstext){
             await message.channel.permissionOverwrites.edit(message.guild.id, { "SEND_MESSAGES": false })
             await message.channel.permissionOverwrites.edit(moderatorRole.id, { "SEND_MESSAGES": true })
