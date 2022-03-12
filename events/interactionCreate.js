@@ -19,7 +19,6 @@ client.on('interactionCreate', async interaction => {
             const everyone = interaction.guild.roles.cache.find(r => r.name === "@everyone")
 
             let data = await schema.findOne({ userId: interaction.user.id });
-            if(!data) data = await schema.create({ userId: interaction.user.id });
 
             const ticketembed = new MessageEmbed()
                 .setTitle('Verification Questions')
@@ -29,9 +28,8 @@ client.on('interactionCreate', async interaction => {
                 .setFooter({ text: "© FaithChatt Forum" })
             let ticketname = interaction.user.tag
 
-            if(data.userId) {
-                return interaction.reply({ content: "You have already created a ticket! If you have problems, immediately contact/DM the moderators.", ephemeral: true }).catch(e=>{})
-            } else {
+            if(!data) {
+                data = await schema.create({ userId: interaction.user.id });
                 let verifychannel = await interaction.guild.channels.create(ticketname, {
                     type: "GUILD_TEXT",
                     parent: faithchatt.parentId.verification,
@@ -46,6 +44,8 @@ client.on('interactionCreate', async interaction => {
                 })
                 verifychannel.send({ content: `${interaction.user}`, embeds: [ticketembed] }).catch(e=>{})
                 return interaction.reply({ content: `Ticket created! Please check ${verifychannel}`, ephemeral: true }).catch(e=>{})
+            } else {
+                return interaction.reply({ content: "You have already created a ticket! If you have problems, immediately contact/DM the moderators.", ephemeral: true }).catch(e=>{})
             }
         }
     }
