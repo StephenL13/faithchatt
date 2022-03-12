@@ -23,7 +23,7 @@ module.exports.run = async (client, message, args, prefix) => {
         await targetmember.roles.remove(memberrole).catch(e=>{})
         await targetmember.roles.remove(regularrole).catch(e=>{})
         await targetmember.roles.remove(legalrole).catch(e=>{})
-        await targetmember.roles.remove(underage).catch(e=>{})
+        await targetmember.roles.remove(underagerole).catch(e=>{})
         let ticketname = targetmember.user.tag
         let jailchannel = await message.guild.channels.create("jail-"+ticketname, {
             type: "GUILD_TEXT",
