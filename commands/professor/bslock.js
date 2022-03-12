@@ -4,10 +4,10 @@ const { MessageEmbed } = require('discord.js')
 module.exports.run = async(client, message, args, prefix) => {
     const professorRole = rolesId.professor
     const facilitatorRole = rolesId.facilitator
-    const moderatorRole = message.member.roles.cache.get(rolesId.staff)
-    const memberrole = message.member.roles.cache.get(rolesId.member)
-    const regularrole = message.member.roles.cache.get(rolesId.regular)
-    const muted = message.member.roles.cache.get(rolesId.muted)
+    const moderatorRole = message.guild.roles.cache.get(rolesId.staff)
+    const memberrole = message.guild.roles.cache.get(rolesId.member)
+    const regularrole = message.guild.roles.cache.get(rolesId.regular)
+    const muted = message.guild.roles.cache.get(rolesId.muted)
     const bstext = textId.biblestudy
     const errorEmbed = new MessageEmbed()
         .setColor('#FF0000')
