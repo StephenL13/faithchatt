@@ -1,6 +1,7 @@
 const { textId, parentId, rolesId } = require('../../variablehandler.js')
-const Discord = require('discord.js')
 const { MessageEmbed, MessageAttachment } = require('discord.js')
+const Discord = require('discord.js')
+const schema = require('../model/ticket.js')
 const moment = require('moment')
 
 module.exports.run = async(client, message, args, prefix) => {
@@ -71,6 +72,9 @@ module.exports.run = async(client, message, args, prefix) => {
                                     .setFooter({text: `UID: ${targetmember.user.id}`})
                                     .setTimestamp()
                                 client.channels.cache.get(textId.general).send({ content: `<@&${rolesId.welcomeping}>, ${targetmember} has arrived!`, embeds: [welcome] }).catch(e=>{});
+                                await schema.findOne({ userId: targetmember.user.id }).then(async() => {
+                                    await schema.deleteOne({ userId: targetmember.user.id })
+                                });
                                 message.channel.delete()
                             }, 5000)
                         })

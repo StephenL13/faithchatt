@@ -1,6 +1,7 @@
 const client = require('../index.js').client
 const { MessageEmbed } = require('discord.js')
 const faithchatt = require('../variablehandler.js')
+const schema = require('../model/ticket.js')
 
 client.on('interactionCreate', async interaction => {
     // SLASH COMMAND HANDLER
@@ -17,6 +18,9 @@ client.on('interactionCreate', async interaction => {
             const memberrole = interaction.guild.roles.cache.get(faithchatt.rolesId.member)
             const everyone = interaction.guild.roles.cache.find(r => r.name === "@everyone")
 
+            let data = await schema.findOne({ userId: interaction.user.id });
+            if(!data) data = await schema.create({ userId: interaction.user.id });
+
             const ticketembed = new MessageEmbed()
                 .setTitle('Verification Questions')
                 .setDescription(`1. What made you come to the server?\n2. Where did you find the invite link?\n3. What is your age and gender?\n4. What is your story of coming to the faith?\n5. Have you been on FaithChatt Forum in the past?\n\nIf done, ping a staff member available. Rest assured, we will reach out to you as soon as possible since we're available 24/7.`)
@@ -25,7 +29,7 @@ client.on('interactionCreate', async interaction => {
                 .setFooter({ text: "© FaithChatt Forum" })
             let ticketname = interaction.user.tag
 
-            if(interaction.member.roles.cache.has(faithchatt.rolesId.pending)) {
+            if(data.userId) {
                 return interaction.reply({ content: "You have already created a ticket! If you have problems, immediately contact/DM the moderators.", ephemeral: true }).catch(e=>{})
             } else {
                 let verifychannel = await interaction.guild.channels.create(ticketname, {

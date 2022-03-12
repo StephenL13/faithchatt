@@ -5,6 +5,8 @@ module.exports.run = async(client, message, args, prefix) => {
     const professorRole = rolesId.professor
     const facilitatorRole = rolesId.facilitator
     const memberrole = message.member.roles.cache.get(rolesId.member)
+    const regularrole = message.member.roles.cache.get(rolesId.regular)
+    const muted = message.member.roles.cache.get(rolesId.muted)
     const bstext = textId.biblestudy
     const errorEmbed = new MessageEmbed()
         .setColor('#FF0000')
@@ -19,6 +21,8 @@ module.exports.run = async(client, message, args, prefix) => {
         if(message.channel.id === bstext){
             await message.channel.permissionOverwrites.edit(message.guild.id, { "SEND_MESSAGES": false })
             await message.channel.permissionOverwrites.edit(memberrole.id, { "SEND_MESSAGES": false })
+            await message.channel.permissionOverwrites.edit(regularrole.id, { "SEND_MESSAGES": false })
+            await message.channel.permissionOverwrites.edit(muted.id, { "SEND_MESSAGES": false })
             await message.channel.send({ embeds: [successEmbed] })
         } else {
             await message.delete()

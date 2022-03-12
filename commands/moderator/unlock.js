@@ -1,5 +1,6 @@
 const { textId, rolesId } = require('../../variablehandler.js')
 const { MessageEmbed } = require("discord.js");
+
 module.exports.run = async (client, message, args, prefix) => {
   if(message.channel.id === textId.biblestudy) return message.delete().catch(e=>{})
   if(message.member.permissions.has("MANAGE_ROLES")){

@@ -1,5 +1,6 @@
 const { textId, rolesId } = require('../../variablehandler.js')
 const { MessageEmbed } = require('discord.js')
+
 module.exports.run = async (client, message, args, prefix) => {
     let moderator = message.member.roles.cache.has(rolesId.staff)
     if(message.channel.id === textId.biblestudy) return message.delete().catch(e=>{})
@@ -15,12 +16,10 @@ module.exports.run = async (client, message, args, prefix) => {
         message.channel.permissionOverwrites.edit(message.guild.id, {
           SEND_MESSAGES: false,
         });
-        message.channel.permissionOverwrites.edit(
-          message.guild.roles.cache.get("871058889339207681"),
-          {
-            SEND_MESSAGES: true,
-          }
-        );
+        message.channel.permissionOverwrites.edit();
+        message.channel.permissionOverwrites.edit();
+        message.channel.permissionOverwrites.edit();
+        message.channel.permissionOverwrites.edit();
         message.channel.send({ embeds: [lockEmbed] });
       } else {
         message.delete();
