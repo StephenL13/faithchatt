@@ -9,6 +9,7 @@ module.exports.run = async (client, message, args, prefix) => {
     if(message.channel.id === textId.biblestudy) return message.delete().catch(e=>{})
     if(message.member.permissions.has("MANAGE_ROLES")) {
       if (moderator) {
+        const moderatorRole = message.member.roles.cache.get(rolesId.staff)
         const lockEmbed = new MessageEmbed()
           .setColor("#FF0000")
           .setTitle("🔒 Channel is locked.")
