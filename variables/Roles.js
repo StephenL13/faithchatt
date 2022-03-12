@@ -5,6 +5,8 @@ var regular = "839720156065169449"
 var muted = "859912959660785667"
 var underage = "849442918941851678"
 var legal = "849442852785487893"
+var female = "849442745495715850"
+var male = "849442640453173248"
 
 // MISCELLANEOUS
 var prayerwarrior = "844787634030772224"
@@ -22,6 +24,6 @@ var facilitator = "903033680497365033"
 module.exports = {
     unverified, member, regular, muted,
     divPing, divProfile, prayerwarrior, usher, 
-    welcomeping, booster, underage, legal,
+    welcomeping, booster, underage, legal, female, male,
     staff, professor, facilitator 
 }
