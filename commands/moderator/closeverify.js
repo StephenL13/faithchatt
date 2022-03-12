@@ -7,8 +7,8 @@ module.exports.run = async (client, message, args, prefix) => {
     if(message.member.permissions.has("MANAGE_ROLES") || message.member.roles.cache.has(rolesId.staff)) {
         if (message.channel.parent.id === parentId.verification){
             if(message.channel.id === textId.verify) return message.delete()
+            let unvMem = message.guild.members.cache.get(message.channel.topic)
             async function logAction() {
-                let unvMem = message.guild.members.cache.get(message.channel.topic)
                 let messageCollection = new Discord.Collection();
                 let channelMessages = await message.channel.messages.fetch({ limit: 100 }).catch(err => console.log(err));
                 messageCollection = await messageCollection.concat(channelMessages);
