@@ -70,16 +70,16 @@ module.exports.run = async (client, message, args, prefix) => {
             }
 
             logAction()
+            try {
+                await schema.findOne({ userId: unvMem.user.id }).then(async() => {
+                    await schema.deleteOne({ userId: unvMem.user.id })
+                });
+            } catch (error) { 
+                console.log(error) 
+            }
             await message.react('✅')
             await message.channel.send("**The channel will be closed in five seconds.**")
             setTimeout(async() => {
-                try {
-                    await schema.findOne({ userId: unvMem.user.id }).then(async() => {
-                        await schema.deleteOne({ userId: unvMem.user.id })
-                    });
-                } catch (error) { 
-                    console.log(error) 
-                }
                 message.channel.delete()
             }, 5000)
         } else return console.log(`${message.author.tag} executed in a non-verification ticket.`)

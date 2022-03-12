@@ -61,6 +61,13 @@ module.exports.run = async(client, message, args, prefix) => {
                         }
                         logAction().then(async() => {
                             await message.reply({ content: `${targetmember} is now verified!\n**The channel will be closed in five seconds.**` })
+                            try {
+                                await schema.findOne({ userId: targetmember.user.id }).then(async() => {
+                                    await schema.deleteOne({ userId: targetmember.user.id })
+                                });
+                            } catch (error) {
+                                console.log(error);
+                            }
                             setTimeout(async() => {
                                 targetmember.roles.remove(unverified).catch(e => {})
                                 targetmember.roles.add(memberrole).catch(e => {})
@@ -72,9 +79,6 @@ module.exports.run = async(client, message, args, prefix) => {
                                     .setFooter({text: `UID: ${targetmember.user.id}`})
                                     .setTimestamp()
                                 client.channels.cache.get(textId.general).send({ content: `<@&${rolesId.welcomeping}>, ${targetmember} has arrived!`, embeds: [welcome] }).catch(e=>{});
-                                await schema.findOne({ userId: targetmember.user.id }).then(async() => {
-                                    await schema.deleteOne({ userId: targetmember.user.id })
-                                });
                                 message.channel.delete()
                             }, 5000)
                         })
