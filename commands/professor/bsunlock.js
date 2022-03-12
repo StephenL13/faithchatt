@@ -4,6 +4,7 @@ const { MessageEmbed } = require('discord.js')
 module.exports.run = async(client, message, args, prefix) => {
     const professorRole = rolesId.professor
     const facilitatorRole = rolesId.facilitator
+    const moderatorRole = message.member.roles.cache.get(rolesId.staff)
     const memberrole = message.member.roles.cache.get(rolesId.member)
     const regularrole = message.member.roles.cache.get(rolesId.regular)
     const muted = message.member.roles.cache.get(rolesId.muted)
@@ -19,7 +20,8 @@ module.exports.run = async(client, message, args, prefix) => {
     if(message.member.roles.cache.has({ professorRole, facilitatorRole }) || message.member.permissions.has("MANAGE_ROLES")) {
         if(message.channel.id === bstext){
             await message.channel.permissionOverwrites.edit(message.guild.id, { "SEND_MESSAGES": null })
-            await message.channel.permissionOverwrites.edit(memberrole.id, { "SEND_MESSAGES": null })
+            await message.channel.permissionOverwrites.edit(moderatorRole.id, { "SEND_MESSAGES": true })
+            await message.channel.permissionOverwrites.edit(memberrole.id, { "SEND_MESSAGES": true })
             await message.channel.permissionOverwrites.edit(regularrole.id, { "SEND_MESSAGES": null })
             await message.channel.permissionOverwrites.edit(muted.id, { "SEND_MESSAGES": false })
             message.channel.send({ embeds: [successEmbed] })
