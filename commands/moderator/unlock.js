@@ -2,10 +2,13 @@ const { textId, rolesId } = require('../../variablehandler.js')
 const { MessageEmbed } = require("discord.js");
 
 module.exports.run = async (client, message, args, prefix) => {
+  const memberrole = message.guild.roles.cache.get(rolesId.member)
+  const regularrole = message.guild.roles.cache.get(rolesId.regular)
+  const muted = message.guild.roles.cache.get(rolesId.muted)
   if(message.channel.id === textId.biblestudy) return message.delete().catch(e=>{})
   if(message.member.permissions.has("MANAGE_ROLES")){
     if (message.member.roles.cache.has(rolesId.staff)) {
-      const moderatorRole = message.member.roles.cache.get(rolesId.staff)
+      const moderatorRole = message.guild.roles.cache.get(rolesId.staff)
       const lockEmbed = new MessageEmbed()
         .setColor("#FF0000")
         .setTitle("🔐 Channel is unlocked.")
