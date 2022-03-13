@@ -13,7 +13,7 @@ module.exports.run = async (client, message, args, prefix) => {
         .setColor("#FF0000")
         .setTitle("🔐 Channel is unlocked.")
         .setFooter({ text: "© FaithChatt Forum" });
-      await message.channel.permissionOverwrites.edit(message.guild.id, { SEND_MESSAGES: null });
+      await message.channel.permissionOverwrites.edit(message.guild.id, { SEND_MESSAGES: false });
       await message.channel.permissionOverwrites.edit(moderatorRole.id, { SEND_MESSAGES: true });
       await message.channel.permissionOverwrites.edit(memberrole.id, { SEND_MESSAGES: true });
       await message.channel.permissionOverwrites.edit(regularrole.id, { SEND_MESSAGES: null });
