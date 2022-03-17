@@ -22,7 +22,7 @@ client.on('interactionCreate', async interaction => {
 
             const ticketembed = new MessageEmbed()
                 .setTitle('Verification Questions')
-                .setDescription(`1. What made you come to the server?\n2. Where did you find the invite link?\n3. What is your age and gender?\n4. What is your story of coming to the faith?\n5. Have you been on FaithChatt Forum in the past?\n\nIf done, ping a staff member available. Rest assured, we will reach out to you as soon as possible since we're available 24/7.`)
+                .setDescription(`1. What made you come to the server?\n2. Where did you find the invite link?\n3. What is your age and gender?\n4. What is your story of coming to the faith?\n5. Have you been on FaithChatt Forum in the past?\n\n**NOTE:** We only allow incoming members of 13 years old and above, as prescribed by Discord's Terms of Service, for the safety of our brothers and sisters online.\n\nIf done, ping a staff member available. Rest assured, we will reach out to you as soon as possible since we're available 24/7.`)
                 .setThumbnail('https://cdn.discordapp.com/attachments/855630577105502228/904092673353334884/FaithChatt_Halo.png')
                 .setColor("#ffd100")
                 .setFooter({ text: "© FaithChatt Forum" })
