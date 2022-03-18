@@ -29,7 +29,7 @@ client.on('interactionCreate', async interaction => {
             let ticketname = interaction.user.tag
 
             if(!data) {
-                data = await schema.create({ userId: interaction.user.id });
+                data = await schema.create({ userId: interaction.user.id, userName: ticketname });
                 let verifychannel = await interaction.guild.channels.create(ticketname, {
                     type: "GUILD_TEXT",
                     parent: faithchatt.parentId.verification,
