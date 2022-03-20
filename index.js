@@ -1,10 +1,9 @@
 const Discord = require('discord.js');
 const intents = new Discord.Intents(32767);
 const client = new Discord.Client({ intents });
+const express = require('express');
 const fs = require('fs');
 require('dotenv').config();
-client.login(process.env.TOKEN);
-require('http').createServer((req, res) => res.end('Bot is alive!')).listen(3000);
 
 client.commands = new Discord.Collection();
 client.slashCmds = new Discord.Collection();
@@ -74,3 +73,22 @@ fs.readdirSync('./events/').forEach(file => {
     };
   });
 });
+
+try {
+  const server = express();
+  server.all("/", (req, res) => {
+    res.send("Bot is running!")
+  })
+  
+  function keepAlive() {
+    server.listen(3000, () => {
+      console.log("Server is ready.")
+    })
+  }
+
+  keepAlive();
+} catch (error) {
+  console.log(error)
+}
+
+client.login(process.env.TOKEN);
