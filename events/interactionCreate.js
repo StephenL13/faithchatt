@@ -15,6 +15,7 @@ client.on('interactionCreate', async interaction => {
         if(interaction.customId == "verifyStart"){
             const moderatorrole = interaction.guild.roles.cache.get(faithchatt.rolesId.staff)
             const unverified = interaction.guild.roles.cache.get(faithchatt.rolesId.unverified)
+            const regular = interaction.guild.roles.cache.get(faithchatt.rolesId.regular)
             const memberrole = interaction.guild.roles.cache.get(faithchatt.rolesId.member)
             const everyone = interaction.guild.roles.cache.find(r => r.name === "@everyone")
 
@@ -36,6 +37,7 @@ client.on('interactionCreate', async interaction => {
                     topic: interaction.user.id,
                     permissionOverwrites: [
                         { id: interaction.user.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES"], deny: ["EMBED_LINKS", "ATTACH_FILES", "CREATE_PUBLIC_THREADS", "CREATE_PRIVATE_THREADS", "SEND_MESSAGES_IN_THREADS"] },
+                        { id: regular.id, deny: ["EMBED_LINKS", "ATTACH_FILES", "CREATE_PUBLIC_THREADS", "CREATE_PRIVATE_THREADS", "SEND_MESSAGES_IN_THREADS"] },
                         { id: memberrole.id, deny: ["VIEW_CHANNEL"] },
                         { id: unverified.id, deny: ["VIEW_CHANNEL"] },
                         { id: moderatorrole.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"] },
