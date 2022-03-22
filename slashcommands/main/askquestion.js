@@ -26,8 +26,6 @@ module.exports.run = async (client, interaction) => {
         autoArchiveDuration: 1440,
         rateLimitPerUser: 5
     })
-    newThread.members.add('394019914157129728')
-    newThread.members.add('204255221017214977')
 }
 
 module.exports.command = {
