@@ -5,26 +5,27 @@ module.exports.run = async (client, message, args, prefix) => {
   const memberrole = message.guild.roles.cache.get(rolesId.member)
   const regularrole = message.guild.roles.cache.get(rolesId.regular)
   const muted = message.guild.roles.cache.get(rolesId.muted)
+  const moderatorCheck = message.member.roles.cache.has(rolesId.staff)
+  const moderatorRole = message.guild.roles.cache.get(rolesId.staff)
   if(message.channel.id === textId.biblestudy) return message.delete().catch(e=>{})
-  if(message.member.permissions.has("MANAGE_ROLES")){
-    if (message.member.roles.cache.has(rolesId.staff)) {
-      const moderatorRole = message.guild.roles.cache.get(rolesId.staff)
-      const lockEmbed = new MessageEmbed()
-        .setColor("#FF0000")
-        .setTitle("🔐 Channel is unlocked.")
-        .setFooter({ text: "© FaithChatt Forum" });
-      await message.channel.permissionOverwrites.edit(message.guild.id, { SEND_MESSAGES: false });
-      await message.channel.permissionOverwrites.edit(moderatorRole.id, { SEND_MESSAGES: true });
-      await message.channel.permissionOverwrites.edit(memberrole.id, { SEND_MESSAGES: true });
-      await message.channel.permissionOverwrites.edit(regularrole.id, { SEND_MESSAGES: null });
-      await message.channel.permissionOverwrites.edit(muted.id, { SEND_MESSAGES: false });
-      await message.channel.send({ embeds: [lockEmbed] });
-    } else {
-      await message.delete();
-      await message.author.send("You are not a staff member authorized to use this command.");
+  if(!moderatorCheck) return message.delete().then(()=>{
+    try {
+      message.author.send({ content:"You are not a staff member authorized to use this command."})
+    } catch (error) {
+      console.log(error)
     }
-  }
-};
+  })
+  const lockEmbed = new MessageEmbed()
+    .setColor("#FF0000")
+    .setTitle("🔐 Channel is unlocked.")
+    .setFooter({ text: "© FaithChatt Forum" });
+  await message.channel.permissionOverwrites.edit(message.guild.id, { SEND_MESSAGES: false });
+  await message.channel.permissionOverwrites.edit(moderatorRole.id, { SEND_MESSAGES: true });
+  await message.channel.permissionOverwrites.edit(memberrole.id, { SEND_MESSAGES: true });
+  await message.channel.permissionOverwrites.edit(regularrole.id, { SEND_MESSAGES: null });
+  await message.channel.permissionOverwrites.edit(muted.id, { SEND_MESSAGES: false });
+  await message.channel.send({ embeds: [lockEmbed] });
+}
 
 module.exports.command = {
   name: "unlock",
