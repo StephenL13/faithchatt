@@ -57,7 +57,7 @@ module.exports.run = async (client, message, args, prefix) => {
       const serverroles = new MessageEmbed()
         .setColor('#ffd100')
         .setTitle("SERVER PINGS/OTHER ROLES")
-        .setDescription(':postal_horn: Special Announcement Ping\n:calendar: Daily Devotional Ping\n:scroll: Verse of the Day Ping\n:mortar_board: Dead Theologians Ping\n:bar_chart: Poll Ping\n:video_game: Gamer Ping\n:bell: Disboard Bump\n:book: Bible Study Ping\n:sunglasses: Lesson Ping\n:books: Reading Scripture Ping\n:green_book: Reading Ping\n:musical_keyboard: Worship Night Ping\n:cross: Prayers/Intercession Ping\n:pray: Prayer Requests Ping\n:wave: Welcoming Committee\n:sparkles: Other Events')
+        .setDescription(':postal_horn: Special Announcement Ping\n:calendar: Daily Devotional Ping\n:scroll: Verse of the Day Ping\n:mortar_board: Dead Theologians Ping\n:bar_chart: Poll Ping\n:video_game: Gamer Ping\n:bell: Disboard Bump\n:book: Bible Study Ping\n:sunglasses: Lesson Ping\n:books: Reading Scripture Ping\n:green_book: Reading Ping\n:musical_keyboard: Worship Night Ping\n:cross: Prayers/Intercession Ping\n:pray: Prayer Requests Ping\n:clapper: Movie Screening Ping\n:wave: Welcoming Committee\n:sparkles: Other Events')
         .setImage(border_image)
       wc_roles.send({ embeds: [religion] })
       wc_roles.send({ embeds: [gender] })
