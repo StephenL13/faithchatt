@@ -11,6 +11,7 @@ var male = "849442640453173248"
 // MISCELLANEOUS
 var prayerwarrior = "844787634030772224"
 var usher = "927436319318224906"
+var fisherofmen = "844787540996915240"
 var welcomeping = "912259335881650176"
 var booster = "852783343376269323"
 var divPing = "908240970523492353"
@@ -23,7 +24,7 @@ var facilitator = "903033680497365033"
 
 module.exports = {
     unverified, member, regular, muted,
-    divPing, divProfile, prayerwarrior, usher, 
+    divPing, divProfile, prayerwarrior, usher, fisherofmen,
     welcomeping, booster, underage, legal, female, male,
-    staff, professor, facilitator 
+    staff, professor, facilitator, 
 }

@@ -6,6 +6,9 @@ module.exports.run = async (client, message, args, prefix) => {
         let reason = args.slice(1).join(" ")
         const memberrole = message.guild.roles.cache.get(rolesId.member)
         const regularrole = message.guild.roles.cache.get(rolesId.regular)
+        const usherrole = message.guild.roles.cache.get(rolesId.usher)
+        const prayerwarrior = message.guild.roles.cache.get(rolesId.prayerwarrior)
+        const fisherofmen = message.guild.roles.cache.get(rolesid.fisherofmen)
 
         const legalrole = message.guild.roles.cache.get(rolesId.legal)
         const underagerole = message.guild.roles.cache.get(rolesId.underage)
@@ -26,6 +29,9 @@ module.exports.run = async (client, message, args, prefix) => {
         await targetmember.roles.add(mutedrole).catch(e=>{})
         await targetmember.roles.remove(memberrole).catch(e=>{})
         await targetmember.roles.remove(regularrole).catch(e=>{})
+        await targetmember.roles.remove(usherrole).catch(e=>{})
+        await targetmember.roles.remove(prayerwarrior).catch(e=>{})
+        await targetmember.roles.remove(fisherofmen).catch(e=>{})
         await targetmember.roles.remove(malerole).catch(e=>{})
         await targetmember.roles.remove(femalerole).catch(e=>{})
         await targetmember.roles.remove(legalrole).catch(e=>{})
@@ -36,7 +42,7 @@ module.exports.run = async (client, message, args, prefix) => {
             parent: parentId.jail,
             topic: targetmember.user.id,
             permissionOverwrites: [
-                { id: targetmember.user.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES"], deny: ["EMBED_LINKS", "ATTACH_FILES"] },
+                { id: targetmember.user.id, allow: ["VIEW_CHANNEL", "READ_MESSAGE_HISTORY", "SEND_MESSAGES"], deny: ["MANAGE_CHANNELS", "EMBED_LINKS", "ATTACH_FILES", "CREATE_PUBLIC_THREADS", "CREATE_PRIVATE_THREADS", "CREATE_INSTANT_INVITE", "SEND_MESSAGES_IN_THREADS", "MANAGE_THREADS", "MANAGE_MESSAGES", "USE_EXTERNAL_EMOJIS", "USE_EXTERNAL_STICKERS", "USE_APPLICATION_COMMANDS", "MANAGE_WEBHOOKS", "MANAGE_ROLES", "SEND_TTS_MESSAGES"] },
                 { id: mutedrole.id, deny: ["EMBED_LINKS", "ATTACH_FILES"] },
                 { id: memberrole.id, deny: ["VIEW_CHANNEL"] },
                 { id: moderatorrole.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"] },
