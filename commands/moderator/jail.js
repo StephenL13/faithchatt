@@ -8,7 +8,7 @@ module.exports.run = async (client, message, args, prefix) => {
         const regularrole = message.guild.roles.cache.get(rolesId.regular)
         const usherrole = message.guild.roles.cache.get(rolesId.usher)
         const prayerwarrior = message.guild.roles.cache.get(rolesId.prayerwarrior)
-        const fisherofmen = message.guild.roles.cache.get(rolesid.fisherofmen)
+        const fisherofmen = message.guild.roles.cache.get(rolesId.fisherofmen)
 
         const legalrole = message.guild.roles.cache.get(rolesId.legal)
         const underagerole = message.guild.roles.cache.get(rolesId.underage)
