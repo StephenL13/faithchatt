@@ -1,4 +1,3 @@
-const config = require('../config.json');
 const client = require(`../index.js`).client;
 
 client.on('messageCreate', async message => {
