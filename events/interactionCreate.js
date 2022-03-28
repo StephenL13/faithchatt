@@ -23,16 +23,8 @@ client.on('interactionCreate', async interaction => {
             let ticketdata = await ticketschema.findOne({ userId: interaction.user.id });
             let configdata = await configschema.findOne({ guildId: interaction.guild.id });
             if(!configdata) configdata = await configschema.create({ guildId: interaction.guild.id });
-            if(!configdata.verifyLock) return interaction.reply({
-                embeds: [
-                    new MessageEmbed()
-                    .setTitle("An error has occured.")
-                    .setDescription("Please contact a staff member for further assistance.")
-                    .setFooter({ text: "© FaithChatt Forum" })
-                ],
-                ephemeral: true
-            })
-            if(configdata.verifyLock === true) return interaction.reply({ 
+            if(configdata.verifyLock === true) { 
+                return interaction.reply({ 
                 embeds: [
                     new MessageEmbed()
                     .setTitle("Verification is currently locked.")
@@ -41,36 +33,44 @@ client.on('interactionCreate', async interaction => {
                     .setColor("#ff0000")
                 ],
                 ephemeral: true 
-            });
+            })} else if (configdata.verifyLock === false) {
+                const ticketembed = new MessageEmbed()
+                    .setTitle('Verification Questions')
+                    .setDescription(`1. What made you come to the server?\n2. Where did you find the invite link?\n3. What is your age and gender?\n4. What is your story of coming to the faith?\n5. Have you been on FaithChatt Forum in the past?\n\n**NOTE:** We only allow incoming members of 13 years old and above, as prescribed by Discord's Terms of Service, for the safety of our brothers and sisters online.\n\nIf done, ping a staff member available. Rest assured, we will reach out to you as soon as possible since we're available 24/7.`)
+                    .setThumbnail('https://cdn.discordapp.com/attachments/855630577105502228/904092673353334884/FaithChatt_Halo.png')
+                    .setColor("#ffd100")
+                    .setFooter({ text: "© FaithChatt Forum" })
+                let ticketname = interaction.user.tag
 
-            const ticketembed = new MessageEmbed()
-                .setTitle('Verification Questions')
-                .setDescription(`1. What made you come to the server?\n2. Where did you find the invite link?\n3. What is your age and gender?\n4. What is your story of coming to the faith?\n5. Have you been on FaithChatt Forum in the past?\n\n**NOTE:** We only allow incoming members of 13 years old and above, as prescribed by Discord's Terms of Service, for the safety of our brothers and sisters online.\n\nIf done, ping a staff member available. Rest assured, we will reach out to you as soon as possible since we're available 24/7.`)
-                .setThumbnail('https://cdn.discordapp.com/attachments/855630577105502228/904092673353334884/FaithChatt_Halo.png')
-                .setColor("#ffd100")
-                .setFooter({ text: "© FaithChatt Forum" })
-            let ticketname = interaction.user.tag
-
-            if(!ticketdata) {
-                ticketdata = await ticketschema.create({ userId: interaction.user.id, userName: ticketname });
-                let verifychannel = await interaction.guild.channels.create(ticketname, {
-                    type: "GUILD_TEXT",
-                    parent: faithchatt.parentId.verification,
-                    topic: interaction.user.id,
-                    permissionOverwrites: [
-                        { id: interaction.user.id, allow: ["VIEW_CHANNEL", "READ_MESSAGE_HISTORY", "SEND_MESSAGES"], deny: ["MANAGE_CHANNELS", "EMBED_LINKS", "ATTACH_FILES", "CREATE_PUBLIC_THREADS", "CREATE_PRIVATE_THREADS", "CREATE_INSTANT_INVITE", "SEND_MESSAGES_IN_THREADS", "MANAGE_THREADS", "MANAGE_MESSAGES", "USE_EXTERNAL_EMOJIS", "USE_EXTERNAL_STICKERS", "USE_APPLICATION_COMMANDS", "MANAGE_WEBHOOKS", "MANAGE_ROLES", "SEND_TTS_MESSAGES"] },
-                        { id: regular.id, deny: ["EMBED_LINKS", "ATTACH_FILES"] },
-                        { id: memberrole.id, deny: ["VIEW_CHANNEL"] },
-                        { id: unverified.id, deny: ["VIEW_CHANNEL"] },
-                        { id: moderatorrole.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"] },
-                        { id: everyone.id, deny: ["VIEW_CHANNEL"] }
-                    ]
-                })
-                verifychannel.send({ content: `${interaction.user}`, embeds: [ticketembed] }).catch(e=>{})
-                return interaction.reply({ content: `Ticket created! Please check ${verifychannel}`, ephemeral: true }).catch(e=>{})
-            } else {
-                return interaction.reply({ content: "You have already created a ticket! If you have problems, immediately contact/DM the moderators.", ephemeral: true }).catch(e=>{})
-            }
+                if(!ticketdata) {
+                    ticketdata = await ticketschema.create({ userId: interaction.user.id, userName: ticketname });
+                    let verifychannel = await interaction.guild.channels.create(ticketname, {
+                        type: "GUILD_TEXT",
+                        parent: faithchatt.parentId.verification,
+                        topic: interaction.user.id,
+                        permissionOverwrites: [
+                            { id: interaction.user.id, allow: ["VIEW_CHANNEL", "READ_MESSAGE_HISTORY", "SEND_MESSAGES"], deny: ["MANAGE_CHANNELS", "EMBED_LINKS", "ATTACH_FILES", "CREATE_PUBLIC_THREADS", "CREATE_PRIVATE_THREADS", "CREATE_INSTANT_INVITE", "SEND_MESSAGES_IN_THREADS", "MANAGE_THREADS", "MANAGE_MESSAGES", "USE_EXTERNAL_EMOJIS", "USE_EXTERNAL_STICKERS", "USE_APPLICATION_COMMANDS", "MANAGE_WEBHOOKS", "MANAGE_ROLES", "SEND_TTS_MESSAGES"] },
+                            { id: regular.id, deny: ["EMBED_LINKS", "ATTACH_FILES"] },
+                            { id: memberrole.id, deny: ["VIEW_CHANNEL"] },
+                            { id: unverified.id, deny: ["VIEW_CHANNEL"] },
+                            { id: moderatorrole.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"] },
+                            { id: everyone.id, deny: ["VIEW_CHANNEL"] }
+                        ]
+                    })
+                    verifychannel.send({ content: `${interaction.user}`, embeds: [ticketembed] }).catch(e=>{})
+                    return interaction.reply({ content: `Ticket created! Please check ${verifychannel}`, ephemeral: true }).catch(e=>{})
+                } else {
+                    return interaction.reply({ content: "You have already created a ticket! If you have problems, immediately contact/DM the moderators.", ephemeral: true }).catch(e=>{})
+                }
+            } else return interaction.reply({
+                embeds: [
+                    new MessageEmbed()
+                    .setTitle("An error has occured.")
+                    .setDescription("Please contact a staff member for further assistance.")
+                    .setFooter({ text: "© FaithChatt Forum" })
+                ],
+                ephemeral: true
+            })
         }
     }
 })
