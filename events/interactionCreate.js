@@ -1,7 +1,8 @@
 const client = require('../index.js').client
 const { MessageEmbed } = require('discord.js')
 const faithchatt = require('../variablehandler.js')
-const schema = require('../model/ticket.js')
+const ticketschema = require('../model/ticket.js')
+const configschema = require('../model/botconfig.js')
 
 client.on('interactionCreate', async interaction => {
     // SLASH COMMAND HANDLER
@@ -19,7 +20,28 @@ client.on('interactionCreate', async interaction => {
             const memberrole = interaction.guild.roles.cache.get(faithchatt.rolesId.member)
             const everyone = interaction.guild.roles.cache.find(r => r.name === "@everyone")
 
-            let data = await schema.findOne({ userId: interaction.user.id });
+            let ticketdata = await ticketschema.findOne({ userId: interaction.user.id });
+            let configdata = await configschema.findOne({ guildId: interaction.guild.id });
+            if(!configdata) configdata = await configschema.create({ guildId: interaction.guild.id });
+            if(!configdata.verifyLock) return interaction.reply({
+                embeds: [
+                    new MessageEmbed()
+                    .setTitle("An error has occured.")
+                    .setDescription("Please contact a staff member for further assistance.")
+                    .setFooter({ text: "© FaithChatt Forum" })
+                ],
+                ephemeral: true
+            })
+            if(configdata.verifyLock === true) return interaction.reply({ 
+                embeds: [
+                    new MessageEmbed()
+                    .setTitle("Verification is currently locked.")
+                    .setDescription("Due to the incoming members involving a raid or any unknown circumstance, the verification channel is locked until further notice. Please contact a staff member for questions and details.")
+                    .setFooter({ text: "© FaithChatt Forum" })
+                    .setColor("#ff0000")
+                ],
+                ephemeral: true 
+            });
 
             const ticketembed = new MessageEmbed()
                 .setTitle('Verification Questions')
@@ -29,8 +51,8 @@ client.on('interactionCreate', async interaction => {
                 .setFooter({ text: "© FaithChatt Forum" })
             let ticketname = interaction.user.tag
 
-            if(!data) {
-                data = await schema.create({ userId: interaction.user.id, userName: ticketname });
+            if(!ticketdata) {
+                ticketdata = await ticketschema.create({ userId: interaction.user.id, userName: ticketname });
                 let verifychannel = await interaction.guild.channels.create(ticketname, {
                     type: "GUILD_TEXT",
                     parent: faithchatt.parentId.verification,
