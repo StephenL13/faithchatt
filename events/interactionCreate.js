@@ -62,15 +62,7 @@ client.on('interactionCreate', async interaction => {
                 } else {
                     return interaction.reply({ content: "You have already created a ticket! If you have problems, immediately contact/DM the moderators.", ephemeral: true }).catch(e=>{})
                 }
-            } else return interaction.reply({
-                embeds: [
-                    new MessageEmbed()
-                    .setTitle("An error has occured.")
-                    .setDescription("Please contact a staff member for further assistance.")
-                    .setFooter({ text: "© FaithChatt Forum" })
-                ],
-                ephemeral: true
-            })
+            } 
         }
     }
 })
