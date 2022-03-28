@@ -30,7 +30,7 @@ module.exports.run = async (client, message, args, prefix) => {
                     await unvMem.send({ embeds: [
                         new MessageEmbed()
                             .setTitle("Verification ticket has been closed.")
-                            .setDescription(`Staff member has decided to close the ticket for the following reasons:\n- A set of questions are not answered.\n- Bot has been offline due to a bog.`)
+                            .setDescription(`Staff member has decided to close the ticket for the following reasons:\n- A set of questions are not answered.\n- Bot has been offline due to a bug.\n\nTo re-apply, be sure to re-read the rules and click "Verify Here". Thank you.`)
                             .setColor("#FF0000")
                             .setFooter({ text: "© FaithChatt Forum" })
                     ] }).catch(e=>{})
