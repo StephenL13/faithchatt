@@ -27,9 +27,10 @@ module.exports.run = async (client, interaction) => {
         autoArchiveDuration: 1440,
         rateLimitPerUser: 5
     })
-    for (i of botArray) {
-        newThread.members.add(botArray[i])
-    }
+    newThread.members.add(botArray[0]);
+    newThread.members.add(botArray[1]);
+    newThread.members.add(botArray[2]);
+    newThread.members.add(botArray[3]);
 }
 
 module.exports.command = {
