@@ -29,8 +29,8 @@ module.exports.run = async (client, message, args, prefix) => {
                     .setThumbnail(unvMem.user.displayAvatarURL())
                     await unvMem.send({ embeds: [
                         new MessageEmbed()
-                            .setTitle("Verification ticket has been closed due to inactivity.")
-                            .setDescription(`To re-apply, be sure to re-read the rules and click "Verify Here". Thank you.`)
+                            .setTitle("Verification ticket has been closed.")
+                            .setDescription(`Staff member has decided to close the ticket for the following reasons:\n- A set of questions are not answered.\n- Bot has been offline due to a bug.\n\nTo re-apply, be sure to re-read the rules and click "Verify Here". Thank you.`)
                             .setColor("#FF0000")
                             .setFooter({ text: "© FaithChatt Forum" })
                     ] }).catch(e=>{})
@@ -51,7 +51,7 @@ module.exports.run = async (client, message, args, prefix) => {
                 } else {
                     const closeEmbed = new MessageEmbed()
                     .setColor('#FF0000')
-                    .setDescription(`Member has left the server and failed to accomplish the verification. Ticket was closed manually.`)
+                    .setDescription(`Staff has closed the verification ticket. Member left the server due to either inactivity or the bot was offline.`)
                     if(text.length >= 2000) {
                         const timestamp = await moment().format("M-D-YYYY, HH:mm")
                         const fileAttach = new MessageAttachment(Buffer.from(text), `VerifyLog - ${timestamp}.txt`)

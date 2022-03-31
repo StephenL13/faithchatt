@@ -43,6 +43,19 @@ module.exports.run = async(client, message, args, prefix) => {
                         return message.channel.send({ embeds: [successEmbed.setDescription("You have **disabled** the autoclose of verification channels.")] });
                     } else return message.channel.send({ embeds: [boolDefaultEmbed] });
                 } break;
+                case "verifylock": {
+                    if(boolString === 'on') {
+                        data.verifyLock = true;
+                        await data.save();
+                        await message.react('✅');
+                        return message.channel.send({ embeds: [successEmbed.setDescription("You have **locked** the verification lock.")] });
+                    } else if (boolString === 'off') {
+                        data.verifyLock = false;
+                        await data.save();
+                        await message.react('✅');
+                        return message.channel.send({ embeds: [successEmbed.setDescription("You have **unlocked** the verification lock.")] });
+                    } else return message.channel.send({ embeds: [boolDefaultEmbed] });
+                } break;
                 default: return message.channel.send({ embeds: [configDefaultEmbed] });
             }
         } else return message.delete();
@@ -57,5 +70,5 @@ module.exports.run = async(client, message, args, prefix) => {
 
 module.exports.command = {
     name: "config",
-    aliases: []
+    aliases: ["cfg"]
 };
