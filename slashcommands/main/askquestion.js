@@ -21,12 +21,15 @@ module.exports.run = async (client, interaction) => {
         .setFooter({ text: "© FaithChatt Forum" })
     ]})
     let msgfetch = await textChannel.messages.fetch(output.id)
+    let botArray = ["349394562336292876", "361033318273384449", "204255221017214977", "394019914157129728"]
     let newThread = await msgfetch.startThread({
         name: `${interaction.user.username} | ${simpledate}`,
         autoArchiveDuration: 1440,
         rateLimitPerUser: 5
     })
-    newThread.members.add(["349394562336292876", "361033318273384449", "204255221017214977", "394019914157129728"])
+    for (i of botArray) {
+        newThread.members.add(botArray[i])
+    }
 }
 
 module.exports.command = {
