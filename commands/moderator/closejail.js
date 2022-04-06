@@ -4,7 +4,8 @@ const Discord = require('discord.js');
 const moment = require('moment');
 
 module.exports.run = async (client, message, args, prefix) => {
-    if(message.member.permissions.has("MANAGE_ROLES") || message.member.roles.cache.has(rolesId.staff)) {
+    const modcheck = message.member.roles.cache.has(rolesId.staff) || message.member.roles.cache.has(rolesId.moderator)
+    if(modcheck) {
         if (message.channel.parent.id === parentId.jail){
             if(message.channel.id === textId.jailedRules) return message.delete()
             let messageCollection = new Discord.Collection();
