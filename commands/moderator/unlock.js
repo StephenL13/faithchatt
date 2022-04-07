@@ -6,7 +6,7 @@ module.exports.run = async (client, message, args, prefix) => {
   const regularrole = message.guild.roles.cache.get(rolesId.regular)
   const muted = message.guild.roles.cache.get(rolesId.muted)
   const moderatorCheck = message.member.roles.cache.has(rolesId.staff, rolesId.moderator)
-  const moderatorRole = message.guild.roles.cache.get(rolesId.staff)
+  const moderatorRole = message.guild.roles.cache.get(rolesId.moderator)
   if(message.channel.id === textId.biblestudy) return message.delete().catch(e=>{})
   if(!moderatorCheck) return message.delete().then(()=>{
     try {
