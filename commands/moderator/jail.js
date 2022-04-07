@@ -19,7 +19,7 @@ module.exports.run = async (client, message, args, prefix) => {
         const everyone = message.guild.roles.cache.find(r => r.name === "@everyone")
         const modlog = message.guild.channels.cache.get(textId.modLog)
 
-        const modcheck = message.member.roles.cache.has(rolesId.staff) || message.member.roles.cache.has(rolesId.moderator)
+        const modcheck = message.member.roles.cache.has(rolesId.staff, rolesId.moderator)
 
         if(!modcheck) try {
             await message.delete().catch(e => {})

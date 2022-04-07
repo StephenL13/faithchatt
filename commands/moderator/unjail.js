@@ -9,7 +9,7 @@ module.exports.run = async (client, message, args, prefix) => {
         let targetmember = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         const memberrole = message.guild.roles.cache.get(rolesId.member)
         const mutedrole = message.guild.roles.cache.get(rolesId.muted)
-        const modcheck = message.member.roles.cache.has(rolesId.staff) || message.member.roles.cache.has(rolesId.moderator)
+        const modcheck = message.member.roles.cache.has(rolesId.staff, rolesId.moderator)
 
         if (!modcheck)
         return message.delete().then(async () => {
