@@ -2,7 +2,8 @@ const { MessageEmbed } = require('discord.js')
 const { textId, parentId, rolesId } = require('../../variablehandler.js');
 const schema = require('../../model/botconfig.js')
 module.exports.run = async(client, message, args, prefix) => {
-    if(message.member.roles.cache.has(rolesId.staff)) {
+    const modcheck = message.member.roles.cache.has(rolesId.staff) || message.member.roles.cache.has(rolesId.moderator)
+    if(modcheck) {
         if(message.member.permissions.has("MANAGE_ROLES")) {
             let config = args[0];
             let boolString = args[1];

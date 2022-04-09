@@ -19,6 +19,7 @@ var divProfile = "929740383892672552"
 
 // STAFF MEMBER
 var staff = "871058889339207681"
+var moderator = "839717673998614579"
 var professor = "843151409167073350"
 var facilitator = "903033680497365033"
 
@@ -26,5 +27,5 @@ module.exports = {
     unverified, member, regular, muted,
     divPing, divProfile, prayerwarrior, usher, fisherofmen,
     welcomeping, booster, underage, legal, female, male,
-    staff, professor, facilitator, 
+    staff, moderator, professor, facilitator, 
 }

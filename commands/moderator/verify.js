@@ -8,8 +8,9 @@ module.exports.run = async(client, message, args, prefix) => {
     const memberrole = message.guild.roles.cache.get(rolesId.member)
     const unverified = message.guild.roles.cache.get(rolesId.unverified)
     const targetmember = message.mentions.members.first() || message.guild.members.cache.get(args[0])
+    const modcheck = message.member.roles.cache.has(rolesId.staff, rolesId.moderator)
 
-    if(message.member.roles.cache.has(rolesId.staff)) {
+    if(modcheck) {
         if(message.channel.id === textId.verify) return message.delete()
         if(message.channel.parent.id === parentId.verification) {
             if(!args[0]) return message.channel.send('Correct command usage:\n\`!verify <@user/userid>\`').catch(e => {})

@@ -5,7 +5,7 @@ client.on('messageCreate', async message => {
     for (let i in links) {
         if(message.content.toLowerCase().includes(links[i])) {
             try {
-                await message.delete();
+                await message.delete().catch(e=>{});
                 return message.author.send({ content: "**You are not allowed to send suspicious links! Failure to abide in the server rules will result into a moderator action.**" }).catch(e => {});
             } catch (error) {
                 console.log(error);

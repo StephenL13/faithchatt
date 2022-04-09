@@ -4,7 +4,8 @@ const { MessageEmbed, MessageAttachment } = require('discord.js')
 const schema = require('../../model/ticket.js')
 const moment = require('moment')
 module.exports.run = async (client, message, args, prefix) => {
-    if(message.member.permissions.has("MANAGE_ROLES") || message.member.roles.cache.has(rolesId.staff)) {
+    const modcheck = message.member.roles.cache.has(rolesId.staff, rolesId.moderator)
+    if(modcheck) {
         if (message.channel.parent.id === parentId.verification){
             if(message.channel.id === textId.verify) return message.delete()
             let unvMem = message.guild.members.cache.get(message.channel.topic)

@@ -16,13 +16,16 @@ module.exports.run = async (client, message, args, prefix) => {
         const femalerole = message.guild.roles.cache.get(rolesId.female)
 
         const mutedrole = message.guild.roles.cache.get(rolesId.muted)
-        const moderatorrole = message.guild.roles.cache.get(rolesId.staff)
         const everyone = message.guild.roles.cache.find(r => r.name === "@everyone")
         const modlog = message.guild.channels.cache.get(textId.modLog)
 
-        if(!message.member.roles.cache.has(rolesId.staff)) return message.delete().then(async() => {
-            await message.author.send("You're not a staff member authorized to use this command.")
-        }).catch(e => {})
+        const moderatorrole = message.guild.roles.cache.get(rolesId.moderator)
+        const modcheck = message.member.roles.cache.has(rolesId.staff, rolesId.moderator)
+
+        if(!modcheck) try {
+            await message.delete().catch(e => {})
+            return message.author.send("You're not a staff member authorized to use this command.").catch(e => {})
+        } catch(e) {}
         if(!targetmember) return message.channel.send("Command usage:\n`!jail <@user/uid> <reason>`")
         if(targetmember.roles.cache.has(rolesId.muted)) return message.reply("The member has been already jailed!")
         if(!reason) return message.channel.send("Please supply a reason of the suspect.\n`!jail <@user/uid> <reason>`")

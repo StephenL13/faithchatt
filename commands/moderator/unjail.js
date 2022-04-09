@@ -9,12 +9,13 @@ module.exports.run = async (client, message, args, prefix) => {
         let targetmember = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         const memberrole = message.guild.roles.cache.get(rolesId.member)
         const mutedrole = message.guild.roles.cache.get(rolesId.muted)
+        const modcheck = message.member.roles.cache.has(rolesId.staff, rolesId.moderator)
 
-        if (!message.member.roles.cache.has(rolesId.staff))
+        if (!modcheck)
         return message.delete().then(async () => {
             await message.author.send("You're not a staff member authorized to use this command.");
             }).catch((e) => {});
-            if(!targetmember) return message.channel.send("Command usage:\n`!unjail <@user/uid>`");
+        if(!targetmember) return message.channel.send("Command usage:\n`!unjail <@user/uid>`");
         if (message.channel.parent.id === parentId.jail){
             if(message.channel.id === textId.jailedRules) return message.delete()
             let messageCollection = new Discord.Collection();

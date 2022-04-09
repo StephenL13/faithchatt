@@ -15,8 +15,7 @@ module.exports.run = async(client, message, args, prefix) => {
     const successEmbed = new MessageEmbed()
         .setTitle('<:Unstaged:880650957925519441> Bible study channel is now locked.')
         .setColor('#ffd100')
-        .setDescription(`For more upcoming bible studies, please check the **📅 Events** tab.\nIn the meantime, you can also check out our radio station channels Moody Radio, RefNet, and Worship Radio.\n\nThanks for joining with us. God bless you.`)
-        .setImage('https://media1.giphy.com/media/z1kL3TjrK278E6EhZF/giphy.gif?cid=790b7611e06601e976e82fa774ae08ceab4bd86a1f6672ea&rid=giphy.gif&ct=g')
+        .setDescription(`For more upcoming bible studies, please check the **📅 Events** tab.\nIn the meantime, you can also check out our radio station channels __Moody Radio__, __RefNet__, and __Worship Radio__.\n\nThanks for joining with us. God bless you.`)
         .setFooter({ text:"© FaithChatt Forum" });
     if(message.member.roles.cache.has({ professorRole, facilitatorRole }) || message.member.roles.cache.has(rolesId.staff)) {
         if(message.channel.id === bstext){
