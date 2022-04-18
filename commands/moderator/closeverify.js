@@ -4,7 +4,7 @@ const { MessageEmbed, MessageAttachment } = require('discord.js')
 const schema = require('../../model/ticket.js')
 const moment = require('moment')
 module.exports.run = async (client, message, args, prefix) => {
-    const modcheck = message.member.roles.cache.has(rolesId.moderator)
+    const modcheck = message.member.permissions.has("KICK_MEMBERS") || message.member.permissions.has("BAN_MEMBERS")
     if(modcheck) {
         if (message.channel.parent.id === parentId.verification){
             if(message.channel.id === textId.verify) return message.delete()
