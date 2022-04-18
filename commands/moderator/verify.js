@@ -8,7 +8,7 @@ module.exports.run = async(client, message, args, prefix) => {
     const memberrole = message.guild.roles.cache.get(rolesId.member)
     const unverified = message.guild.roles.cache.get(rolesId.unverified)
     const targetmember = message.mentions.members.first() || message.guild.members.cache.get(args[0])
-    const modcheck = message.member.roles.cache.has(rolesId.staff) || message.member.roles.cache.has(rolesId.moderator)
+    const modcheck = message.member.permissions.has("KICK_MEMBERS") || message.member.permissions.has("BAN_MEMBERS")
 
     if(modcheck) {
         if(message.channel.id === textId.verify) return message.delete()
