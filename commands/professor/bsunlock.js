@@ -4,6 +4,7 @@ const { MessageEmbed } = require('discord.js')
 module.exports.run = async(client, message, args, prefix) => {
     const professorRole = rolesId.professor
     const facilitatorRole = rolesId.facilitator
+    const lockingPerms = message.member.roles.cache.has({ professorRole, facilitatorRole }) || message.member.roles.cache.has(rolesId.staff)
     const moderatorRole = message.guild.roles.cache.get(rolesId.staff)
     const memberrole = message.guild.roles.cache.get(rolesId.member)
     const regularrole = message.guild.roles.cache.get(rolesId.regular)
@@ -17,7 +18,7 @@ module.exports.run = async(client, message, args, prefix) => {
         .setTitle('<:Staged:880649462492569651> Session is about to start in a few moments.')
         .setDescription("Head over to <#840942889340239914> and study the Word with us!")
         .setFooter({ text:"© FaithChatt Forum" });
-    if(message.member.roles.cache.has({ professorRole, facilitatorRole }) || message.member.roles.cache.has(rolesId.staff)) {
+    if(lockingPerms) {
         if(message.channel.id === bstext){
             await message.channel.permissionOverwrites.edit(message.guild.id, { "SEND_MESSAGES": null })
             await message.channel.permissionOverwrites.edit(moderatorRole.id, { "SEND_MESSAGES": true })

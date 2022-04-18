@@ -4,6 +4,7 @@ const { MessageEmbed } = require('discord.js')
 module.exports.run = async(client, message, args, prefix) => {
     const professorRole = rolesId.professor
     const facilitatorRole = rolesId.facilitator
+    const lockingPerms = message.member.roles.cache.has({ professorRole, facilitatorRole }) || message.member.roles.cache.has(rolesId.staff)
     const moderatorRole = message.guild.roles.cache.get(rolesId.staff)
     const memberrole = message.guild.roles.cache.get(rolesId.member)
     const regularrole = message.guild.roles.cache.get(rolesId.regular)
@@ -17,7 +18,7 @@ module.exports.run = async(client, message, args, prefix) => {
         .setColor('#ffd100')
         .setDescription(`For more upcoming bible studies, please check the **📅 Events** tab.\nIn the meantime, you can also check out our radio station channels __Moody Radio__, __RefNet__, and __Worship Radio__.\n\nThanks for joining with us. God bless you.`)
         .setFooter({ text:"© FaithChatt Forum" });
-    if(message.member.roles.cache.has({ professorRole, facilitatorRole }) || message.member.roles.cache.has(rolesId.staff)) {
+    if(lockingPerms) {
         if(message.channel.id === bstext){
             await message.channel.permissionOverwrites.edit(message.guild.id, { "SEND_MESSAGES": false })
             await message.channel.permissionOverwrites.edit(moderatorRole.id, { "SEND_MESSAGES": true })
