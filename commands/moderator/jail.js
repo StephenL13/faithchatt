@@ -22,10 +22,9 @@ module.exports.run = async (client, message, args, prefix) => {
         const moderatorrole = message.guild.roles.cache.get(rolesId.moderator)
         const modcheck = message.member.permissions.has("KICK_MEMBERS") || message.member.permissions.has("BAN_MEMBERS")
 
-        if(!modcheck) try {
-            await message.delete().catch(e => {})
-            return message.author.send("You're not a staff member authorized to use this command.").catch(e => {})
-        } catch(e) {}
+        if(!modcheck) return message.delete().then(() => {
+            message.author.send("You're not a staff member authorized to use this command.").catch(e => {})
+        }).catch(err => {})
         if(!targetmember) return message.channel.send("Command usage:\n`!jail <@user/uid> <reason>`")
         if(targetmember.roles.cache.has(rolesId.muted)) return message.reply("The member has been already jailed!")
         if(!reason) return message.channel.send("Please supply a reason of the suspect.\n`!jail <@user/uid> <reason>`")
