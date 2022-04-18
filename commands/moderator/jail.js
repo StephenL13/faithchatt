@@ -20,7 +20,7 @@ module.exports.run = async (client, message, args, prefix) => {
         const modlog = message.guild.channels.cache.get(textId.modLog)
 
         const moderatorrole = message.guild.roles.cache.get(rolesId.moderator)
-        const modcheck = message.member.roles.cache.has(rolesId.staff, rolesId.moderator)
+        const modcheck = message.member.roles.cache.has(rolesId.staff) || message.member.roles.cache.has(rolesId.moderator)
 
         if(!modcheck) try {
             await message.delete().catch(e => {})
