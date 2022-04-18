@@ -20,7 +20,7 @@ module.exports.run = async (client, message, args, prefix) => {
         const modlog = message.guild.channels.cache.get(textId.modLog)
 
         const moderatorrole = message.guild.roles.cache.get(rolesId.moderator)
-        const modcheck = message.member.permissions.has("KICK_MEMBERS") || message.member.permissions.has("BAN_MEMBERS")
+        const modcheck = message.member.roles.cache.has(rolesId.moderator)
 
         if(!modcheck) return message.delete().then(() => {
             message.author.send("You're not a staff member authorized to use this command.").catch(e => {})

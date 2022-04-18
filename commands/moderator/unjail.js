@@ -9,7 +9,7 @@ module.exports.run = async (client, message, args, prefix) => {
         let targetmember = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         const memberrole = message.guild.roles.cache.get(rolesId.member)
         const mutedrole = message.guild.roles.cache.get(rolesId.muted)
-        const modcheck = message.member.permissions.has("KICK_MEMBERS") || message.member.permissions.has("BAN_MEMBERS")
+        const modcheck = message.member.roles.cache.has(rolesId.moderator)
 
         if (!modcheck) return message.delete().then(() => {
             message.author.send("You're not a staff member authorized to use this command.").catch(e => {})

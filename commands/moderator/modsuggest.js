@@ -2,7 +2,7 @@ const faithchatt = require('../../variablehandler')
 const { MessageEmbed } = require('discord.js')
 
 module.exports.run = async (client, message, args, prefix) => {
-    const staffPermCheck = message.member.permissions.has("KICK_MEMBERS") || message.member.permissions.has("BAN_MEMBERS")
+    const staffPermCheck = message.member.roles.cache.has(faithchatt.rolesId.moderator)
     const textChannel = client.channels.cache.get(faithchatt.textId.suggest)
     const suggestion = args.join(" ")
 
