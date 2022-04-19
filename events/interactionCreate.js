@@ -64,7 +64,7 @@ client.on('interactionCreate', async interaction => {
                     verifychannel.send({ content: `${interaction.user}`, embeds: [ticketembed] }).catch(e=>{})
                     return interaction.reply({ content: `Ticket created! Please check ${verifychannel}`, ephemeral: true }).catch(e=>{})
                 } else {
-                    if (!ticketdata.channelId) {
+                    if (!interaction.guild.channels.cache.has(ticketdata.channelId)) {
                         let verifychannel = await interaction.guild.channels.create(ticketname, {
                             type: "GUILD_TEXT",
                             parent: faithchatt.parentId.verification,
