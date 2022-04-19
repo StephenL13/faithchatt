@@ -24,6 +24,28 @@ module.exports.run = async (client, message, args, prefix) => {
                 const text = await msgs.map(m=>`${m.author.tag}: ${m.content}`).join("\n")
                 const logChannel = client.channels.cache.get(textId.verifyLog)
                 if(unvMem) {
+                    async function alreadyMem() {
+                        const alreadyEmbed = new MessageEmbed()
+                        .setColor('#FF0000')
+                        .setDescription(`👤 **User:** \`${unvMem.user.tag}\`\n📜 **ID:** \`${unvMem.user.id}\`\n\nMember has been already verified when it had duplicate channels.`)
+                        .setThumbnail(unvMem.user.displayAvatarURL())
+                        await console.log("Member has been already verified.")
+                        if(text.length >= 2000) {
+                            const timestamp = await moment().format("M-D-YYYY, HH:mm")
+                            const fileAttach = new MessageAttachment(Buffer.from(text), `VerifyLog - ${timestamp}.txt`)
+                            await logChannel.send({
+                                content: "Channel is over 2000 characters. Thus, a generated file.",
+                                files: [fileAttach],
+                                embeds: [alreadyEmbed]
+                            })
+                        } else {
+                            await logChannel.send({ 
+                                content: `\`\`\`\n${text}\`\`\``,
+                                embeds: [alreadyEmbed]
+                            })
+                        }
+                    }
+                    if (unvMem.roles.cache.has(rolesId.member)) return alreadyMem();
                     const closeEmbed = new MessageEmbed()
                     .setColor('#FF0000')
                     .setDescription(`👤 **User:** \`${unvMem.user.tag}\`\n📜 **ID:** \`${unvMem.user.id}\`\n\nMember has failed to accomplish the verification, upon the decision of the staff.`)
@@ -47,26 +69,6 @@ module.exports.run = async (client, message, args, prefix) => {
                         await logChannel.send({ 
                             content: `\`\`\`\n${text}\`\`\``,
                             embeds: [closeEmbed]
-                        })
-                    }
-                } else if (unvMem.roles.cache.has(rolesId.member)) {
-                    const alreadyEmbed = new MessageEmbed()
-                    .setColor('#FF0000')
-                    .setDescription(`👤 **User:** \`${unvMem.user.tag}\`\n📜 **ID:** \`${unvMem.user.id}\`\n\nMember has been already verified when it had duplicate channels.`)
-                    .setThumbnail(unvMem.user.displayAvatarURL())
-                    await console.log("Member has been already verified.")
-                    if(text.length >= 2000) {
-                        const timestamp = await moment().format("M-D-YYYY, HH:mm")
-                        const fileAttach = new MessageAttachment(Buffer.from(text), `VerifyLog - ${timestamp}.txt`)
-                        await logChannel.send({
-                            content: "Channel is over 2000 characters. Thus, a generated file.",
-                            files: [fileAttach],
-                            embeds: [alreadyEmbed]
-                        })
-                    } else {
-                        await logChannel.send({ 
-                            content: `\`\`\`\n${text}\`\`\``,
-                            embeds: [alreadyEmbed]
                         })
                     }
                 } else {
