@@ -40,10 +40,9 @@ client.on('interactionCreate', async interaction => {
                     .setThumbnail('https://i.imgur.com/xO46ifo.png')
                     .setColor("#ffd100")
                     .setFooter({ text: "© FaithChatt Forum" })
-                let ticketname = interaction.user.tag
+                let ticketname = interaction.user.tag;
 
                 if(!ticketdata) {
-                    ticketdata = await ticketschema.create({ userId: interaction.user.id, userName: ticketname });
                     let verifychannel = await interaction.guild.channels.create(ticketname, {
                         type: "GUILD_TEXT",
                         parent: faithchatt.parentId.verification,
@@ -57,9 +56,31 @@ client.on('interactionCreate', async interaction => {
                             { id: everyone.id, deny: ["VIEW_CHANNEL"] }
                         ]
                     })
+                    ticketdata = await ticketschema.create({ 
+                        userId: interaction.user.id, 
+                        userName: ticketname,
+                        channelId: verifychannel.id
+                    });
                     verifychannel.send({ content: `${interaction.user}`, embeds: [ticketembed] }).catch(e=>{})
                     return interaction.reply({ content: `Ticket created! Please check ${verifychannel}`, ephemeral: true }).catch(e=>{})
                 } else {
+                    if (!ticketdata.channelId) {
+                        let verifychannel = await interaction.guild.channels.create(ticketname, {
+                            type: "GUILD_TEXT",
+                            parent: faithchatt.parentId.verification,
+                            topic: interaction.user.id,
+                            permissionOverwrites: [
+                                { id: interaction.user.id, allow: ["VIEW_CHANNEL", "READ_MESSAGE_HISTORY", "SEND_MESSAGES"], deny: ["MANAGE_CHANNELS", "EMBED_LINKS", "ATTACH_FILES", "CREATE_PUBLIC_THREADS", "CREATE_PRIVATE_THREADS", "CREATE_INSTANT_INVITE", "SEND_MESSAGES_IN_THREADS", "MANAGE_THREADS", "MANAGE_MESSAGES", "USE_EXTERNAL_EMOJIS", "USE_EXTERNAL_STICKERS", "USE_APPLICATION_COMMANDS", "MANAGE_WEBHOOKS", "MANAGE_ROLES", "SEND_TTS_MESSAGES"] },
+                                { id: regular.id, deny: ["EMBED_LINKS", "ATTACH_FILES"] },
+                                { id: memberrole.id, deny: ["VIEW_CHANNEL"] },
+                                { id: unverified.id, deny: ["VIEW_CHANNEL"] },
+                                { id: moderatorrole.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"] },
+                                { id: everyone.id, deny: ["VIEW_CHANNEL"] }
+                            ]
+                        })
+                        await verifychannel.send({ content: `${interaction.user}`, embeds: [ticketembed] }).catch(e=>{})
+                        return interaction.reply({ content: `Ticket created! Please check ${verifychannel}`, ephemeral: true }).catch(e=>{})
+                    }
                     return interaction.reply({ content: "You have already created a ticket! If you have problems, immediately contact/DM the moderators.", ephemeral: true }).catch(e=>{})
                 }
             } else return interaction.reply({
