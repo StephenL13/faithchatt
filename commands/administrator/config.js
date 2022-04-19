@@ -26,7 +26,7 @@ module.exports.run = async(client, message, args, prefix) => {
             new MessageEmbed()
             .setTitle("List of Sub-Commands")
             .setAuthor({ name: "Command usage: !config [name] [on/off]" })
-            .setDescription('\`autoclose\` - Automatically closes the verification ticket if member leaves.')
+            .setDescription('\`autoclose\` - Automatically closes the verification ticket if member leaves.\n\`verifylock\` - Locks the verification button to public (applicable to raids)')
             .setColor('#ffd100')
         ] })
         switch(config) {
@@ -48,12 +48,12 @@ module.exports.run = async(client, message, args, prefix) => {
                     data.verifyLock = true;
                     await data.save();
                     await message.react('✅');
-                    return message.channel.send({ embeds: [successEmbed.setDescription("You have **locked** the verification lock.")] });
+                    return message.channel.send({ embeds: [successEmbed.setDescription("You have **locked** the verification system.")] });
                 } else if (boolString === 'off') {
                     data.verifyLock = false;
                     await data.save();
                     await message.react('✅');
-                    return message.channel.send({ embeds: [successEmbed.setDescription("You have **unlocked** the verification lock.")] });
+                    return message.channel.send({ embeds: [successEmbed.setDescription("You have **unlocked** the verification system.")] });
                 } else return message.channel.send({ embeds: [boolDefaultEmbed] });
             } break;
             default: return message.channel.send({ embeds: [configDefaultEmbed] });
