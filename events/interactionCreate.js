@@ -78,6 +78,8 @@ client.on('interactionCreate', async interaction => {
                                 { id: everyone.id, deny: ["VIEW_CHANNEL"] }
                             ]
                         })
+                        ticketdata.channelId = verifychannel.id;
+                        await ticketdata.save();
                         await verifychannel.send({ content: `${interaction.user}`, embeds: [ticketembed] }).catch(e=>{})
                         return interaction.reply({ content: `Ticket created! Please check ${verifychannel}`, ephemeral: true }).catch(e=>{})
                     }
