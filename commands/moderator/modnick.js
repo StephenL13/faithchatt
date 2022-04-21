@@ -39,9 +39,9 @@ module.exports.run = async(client, message, args, prefix) => {
                     .setColor("#00ff00")
                 ]}).then(() => setTimeout(() => {
                     message.delete().catch(() => {})
-                }, 1500).then(m => {
+                }, 1500)).then(m => {
                     m.delete().catch(() => {})
-                }, 5000))
+                }, 5000)
             } catch (error) {
                 console.log(error)
             }
