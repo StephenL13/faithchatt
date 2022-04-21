@@ -16,7 +16,7 @@ module.exports.run = async (client, interaction) => {
                 await interaction.reply({ embeds: [
                     new MessageEmbed()
                     .setTitle("Basic Moderation Commands")
-                    .setDescription(`\`?warn [member] [reason] - warn\`\n\`?kick [member] [reason]\` - kick\n\`?ban [member] [reason]\` - ban\n\`?purge [count]\` - max. 1000 messages\n\`?purge [count] [user]\`\n\`!jail <@user/uid> <reason>\` - jail\n\`!unjail <@user/uid>\` - Unjail the repenting user\n\`!closejail\` - Only applicable for those who left the server\n\`!lock\` | \`!unlock\` - Changes the state of the channel for lockdown (except the Bible Study channel)\n\n\`?avatar [@user/userid]\` - User's avatar\n\`?poll [message] "[choice1]" "[choice2]"\` - Create a poll (10 max. choices)\n\`?poll show [message ID/link]\` - Results of a poll`)
+                    .setDescription(`\`?warn [member] [reason] - warn\`\n\`?kick [member] [reason]\` - kick\n\`?ban [member] [reason]\` - ban\n\`?purge [count]\` - max. 1000 messages\n\`?purge [count] [user]\`\n\`!jail <@user/uid> <reason>\` - jail\n\`!unjail <@user/uid>\` - Unjail the repenting user\n\`!closejail\` - Only applicable for those who left the server\n\`!lock\` | \`!unlock\` - Changes the state of the channel for lockdown (except the Bible Study channel)\n\n\`!modnick [@user/userid]\` - Generates an automatically generated nickname\n\`?avatar [@user/userid]\` - User's avatar\n\`?poll [message] "[choice1]" "[choice2]"\` - Create a poll (10 max. choices)\n\`?poll show [message ID/link]\` - Results of a poll`)
                     .setImage('https://i.imgur.com/IDkJbsi.png')
                     .setColor("#ffd100")
                     .setFooter({ text: "© FaithChatt Forum" })
