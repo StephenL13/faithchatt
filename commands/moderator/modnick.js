@@ -36,7 +36,7 @@ module.exports.run = async(client, message, args, prefix) => {
                 await setTimeout(() => message.delete().catch(() => {}), 3000)
                 await message.channel.send({ embeds: [
                     new MessageEmbed()
-                    .setDescription(`✅ | ${targetmember.user.tag}'s nickname has been generated and changed!`)
+                    .setDescription(`✅ | **${targetmember.user.tag}**'s nickname has been generated and changed!`)
                     .setColor("#00ff00")
                 ]})
             } catch (error) {
