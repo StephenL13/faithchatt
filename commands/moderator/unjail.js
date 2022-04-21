@@ -12,7 +12,15 @@ module.exports.run = async (client, message, args, prefix) => {
         const modcheck = message.member.roles.cache.has(rolesId.moderator)
 
         if (!modcheck) return message.delete().then(() => {
-            message.author.send("You're not a staff member authorized to use this command.").catch(e => {})
+            try {
+                message.author.send({ embeds: [
+                    new MessageEmbed()
+                    .setDescription("❌ | You are not a staff member authorized to use this command.")
+                    .setColor("#ff0000")
+                ]})
+            } catch (error) {
+                console.log(error)
+            }
         }).catch(err => {})
         if(!targetmember) return message.channel.send("Command usage:\n`!unjail <@user/uid>`");
         if (message.channel.parent.id === parentId.jail){
@@ -64,10 +72,15 @@ module.exports.run = async (client, message, args, prefix) => {
         } else return console.log(`${message.author.tag} executed in a non-jail ticket.`)
     } else {
         message.delete();
-        const inaccessEmbed = new MessageEmbed()
-        .setColor("#ff0000")
-        .setDescription('You are not a staff member authorized to use this command.')
-        message.author.send({ embeds: [inaccessEmbed] }).catch(e => {})
+        try {
+            message.author.send({ embeds: [
+                new MessageEmbed()
+                .setDescription("❌ | You are not a staff member authorized to use this command.")
+                .setColor("#ff0000")
+            ]})
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 

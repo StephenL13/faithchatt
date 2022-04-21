@@ -31,13 +31,17 @@ module.exports.run = async(client, message, args, prefix) => {
             errorEmbed.setDescription('This command is only accessible to the Bible Study/Sermon Text Chatt.')
             message.author.send({ embeds: [errorEmbed] }).catch(e => {})
         }
-
    } else {
        message.delete();
-       const inaccessEmbed = new MessageEmbed()
-       .setColor("#ff0000")
-       .setDescription('You are not a staff member authorized to use this command.')
-       message.author.send({ embeds: [inaccessEmbed] }).catch(e => {})
+       try {
+            message.author.send({ embeds: [
+                new MessageEmbed()
+                .setDescription("❌ | You are not a staff member authorized to use this command.")
+                .setColor("#ff0000")
+            ]})
+        } catch (error) {
+            console.log(error)
+        }
    }
 }
 

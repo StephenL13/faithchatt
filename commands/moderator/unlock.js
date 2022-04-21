@@ -10,9 +10,13 @@ module.exports.run = async (client, message, args, prefix) => {
   if(message.channel.id === textId.biblestudy) return message.delete().catch(e=>{})
   if(!moderatorCheck) return message.delete().then(()=>{
     try {
-      message.author.send({ content:"You are not a staff member authorized to use this command."})
+      message.author.send({ embeds: [
+          new MessageEmbed()
+          .setDescription("❌ | You are not a staff member authorized to use this command.")
+          .setColor("#ff0000")
+      ]})
     } catch (error) {
-      console.log(error)
+        console.log(error)
     }
   })
   const lockEmbed = new MessageEmbed()
