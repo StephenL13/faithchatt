@@ -32,7 +32,7 @@ module.exports.run = async(client, message, args, prefix) => {
         })
     } else {
         await targetmember.setNickname(nicknameSet[num1]+nicknameSet[num2])
-        return message.delete().then(() => {
+        return message.delete().then(async() => {
             try {
                 await message.react("✅")
                 message.channel.send({ embeds: [
