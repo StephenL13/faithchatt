@@ -39,7 +39,7 @@ module.exports.run = async(client, message, args, prefix) => {
                     .setDescription(`✅ | ${targetmember.user.tag}'s nickname has been generated and changed!`)
                     .setColor("#00ff00")
                 ]}).then(m => {
-                    m.delete().catch(() => {})
+                    setTimeout(() => m.delete().catch(() => {}), 5000)
                 }, 5000)
             } catch (error) {
                 console.log(error)
