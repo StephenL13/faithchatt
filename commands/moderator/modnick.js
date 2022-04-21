@@ -1,4 +1,5 @@
-const { MessageEmbed } = require('discord.js')
+const { MessageEmbed } = require('discord.js');
+const { set } = require('express/lib/application');
 const { nicknameSet } = require(`../../variables/MiscValues.js`)
 module.exports.run = async(client, message, args, prefix) => {
     let targetmember = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
@@ -36,7 +37,11 @@ module.exports.run = async(client, message, args, prefix) => {
                     new MessageEmbed()
                     .setDescription(`✅ | ${targetmember.user.tag}'s nickname has been generated and changed!`)
                     .setColor("#00ff00")
-                ]}).then(() => message.delete(), 1000)
+                ]}).then(() => setTimeout(() => {
+                    message.delete().catch(() => {})
+                }, 1500).then(m => {
+                    m.delete().catch(() => {})
+                }, 5000))
             } catch (error) {
                 console.log(error)
             }
