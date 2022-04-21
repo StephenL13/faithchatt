@@ -23,8 +23,7 @@ module.exports.run = async(client, message, args, prefix) => {
                     new MessageEmbed()
                     .setDescription("❌ | You must mention a user to change their nickname.")
                     .setColor("#ff0000")
-                ]})
-                setTimeout(m => m.delete().catch(() => {}), 5000)
+                ]}).then(m => setTimeout(() => m.delete().catch(() => {}), 5000))
             } catch (error) {
                 console.log(error)
             }
