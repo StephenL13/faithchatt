@@ -30,14 +30,13 @@ module.exports.run = async(client, message, args, prefix) => {
         })
     } else {
         await targetmember.setNickname(nicknameSet[num1]+nicknameSet[num2])
-        return message.delete().then(async() => {
+        return message.react("✅").then(async() => {
             try {
-                await message.react("✅")
                 message.channel.send({ embeds: [
                     new MessageEmbed()
                     .setDescription(`✅ | ${targetmember.user.tag}'s nickname has been generated and changed!`)
                     .setColor("#00ff00")
-                ]})
+                ]}).then(() => message.delete(), 1000)
             } catch (error) {
                 console.log(error)
             }
