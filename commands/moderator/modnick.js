@@ -24,7 +24,7 @@ module.exports.run = async(client, message, args, prefix) => {
                     .setDescription("❌ | You must mention a user to change their nickname.")
                     .setColor("#ff0000")
                 ]}).then(async() => {
-                    await setTimeout(() => message.delete(), 5000).catch(() => {})
+                    await setTimeout(() => message.delete().catch(() => {}), 5000)
                 })
             } catch (error) {
                 console.log(error)
