@@ -4,7 +4,7 @@ const { textId } = require('../variablehandler.js')
 const moment = require('moment')
 
 client.on('modalSubmit', async (modal) => { 
-    if(modal.customId === "askquestion"){
+    if(modal.customId === "question-modal"){
         const textChannel = client.channels.cache.get(textId.askquestion)
         const textInput = modal.getTextInputValue('textinput')
         let simpledate = await moment().format('M-D-YYYY')
