@@ -1,6 +1,6 @@
 const client = require(`../index.js`).client;
 const { MessageEmbed } = require('discord.js');
-const { textId } = require('../../variablehandler.js')
+const { textId } = require('../variablehandler.js')
 const moment = require('moment')
 
 client.on('modalSubmit', async (modal) => { 
