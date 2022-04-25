@@ -3,16 +3,16 @@ const { TextInputComponent, Modal, showModal } = require('discord-modals')
 module.export.run = async(client, interaction) => {
     let textInput = new TextInputComponent()
     .setCustomId('textinput')
-    .setLabel('Anything related to Christianity goes here.')
+    .setLabel('You may submit your questions here.')
     .setStyle('LONG')
     .setMinLength(5)
-    .setMaxLength(100)
+    .setMaxLength(1500)
     .setPlaceholder('Text field')
     .setRequired(true)
 
     const questionModal = new Modal()
     .setCustomId('question-modal')
-    .setTitle('Please answer the questions.')
+    .setTitle('#askquestion | FaithChatt')
     .addComponents(textInput)
 
     await showModal(questionModal, {
