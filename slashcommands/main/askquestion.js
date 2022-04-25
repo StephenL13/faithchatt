@@ -1,6 +1,6 @@
 const { TextInputComponent, Modal, showModal } = require('discord-modals')
 
-module.export.run = async(client, interaction) => {
+module.exports.run = async(client, interaction) => {
     let textInput = new TextInputComponent()
     .setCustomId('textinput')
     .setLabel('You may submit your questions here.')
