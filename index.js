@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const intents = new Discord.Intents(32767);
 const client = new Discord.Client({ intents });
+const discordModals = require('discord-modals')
 const express = require('express');
 const fs = require('fs');
 require('dotenv').config();
@@ -9,7 +10,8 @@ client.commands = new Discord.Collection();
 client.slashCmds = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.events = new Discord.Collection();
-require('./mongo.js')()
+discordModals(client);
+require('./mongo.js')();
 
 module.exports.client = client;
 

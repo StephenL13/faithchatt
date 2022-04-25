@@ -15,14 +15,6 @@ async function createCmd(client, guildId) {
         {
             name: "askquestion",
             description: "Submit a question anything related to faith and more!",
-            options: [
-                {
-                    name: "text",
-                    description: "Place your question here.",
-                    type: "STRING",
-                    required: true
-                }
-            ]
         },
         {
             name: "pray",
@@ -90,9 +82,14 @@ async function createCmd(client, guildId) {
         },
     ]
 
-    const voidArray = []
+    const voidArray = [
+        {
+            name: "modaltest",
+            description: "Staff-only slash command for testing purposes.",
+        },
+    ]
 
-    await client.guilds.cache.get(guildId)?.commands.set(data)
+    await client.guilds.cache.get(guildId)?.commands.set(voidArray)
     //await client.application?.commands.set(data) 
 }
 
