@@ -10,6 +10,7 @@ module.exports.run = async (client, message, args, prefix) => {
         const memberrole = message.guild.roles.cache.get(rolesId.member)
         const mutedrole = message.guild.roles.cache.get(rolesId.muted)
         const modcheck = message.member.roles.cache.has(rolesId.moderator)
+        const generalChat = client.channels.cache.get(textId.general)
 
         if (!modcheck) return message.delete().then(() => {
             try {
@@ -65,9 +66,13 @@ module.exports.run = async (client, message, args, prefix) => {
             await message.react('✅')
             await message.channel.send("**Member unjailed! The channel will be closed in five seconds.**")
             setTimeout(() => {
+                const welcomeBack = new MessageEmbed()
+                .setColor('#ffd100')
+                .setDescription(`${targetmember.user} has been unjailed!`)
                 targetmember.roles.remove(mutedrole).catch(e=>{});
                 targetmember.roles.add(memberrole).catch(e=>{})
                 message.channel.delete()
+                generalChat.send({ embeds: [welcomeBack] })
             }, 5000)
         } else return console.log(`${message.author.tag} executed in a non-jail ticket.`)
     } else {
