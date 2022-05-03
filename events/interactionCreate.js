@@ -23,7 +23,7 @@ client.on('interactionCreate', async interaction => {
 
             let ticketdata = await ticketschema.findOne({ userId: interaction.user.id });
             let configdata = await configschema.findOne({ guildId: interaction.guild.id });
-            if(memberrole) return interaction.reply({ content: "You have been already verified! If you still encounter problems with not being able to see the channels, please contact/DM the moderators.", ephemeral: true }).catch(e=>{})
+            if(verified) return interaction.reply({ content: "You have been already verified! If you still encounter problems with not being able to see the channels, please contact/DM the moderators.", ephemeral: true }).catch(e=>{})
             if(!configdata) configdata = await configschema.create({ guildId: interaction.guild.id });
             if(configdata.verifyLock === true) { 
                 return interaction.reply({ 
