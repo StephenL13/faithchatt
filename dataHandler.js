@@ -14,7 +14,7 @@ async function createCmd(client, guildId) {
         },
         {
             name: "askquestion",
-            description: "Submit a question anything related to faith and more!",
+            description: "Opens a prompt to submit for any question concerning the Christian faith.",
         },
         {
             name: "pray",
