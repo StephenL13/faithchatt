@@ -34,59 +34,6 @@ async function createCmd(client, guildId) {
                 }
             ]
         },
-        {
-            name: "modhelp",
-            description: "A handbook of staff-only commands",
-            options: [
-                {
-                    name: "category",
-                    description: "Select the help category here.",
-                    type: "STRING",
-                    required: true,
-                    choices: [
-                        {
-                            name: "Basic Moderation",
-                            value: "moderation"
-                        },
-                        {
-                            name: "Verification Tickets",
-                            value: "verification"
-                        },
-                        {
-                            name: "Role Commands",
-                            value: "rolecmds"
-                        },
-                        {
-                            name: "Logging",
-                            value: "logging"
-                        },
-                        {
-                            name: "Announcement",
-                            value: "announcement"
-                        }, 
-                        {
-                            name: "Professors",
-                            value: "professors"
-                        }, 
-                        {
-                            name: "Application Forms",
-                            value: "application"
-                        },
-                        { 
-                            name: "Server Bot Settings",
-                            value: "config"
-                        }
-                    ]
-                }
-            ]
-        },
-    ]
-
-    const voidArray = [
-        {
-            name: "modaltest",
-            description: "Staff-only slash command for testing purposes.",
-        },
     ]
 
     await client.guilds.cache.get(guildId)?.commands.set(data)
