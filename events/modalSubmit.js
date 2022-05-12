@@ -16,13 +16,13 @@ client.on('modalSubmit', async (modal) => {
             .setTitle('Your question has been sent!')
             .setDescription('*NOTE: Should there be any submissions that is against the rules, it will be removed immediately.*')
         ] }).catch(e=>console.log(e))
-        let output = await textChannel.send({ content: `${modal.user}`, embeds: [
+        let output = await textChannel.send({ embeds: [
             new MessageEmbed()
             .setColor('#ffd100')
             .setAuthor({ name: modal.user.tag, iconURL: modal.user.displayAvatarURL() })
             .setTitle("A new question has been submitted!")
             .setDescription(textInput)
-            .setFooter({ text: "© FaithChatt Forum" })
+            .setFooter({ text: `User ID: ${modal.user.id} | © FaithChatt Forum`})
         ]})
         let msgFetch = await textChannel.messages.fetch(output.id)
         let newThread = await msgFetch.startThread({
@@ -30,6 +30,6 @@ client.on('modalSubmit', async (modal) => {
             autoArchiveDuration: 1440,
             rateLimitPerUser: 5
         })
-        newThread.send({ content: `Feel free to ping the \`@Professors\`, \`@Facilitators\`, or any fellow member who is free and capable to answer your concerns with Scriptural backing. God bless you.` })
+        newThread.send({ content: `Feel free to ping the \`@Professors\`, \`@Facilitators\`, or any fellow member who is free and capable to answer your concerns with Scriptural backing. God bless you.` + `\n\n${modal.user}` })
     }
 });
