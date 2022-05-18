@@ -18,12 +18,16 @@ client.on('ready', () => {
     const gsChannel = faithchatt.channels.cache.get('940128750723547157')
 
     async function initCount() {
-        humanMemberChannel.setName(`👥: ${humanMemberCount} | 🟢: ${onlineCount}`)
-        boosterChannel.setName(`💜 Boosters: ${boosterCount}`)
-        gsChannel.setName(`😇 Samaritans: ${gsCount}`)
+        try {
+            humanMemberChannel.setName(`👥: ${humanMemberCount} | 🟢: ${onlineCount}`)
+            boosterChannel.setName(`💜 Boosters: ${boosterCount}`)
+            gsChannel.setName(`😇 Samaritans: ${gsCount}`)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
-    initCount()
+    initCount();
     setTimeout(() => initCount(), 1000 * 60 * 15)
     client.on('guildMemberAdd', () => initCount())
     client.on('guildMemberRemove', () => initCount())
