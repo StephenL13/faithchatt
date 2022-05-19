@@ -3,6 +3,7 @@ const { MessageEmbed } = require('discord.js')
 const faithchatt = require('../variablehandler.js')
 const ticketschema = require('../model/ticket.js')
 const configschema = require('../model/botconfig.js')
+const moment = require('moment')
 
 client.on('interactionCreate', async interaction => {
     // SLASH COMMAND HANDLER
