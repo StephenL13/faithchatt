@@ -12,7 +12,7 @@ client.on('interactionCreate', async interaction => {
     }
 
     if(interaction.isModalSubmit()) {
-        if(interaction.getField('question-modal')) {
+        if(interaction.fields.getField('question-modal')) {
             const textChannel = client.channels.cache.get(faithchatt.textId.askquestion)
             const textInput = await interaction.fields.getTextInputValue('textinput')
             let simpledate = await moment().format('M-D-YYYY')
