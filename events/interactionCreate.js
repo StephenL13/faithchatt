@@ -1,8 +1,9 @@
 const client = require('../index.js').client
-const { MessageEmbed } = require('discord.js')
+const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js')
 const faithchatt = require('../variablehandler.js')
 const ticketschema = require('../model/ticket.js')
 const configschema = require('../model/botconfig.js')
+const stickyschema = require('../model/askQuestion.js')
 const moment = require('moment')
 
 client.on('interactionCreate', async interaction => {
@@ -41,6 +42,36 @@ client.on('interactionCreate', async interaction => {
                 rateLimitPerUser: 5
             })
             newThread.send({ content: `Feel free to ping the \`@Professors\`, \`@Facilitators\`, or any fellow member who is free and capable to answer your concerns with Scriptural backing. God bless you.` + `\n\n${interaction.user}` })
+
+            let stickyMessage = await client.channels.cache.get(faithchatt.textId.askquestion).send({
+                embeds: [
+                    new MessageEmbed()
+                    .setTitle("Please post any questions you have about faith, life, or whatever here. The @Professors and @Facilitators also assure to keep on stand-by addressing theological concerns and anything related to Christian life.")
+                ]
+            })
+            let stickydata = stickyschema.findOne({ messageId: stickyMessage.id })
+            if(!stickydata) {
+                try {
+                    let stickydata = await stickyschema.create({
+                        messageId: stickyMessage.id
+                    })
+                    await stickydata.save()
+                } catch (error) {
+                    console.log(error)
+                }
+            } else {
+                if(stickydata.messageId) {
+                    try {
+                        await client.messages.fetch(stickydata.messageId)
+                            .then(message => message.delete())
+                            .catch(error => console.log(error))
+                        stickydata.messageId = stickyMessage.id;
+                        await stickydata.save();
+                    } catch (error) {
+                        console.log(error)
+                    }
+                }
+            }
         }
     }
 
