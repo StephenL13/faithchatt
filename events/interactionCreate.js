@@ -50,26 +50,16 @@ client.on('interactionCreate', async interaction => {
                 ]
             })
             let stickydata = stickyschema.findOne({ messageId: stickyMessage.id })
-            if(!stickydata) {
+            if(!stickydata) return stickydata = await stickyschema.create({ messageId: stickyMessage.id })
+            if(stickydata.messageId) {
                 try {
-                    let stickydata = await stickyschema.create({
-                        messageId: stickyMessage.id
-                    })
-                    await stickydata.save()
+                    await client.messages.fetch(stickydata.messageId)
+                        .then(message => message.delete())
+                        .catch(error => console.log(error))
+                    stickydata.messageId = stickyMessage.id;
+                    await stickydata.save();
                 } catch (error) {
                     console.log(error)
-                }
-            } else {
-                if(stickydata.messageId) {
-                    try {
-                        await client.messages.fetch(stickydata.messageId)
-                            .then(message => message.delete())
-                            .catch(error => console.log(error))
-                        stickydata.messageId = stickyMessage.id;
-                        await stickydata.save();
-                    } catch (error) {
-                        console.log(error)
-                    }
                 }
             }
         }
