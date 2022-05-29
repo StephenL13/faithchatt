@@ -52,6 +52,7 @@ client.on('interactionCreate', async interaction => {
             })
             let stickydata = stickyschema.findOne({ messageId: stickyMessage.id })
             if(!stickydata) return stickydata = await stickyschema.create({ messageId: stickyMessage.id }).then(async() => {
+                stickydata.messageId = stickyMessage.id
                 await stickydata.save();
             })
             if(stickydata.messageId) {
