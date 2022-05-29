@@ -46,11 +46,14 @@ client.on('interactionCreate', async interaction => {
             let stickyMessage = await client.channels.cache.get(faithchatt.textId.askquestion).send({
                 embeds: [
                     new MessageEmbed()
+                    .setColor('#ffd100')
                     .setTitle("Please post any questions you have about faith, life, or whatever here. The @Professors and @Facilitators also assure to keep on stand-by addressing theological concerns and anything related to Christian life.")
                 ]
             })
             let stickydata = stickyschema.findOne({ messageId: stickyMessage.id })
-            if(!stickydata) return stickydata = await stickyschema.create({ messageId: stickyMessage.id })
+            if(!stickydata) return stickydata = await stickyschema.create({ messageId: stickyMessage.id }).then(async() => {
+                await stickydata.save();
+            })
             if(stickydata.messageId) {
                 try {
                     await client.messages.fetch(stickydata.messageId)
