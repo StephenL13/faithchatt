@@ -142,7 +142,7 @@ client.on('interactionCreate', async interaction => {
                 ],
                 ephemeral: true
             })
-        } else if (interaction.custom == 'question-button') {
+        } else if (interaction.customId == 'question-button') {
             const modal = new Modal()
                 .setCustomId('question-modal')
                 .setTitle('Submit for #🤓│any-questions')
