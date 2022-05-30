@@ -1,5 +1,5 @@
 const client = require('../index.js').client
-const { MessageEmbed } = require('discord.js')
+const { MessageEmbed, MessageActionRow, MessageButton, TextInputComponent, Modal } = require('discord.js')
 const faithchatt = require('../variablehandler.js')
 const ticketschema = require('../model/ticket.js')
 const configschema = require('../model/botconfig.js')
@@ -18,6 +18,15 @@ client.on('interactionCreate', async interaction => {
             const textInput = await interaction.fields.getTextInputValue('textinput')
             let simpledate = await moment().format('M-D-YYYY')
 
+            const button = new MessageButton()
+                .setCustomId('question-button')
+                .setDisabled(false)
+                .setLabel('Click here to ask a question!')
+                .setEmoji('📖')
+                .setStyle('PRIMARY')
+            const row = new MessageActionRow()
+                .addComponents(button)
+
             await interaction.deferReply({ ephemeral: true })
             await interaction.followUp({ embeds: [
                 new MessageEmbed()
@@ -26,14 +35,20 @@ client.on('interactionCreate', async interaction => {
                 .setDescription('*NOTE: Should there be any submissions that is against the rules, it will be removed immediately.*')
             ] }).catch(e=>console.log(e))
 
-            let output = await textChannel.send({ embeds: [
+            let output = await textChannel.send({ 
+                embeds: [
                 new MessageEmbed()
                 .setColor('#ffd100')
                 .setAuthor({ name: interaction.user.tag, iconURL: interaction.user.displayAvatarURL() })
                 .setTitle("A new question has been submitted!")
                 .setDescription(textInput)
-                .setFooter({ text: `User ID: ${interaction.user.id} | © FaithChatt Forum`})
-            ]})
+                .setFooter({ text: `User ID: ${interaction.user.id} | © FaithChatt Forum`}),
+                new MessageEmbed()
+                .setDescription('Please post any questions you have about faith, life, or whatever here. The `@Professors` and `@Facilitators` also assure to keep on stand-by addressing theological concerns and anything related to Christian life.')
+                .setColor('#ffd100')
+                ],
+                components: [row]
+            })
             let msgFetch = await textChannel.messages.fetch(output.id)
             let newThread = await msgFetch.startThread({
                 name: `${interaction.user.username} | ${simpledate}`,
@@ -127,6 +142,21 @@ client.on('interactionCreate', async interaction => {
                 ],
                 ephemeral: true
             })
+        } else if (interaction.custom == 'question-button') {
+            const modal = new Modal()
+                .setCustomId('question-modal')
+                .setTitle('Submit for #🤓│any-questions')
+            const component = new MessageActionRow().addComponents(
+                new TextInputComponent()
+                .setCustomId('textinput')
+                .setLabel('Enter your queries here.')
+                .setMinLength(5)
+                .setMaxLength(1500)
+                .setStyle('PARAGRAPH')
+                .setRequired(true)
+            )
+            await modal.addComponents(component)
+            await interaction.showModal(modal)
         }
     }
 })
