@@ -19,22 +19,13 @@ client.on('interactionCreate', async interaction => {
             let simpledate = await moment().format('M-D-YYYY')
 
             const button = new MessageButton()
-                .setCustomId('question-button')
+                .setCustomId('askquestion-interaction')
                 .setDisabled(false)
                 .setLabel('Click here to ask a question!')
                 .setEmoji('📖')
                 .setStyle('PRIMARY')
             const row = new MessageActionRow()
                 .addComponents(button)
-
-            await interaction.deferReply({ ephemeral: true })
-            await interaction.followUp({ embeds: [
-                new MessageEmbed()
-                .setColor('#ffd100')
-                .setTitle('Your question has been sent!')
-                .setDescription('*NOTE: Should there be any submissions that is against the rules, it will be removed immediately.*')
-            ] }).catch(e=>console.log(e))
-
             let output = await textChannel.send({ 
                 embeds: [
                 new MessageEmbed()
@@ -43,11 +34,7 @@ client.on('interactionCreate', async interaction => {
                 .setTitle("A new question has been submitted!")
                 .setDescription(textInput)
                 .setFooter({ text: `User ID: ${interaction.user.id} | © FaithChatt Forum`}),
-                new MessageEmbed()
-                .setDescription('Please post any questions you have about faith, life, or whatever here. The `@Professors` and `@Facilitators` also assure to keep on stand-by addressing theological concerns and anything related to Christian life.')
-                .setColor('#ffd100')
-                ],
-                components: [row]
+                ]
             })
             let msgFetch = await textChannel.messages.fetch(output.id)
             let newThread = await msgFetch.startThread({
@@ -56,6 +43,17 @@ client.on('interactionCreate', async interaction => {
                 rateLimitPerUser: 5
             })
             newThread.send({ content: `Feel free to ping the \`@Professors\`, \`@Facilitators\`, or any fellow member who is free and capable to answer your concerns with Scriptural backing. God bless you.` + `\n\n${interaction.user}` })
+
+            await interaction.deferUpdate().catch(err => {})
+            await interaction.message.delete();
+            await textChannel.send({
+                embeds: [
+                    new MessageEmbed()
+                    .setDescription('Please post any questions you have about faith, life, or whatever here. The \`@Professors\` and \`@Facilitators\` also assure to keep on stand-by addressing theological concerns and anything related to Christian life.')
+                    .setColor('#ffd100')
+                ],
+                components: [row]
+            })
         }
     }
 
@@ -142,7 +140,7 @@ client.on('interactionCreate', async interaction => {
                 ],
                 ephemeral: true
             })
-        } else if (interaction.customId == 'question-button') {
+        } else if (interaction.customId == 'askquestion-interaction') {
             const modal = new Modal()
                 .setCustomId('question-modal')
                 .setTitle('Submit for #🤓│any-questions')
