@@ -18,14 +18,20 @@ client.on('interactionCreate', async interaction => {
             const textInput = await interaction.fields.getTextInputValue('textinput')
             let simpledate = await moment().format('M-D-YYYY')
 
-            const button = new MessageButton()
+            const button1 = new MessageButton()
                 .setCustomId('askquestion-interaction')
                 .setDisabled(false)
                 .setLabel('Click here to ask a question!')
                 .setEmoji('📖')
                 .setStyle('PRIMARY')
+            const button2 = new MessageButton()
+                .setCustomId('askquestion-help')
+                .setDisabled(false)
+                .setLabel('How To Use')
+                .setStyle('SECONDARY')
+                .setEmoji('🆘')
             const row = new MessageActionRow()
-                .addComponents(button)
+                .addComponents(button1, button2)
             let output = await textChannel.send({ 
                 embeds: [
                 new MessageEmbed()
@@ -155,6 +161,11 @@ client.on('interactionCreate', async interaction => {
             )
             await modal.addComponents(component)
             await interaction.showModal(modal)
+        } else if (interaction.customId == "askquestion-help") {
+            await interaction.reply({
+                content: `https://cdn.discordapp.com/attachments/839719700140261388/981851220304089178/FaithChatt_new_feature_1.mp4`,
+                ephemeral: true
+            })
         }
     }
 })
