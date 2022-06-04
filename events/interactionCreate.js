@@ -45,7 +45,7 @@ client.on('interactionCreate', async interaction => {
             let msgFetch = await textChannel.messages.fetch(output.id)
             let newThread = await msgFetch.startThread({
                 name: `${interaction.user.username} | ${simpledate}`,
-                autoArchiveDuration: 1440,
+                autoArchiveDuration: 'MAX',
                 rateLimitPerUser: 5
             })
             newThread.send({ content: `Feel free to ping the \`@Professors\`, \`@Facilitators\`, or any fellow member who is free and capable to answer your concerns with Scriptural backing. God bless you.` + `\n\n${interaction.user}` })
