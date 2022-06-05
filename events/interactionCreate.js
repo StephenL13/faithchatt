@@ -55,7 +55,7 @@ client.on('interactionCreate', async interaction => {
             await textChannel.send({
                 embeds: [
                     new MessageEmbed()
-                    .setDescription('Please post any questions you have about faith, life, or whatever here. The \`@Professors\` and \`@Facilitators\` also assure to keep on stand-by addressing theological concerns and anything related to Christian life.')
+                    .setDescription('Please post any questions you have about faith, life, or whatever here. The \`@Professors\` and \`@Facilitators\` also assure to keep on stand-by addressing theological concerns and anything related to Christian life.\n\nIf the bot is offline, you may use <#839722678860513281> channel.')
                     .setColor('#ffd100')
                 ],
                 components: [row]
