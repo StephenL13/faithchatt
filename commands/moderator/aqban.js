@@ -17,7 +17,7 @@ module.exports.run = async(client, message, args, prefix) => {
     async function aqBanEvent() {
         let data = await schema.findOne({ userId: targetmember.user.id})
         if(!data) {
-            data = await schema.create({ userId, userName })
+            data = await schema.create({ userId: '', userName: '' })
             data.userId = targetmember.user.id;
             data.userName = targetmember.user.name;
             data.save();
