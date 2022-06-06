@@ -3,6 +3,7 @@ const { MessageEmbed, MessageActionRow, MessageButton, TextInputComponent, Modal
 const faithchatt = require('../variablehandler.js')
 const ticketschema = require('../model/ticket.js')
 const configschema = require('../model/botconfig.js')
+const aqblacklistSchema = require('../model/aqblacklist.js')
 const moment = require('moment')
 
 client.on('interactionCreate', async interaction => {
@@ -147,6 +148,15 @@ client.on('interactionCreate', async interaction => {
                 ephemeral: true
             })
         } else if (interaction.customId == 'askquestion-interaction') {
+            let data = await aqblacklist.findOne({ userId: interaction.user.id })
+            if(data.userId == interaction.user.id) return interaction.reply({
+                embeds: [
+                    new MessageEmbed()
+                    .setTitle('**You have been blacklisted from using this feature!**')
+                    .setDescription('However, you can still participate on threads or use the <#839722678860513281> channel.')
+                ],
+                ephemeral: true
+            })
             const modal = new Modal()
                 .setCustomId('question-modal')
                 .setTitle('Submit for #🤓│any-questions')
