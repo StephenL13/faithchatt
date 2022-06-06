@@ -18,7 +18,8 @@ module.exports.run = async(client, message, args, prefix) => {
         let data = await schema.findOne({ userId: targetmember.user.id})
         if(!data) {
             data = await schema.create({ 
-                userId: targetmember.user.id, userName: targetmember.user.name 
+                userId: targetmember.user.id, 
+                userName: targetmember.user.tag 
             })
             data.save();
             await message.delete();
