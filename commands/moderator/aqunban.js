@@ -7,15 +7,15 @@ module.exports.run = async(client, message, args, prefix) => {
     const aqMissingTargetEmbed = new MessageEmbed()
         .setColor('ORANGE')
         .setDescription('Specify a user!') 
-    const aqUnbanEmbed = new MessageEmbed()
-        .setColor('#00ff00')
-        .setDescription(`✅ | **${targetmember.user.tag}** has been removed from Any Questions blacklist.`)
-    const aqUnbanExists = new MessageEmbed()
-        .setColor('#00ff00')
-        .setDescription(`The member has already been removed from blacklist.`)
 
     async function aqUnbanEvent() {
         let data = await schema.findOne({ userId: targetmember.user.id })
+        const aqUnbanEmbed = new MessageEmbed()
+            .setColor('#00ff00')
+            .setDescription(`✅ | **${targetmember.user.tag}** has been removed from Any Questions blacklist.`)
+        const aqUnbanExists = new MessageEmbed()
+            .setColor('#00ff00')
+            .setDescription(`The member has already been removed from blacklist.`)
         if(data) {
             await schema.deleteOne({ userId: targetmember.user.id })
             await message.delete();

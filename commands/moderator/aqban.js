@@ -6,16 +6,16 @@ module.exports.run = async(client, message, args, prefix) => {
 
     const aqMissingTargetEmbed = new MessageEmbed()
         .setColor('ORANGE')
-        .setDescription('Specify a user!') 
-    const aqBanEmbed = new MessageEmbed()
-        .setColor('#ff0000')
-        .setDescription(`⛔ | **${targetmember.user.tag}** has been blacklisted from the Any Questions access!`)
-    const aqBanExists = new MessageEmbed()
-        .setColor('ORANGE')
-        .setDescription(`The member has already been blacklisted!`)
+        .setDescription('Specify a user!')
 
     async function aqBanEvent() {
         let data = await schema.findOne({ userId: targetmember.user.id})
+        const aqBanEmbed = new MessageEmbed()
+            .setColor('#ff0000')
+            .setDescription(`⛔ | **${targetmember.user.tag}** has been blacklisted from the Any Questions access!`)
+        const aqBanExists = new MessageEmbed()
+            .setColor('ORANGE')
+            .setDescription(`The member has already been blacklisted!`)
         if(!data) {
             data = await schema.create({ 
                 userId: targetmember.user.id, 
