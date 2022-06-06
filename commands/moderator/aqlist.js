@@ -2,10 +2,9 @@ const { MessageEmbed } = require('discord.js')
 const schema = require('../../model/aqblacklist.js')
 module.exports.run = async(client, message, args, prefix) => {
     const modcheck = message.member.permissions.has("KICK_MEMBERS") || message.member.permissions.has("BAN_MEMBERS")
+    let data = await schema.find({})
 
-    async function aqListEvent() {
-        let data = await schema.find({})
-        
+    async function aqListEvent() {    
         const content = data.map((user) => {
             return `${user.userName} | ${user.userId}`
         }).join('\n')
