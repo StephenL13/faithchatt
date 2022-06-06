@@ -4,10 +4,7 @@ module.exports.run = async(client, message, args, prefix) => {
     const modcheck = message.member.permissions.has("KICK_MEMBERS") || message.member.permissions.has("BAN_MEMBERS")
 
     async function aqListEvent() {
-        let data = await schema.find({ 
-            userId: targetmember.user.id,
-            userName: targetmember.user.name 
-        })
+        let data = await schema.find({ userId: _id })
         
         const content = data.map((user) => {
             return `${user.userName} | ${user.userId}`
