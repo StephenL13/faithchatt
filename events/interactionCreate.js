@@ -149,16 +149,8 @@ client.on('interactionCreate', async interaction => {
             })
         } else if (interaction.customId == 'askquestion-interaction') {
             let data = await aqblacklistSchema.findOne({ userId: interaction.user.id })
-            if(data.userId == interaction.user.id) {
-                return interaction.reply({
-                embeds: [
-                    new MessageEmbed()
-                    .setTitle('**You have been blacklisted from using this feature!**')
-                    .setDescription('However, you can still participate on threads or use the <#839722678860513281> channel.')
-                ],
-                ephemeral: true
-                })
-            } else {
+
+            async function executeModal() {
                 const modal = new Modal()
                 .setCustomId('question-modal')
                 .setTitle('Submit for #🤓│any-questions')
@@ -173,6 +165,20 @@ client.on('interactionCreate', async interaction => {
                 )
                 await modal.addComponents(component)
                 await interaction.showModal(modal)
+            }
+
+            if(!data) return executeModal();
+            if(data.userId == interaction.user.id) {
+                return interaction.reply({
+                embeds: [
+                    new MessageEmbed()
+                    .setTitle('**You have been blacklisted from using this feature!**')
+                    .setDescription('However, you can still participate on threads or use the <#839722678860513281> channel.')
+                ],
+                ephemeral: true
+                })
+            } else {
+                return executeModal();
             }
             
         } else if (interaction.customId == "askquestion-help") {
