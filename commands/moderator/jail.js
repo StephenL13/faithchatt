@@ -36,6 +36,11 @@ module.exports.run = async (client, message, args, prefix) => {
         if(!targetmember) return message.channel.send("Command usage:\n`!jail <@user/uid> <reason>`")
         if(targetmember.roles.cache.has(rolesId.muted)) return message.reply("The member has been already jailed!")
         if(!reason) return message.channel.send("Please supply a reason of the suspect.\n`!jail <@user/uid> <reason>`")
+
+        // If a mod has met the prerequisites...
+
+        await message.delete().catch(err => console.log(err))
+
         await targetmember.roles.add(mutedrole).catch(e=>{})
         await targetmember.roles.remove(memberrole).catch(e=>{})
         await targetmember.roles.remove(regularrole).catch(e=>{})
