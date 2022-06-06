@@ -149,28 +149,32 @@ client.on('interactionCreate', async interaction => {
             })
         } else if (interaction.customId == 'askquestion-interaction') {
             let data = await aqblacklistSchema.findOne({ userId: interaction.user.id })
-            if(data.userId == interaction.user.id) return interaction.reply({
+            if(data.userId == interaction.user.id) {
+                return interaction.reply({
                 embeds: [
                     new MessageEmbed()
                     .setTitle('**You have been blacklisted from using this feature!**')
                     .setDescription('However, you can still participate on threads or use the <#839722678860513281> channel.')
                 ],
                 ephemeral: true
-            })
-            const modal = new Modal()
+                })
+            } else {
+                const modal = new Modal()
                 .setCustomId('question-modal')
                 .setTitle('Submit for #🤓│any-questions')
-            const component = new MessageActionRow().addComponents(
-                new TextInputComponent()
-                .setCustomId('textinput')
-                .setLabel('Enter your queries here.')
-                .setMinLength(5)
-                .setMaxLength(1500)
-                .setStyle('PARAGRAPH')
-                .setRequired(true)
-            )
-            await modal.addComponents(component)
-            await interaction.showModal(modal)
+                const component = new MessageActionRow().addComponents(
+                    new TextInputComponent()
+                    .setCustomId('textinput')
+                    .setLabel('Enter your queries here.')
+                    .setMinLength(5)
+                    .setMaxLength(1500)
+                    .setStyle('PARAGRAPH')
+                    .setRequired(true)
+                )
+                await modal.addComponents(component)
+                await interaction.showModal(modal)
+            }
+            
         } else if (interaction.customId == "askquestion-help") {
             await interaction.reply({
                 content: `https://cdn.discordapp.com/attachments/839719700140261388/981851220304089178/FaithChatt_new_feature_1.mp4`,
