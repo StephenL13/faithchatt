@@ -148,7 +148,7 @@ client.on('interactionCreate', async interaction => {
                 ephemeral: true
             })
         } else if (interaction.customId == 'askquestion-interaction') {
-            let data = await aqblacklist.findOne({ userId: interaction.user.id })
+            let data = await aqblacklistSchema.findOne({ userId: interaction.user.id })
             if(data.userId == interaction.user.id) return interaction.reply({
                 embeds: [
                     new MessageEmbed()
