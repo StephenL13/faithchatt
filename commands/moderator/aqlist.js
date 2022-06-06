@@ -14,9 +14,13 @@ module.exports.run = async(client, message, args, prefix) => {
             .setColor('#ffd100')
             .setDescription(content)
         await message.channel.send({ embeds: [embed] })
+        const emptyEmbed = new MessageEmbed()
+            .setColor('#ffd100')
+            .setDescription('There are no more blacklisted users.')
     }
 
     if (modcheck) {
+        if (!data?.length) return message.channel.send({ embeds: [emptyEmbed] })
         await aqListEvent();
     } else {
         await message.delete();
