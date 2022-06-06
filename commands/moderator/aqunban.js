@@ -6,7 +6,7 @@ module.exports.run = async(client, message, args, prefix) => {
 
     const aqMissingTargetEmbed = new MessageEmbed()
         .setColor('ORANGE')
-        .setDescription('Specify a user!') 
+        .setDescription('Specify a user existing on this server!') 
 
     async function aqUnbanEvent() {
         let data = await schema.findOne({ userId: targetmember.user.id })
