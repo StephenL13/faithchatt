@@ -4,18 +4,17 @@ module.exports.run = async(client, message, args, prefix) => {
     const modcheck = message.member.permissions.has("KICK_MEMBERS") || message.member.permissions.has("BAN_MEMBERS")
     let data = await schema.find({})
 
-    async function aqListEvent() {    
-        const content = data.map((user) => {
-            return `${user.userName} | ${user.userId}`
-        }).join('\n')
-
-        const embed = new MessageEmbed()
-            .setColor('#ffd100')
-            .setDescription(content)
+    const content = data.map((user) => {
+        return `${user.userName} | ${user.userId}`
+    }).join('\n')
+    const emptyEmbed = new MessageEmbed()
+        .setColor('#ffd100')
+        .setDescription('There are no more blacklisted users.')
+    const embed = new MessageEmbed()
+        .setColor('#ffd100')
+        .setDescription(content)
+    async function aqListEvent() {
         await message.channel.send({ embeds: [embed] })
-        const emptyEmbed = new MessageEmbed()
-            .setColor('#ffd100')
-            .setDescription('There are no more blacklisted users.')
     }
 
     if (modcheck) {
