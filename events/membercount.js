@@ -28,7 +28,7 @@ client.on('ready', () => {
     }
 
     initCount();
-    setTimeout(() => initCount(), 1000 * 60 * 15)
+    setTimeout(() => initCount(), 1000 * 60 * 5)
     client.on('guildMemberAdd', () => initCount())
     client.on('guildMemberRemove', () => initCount())
 })
