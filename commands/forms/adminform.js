@@ -6,7 +6,7 @@ module.exports.run = async(client, message, args, prefix) => {
             .setLabel("Click to start filling the forms!")
             .setStyle("LINK")
             .setEmoji("📝")
-            .setURL("https://forms.gle/yN86k1gWzfagVy6HA")
+            .setURL("https://forms.gle/SuCctpxUBEEXxkPE6")
             .setDisabled("false"),
     );
     const embed = new MessageEmbed()
