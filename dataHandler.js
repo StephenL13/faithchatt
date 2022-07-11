@@ -13,6 +13,10 @@ async function createCmd(client, guildId) {
             description: "Start a new topic that prescribes the Christian faith."
         },
         {
+            name: "suggest",
+            description: "Creates a new server suggestion"
+        },
+        {
             name: "pray",
             description: "Sends a prayer request.",
             options: [
