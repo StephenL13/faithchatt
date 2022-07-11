@@ -23,7 +23,7 @@ module.exports.run = async (client, message, args, prefix) => {
         }, 5000)
     }).catch(e => {})
     await message.delete();
-    await message.author.send({ content: "**Your suggestion has been sent!**", ephemeral: true }).catch(e=>console.log(e))
+    await message.author.send({ content: "**Your staff-exclusive suggestion has been sent!**", ephemeral: true }).catch(e=>console.log(e))
     await textChannel.send({ embeds: [
         new MessageEmbed()
         .setColor('#ffd100')

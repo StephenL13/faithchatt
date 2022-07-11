@@ -16,7 +16,7 @@ client.on('interactionCreate', async interaction => {
     if(interaction.isModalSubmit()) {
         if(interaction.customId == "question-modal") {
             const textChannel = client.channels.cache.get(faithchatt.textId.askquestion)
-            const textInput = await interaction.fields.getTextInputValue('textinput')
+            const textInput = await interaction.fields.getTextInputValue('questioninput')
             let simpledate = await moment().format('M-D-YYYY')
 
             const button1 = new MessageButton()
@@ -61,6 +61,26 @@ client.on('interactionCreate', async interaction => {
                 ],
                 components: [row]
             })
+        } else if (interaction.customId == "suggest-modal") {
+            const textChannel = client.channels.cache.get(faithchatt.textId.suggest)
+            const textInput = await interaction.fields.getTextInputValue('suggestinput')
+            await textChannel.send({ embeds: [
+                new MessageEmbed()
+                .setColor('#ffd100')
+                .setAuthor({ name: `${interaction.user.tag} suggests:`, iconURL: interaction.user.displayAvatarURL() })
+                .setDescription(textInput)
+                .setFooter({ text: "© FaithChatt Forum" })
+            ] }).then(m => {
+                m.react("<:thumb_green:918899980423544843>")
+                m.react("<:thumb_red:918899980377411634>")
+                m.react("❔")
+            })
+            await interaction.reply({ embeds: [
+                new MessageEmbed()
+                .setTitle('Your suggestion has been sent!')
+                .setFooter({ text: "© FaithChatt Forum" })
+                .setColor('#ffd100')
+            ], ephemeral: true })
         }
     }
 
@@ -156,7 +176,7 @@ client.on('interactionCreate', async interaction => {
                 .setTitle('Submit for #🤓│any-questions')
                 const component = new MessageActionRow().addComponents(
                     new TextInputComponent()
-                    .setCustomId('textinput')
+                    .setCustomId('questioninput')
                     .setLabel('Enter your queries here.')
                     .setMinLength(5)
                     .setMaxLength(1500)
@@ -173,7 +193,8 @@ client.on('interactionCreate', async interaction => {
                 embeds: [
                     new MessageEmbed()
                     .setTitle('**You have been blacklisted from using this feature!**')
-                    .setDescription('However, you can still participate on threads or use the <#839722678860513281> channel.')
+                    .setDescription('However, you can still participate on threads or use the <#839722678860513281> channel.\n\nIf you have questions, concerns, or an appeal to contest the ban, [please visit our ticket helpdesk.](https://discord.com/channels/839708279973478430/955246024602034186/957059949689724969)')
+                    .setColor('#ff0000')
                 ],
                 ephemeral: true
                 })
