@@ -17,7 +17,8 @@ const biblestudy = "839953010142871552"
 const prayer = "839722222162804736"
 
 // STAFF-EXCLUSIVE
-const suggest = "943205296891920444"
+const staffsuggest = "943205296891920444"
+const serversuggest = "948447007020838972"
 const jailedRules = "947181368218112000"
 const verifyLog = "945850862662737920"
 const jailLog = "946951985767280710"
@@ -31,5 +32,5 @@ module.exports = {
     booster,
     
     // STAFF
-    jailedRules, suggest, verifyLog, jailLog, modLog
+    jailedRules, serversuggest, staffsuggest, verifyLog, jailLog, modLog
 }

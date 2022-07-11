@@ -62,7 +62,7 @@ client.on('interactionCreate', async interaction => {
                 components: [row]
             })
         } else if (interaction.customId == "suggest-modal") {
-            const textChannel = client.channels.cache.get(faithchatt.textId.suggest)
+            const textChannel = client.channels.cache.get(faithchatt.textId.serversuggest)
             const textInput = await interaction.fields.getTextInputValue('suggestinput')
             await textChannel.send({ embeds: [
                 new MessageEmbed()

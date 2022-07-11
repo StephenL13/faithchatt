@@ -2,7 +2,7 @@ const { textId } = require('../../variablehandler')
 const { MessageEmbed } = require('discord.js');
 
 module.exports.run = async(client, message, args, prefix) => {
-    const textChannel = client.channels.cache.get(textId.suggest)
+    const textChannel = client.channels.cache.get(textId.serversuggest)
     const suggestion = args.join(" ")
     if(!suggestion) return message.reply({ content: "Please enter your query.\`" }).catch(err => {})
     await message.delete();

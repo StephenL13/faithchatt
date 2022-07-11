@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js')
 
 module.exports.run = async (client, message, args, prefix) => {
     const staffPermCheck = message.member.permissions.has("KICK_MEMBERS") || message.member.permissions.has("BAN_MEMBERS")
-    const textChannel = client.channels.cache.get(faithchatt.textId.suggest)
+    const textChannel = client.channels.cache.get(faithchatt.textId.staffsuggest)
     const suggestion = args.join(" ")
 
     if(!staffPermCheck) return message.delete().then(async() => {
