@@ -5,6 +5,10 @@ async function createCmd(client, guildId) {
             description: "Serves a bot ping"
         },
         {
+            name: "membercount",
+            description: "Displays a count for human members"
+        },
+        {
             name: "help",
             description: "A list of all FaithChatt Bot commands"
         },
