@@ -6,7 +6,7 @@ module.exports.run = async(client, message, args, prefix) => {
     const embed = new MessageEmbed()
     .setColor('#ffd100')
     .setTitle(`We are now on ${humanMemberCount} members!`)
-    .setfooter({ text: '©️ FaithChatt Forum' })
+    .setFooter({ text: '©️ FaithChatt Forum' })
 
     await message.channel.send({ embeds: [embed] })
 }
