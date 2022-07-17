@@ -18,7 +18,7 @@ module.exports.run = async(client, message, args, prefix) => {
             .setColor('#00ff00')
             .setDescription(`The member has already been removed from blacklist.`)
         if(data) {
-            await targetmember.roles.remove(rolesId.aqban)
+            await targetmember.roles.remove(rolesId.aqban).catch(e=>{})
             await schema.deleteOne({ userId: targetmember.user.id })
             await message.delete();
             await message.channel.send({ embeds: [aqUnbanEmbed] })

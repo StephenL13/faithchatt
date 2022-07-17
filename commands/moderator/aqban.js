@@ -23,7 +23,7 @@ module.exports.run = async(client, message, args, prefix) => {
                 userName: targetmember.user.tag 
             })
             data.save();
-            await targetmember.roles.add(rolesId.aqban)
+            await targetmember.roles.add(rolesId.aqban).catch(e=>{})
             await message.delete();
             await message.channel.send({ embeds: [aqBanEmbed] })
         } else {
