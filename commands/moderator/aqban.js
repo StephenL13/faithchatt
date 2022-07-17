@@ -1,4 +1,5 @@
 const { MessageEmbed } = require('discord.js')
+const { rolesId } = require('../../variablehandler.js')
 const schema = require('../../model/aqblacklist.js')
 module.exports.run = async(client, message, args, prefix) => {
     const modcheck = message.member.permissions.has("KICK_MEMBERS") || message.member.permissions.has("BAN_MEMBERS")
@@ -22,6 +23,7 @@ module.exports.run = async(client, message, args, prefix) => {
                 userName: targetmember.user.tag 
             })
             data.save();
+            await targetmember.roles.add(rolesId.aqban)
             await message.delete();
             await message.channel.send({ embeds: [aqBanEmbed] })
         } else {

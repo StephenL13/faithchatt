@@ -3,6 +3,7 @@ var unverified = "940052640472109117"
 var member = "839720518213959701"
 var regular = "839720156065169449"
 var muted = "859912959660785667"
+var aqban = "983355205552848947"
 var underage = "849442918941851678"
 var legal = "849442852785487893"
 var female = "849442745495715850"
@@ -24,7 +25,7 @@ var professor = "843151409167073350"
 var facilitator = "903033680497365033"
 
 module.exports = {
-    unverified, member, regular, muted,
+    unverified, member, regular, muted, aqban,
     divPing, divProfile, prayerwarrior, usher, fisherofmen,
     welcomeping, booster, underage, legal, female, male,
     staff, moderator, professor, facilitator, 
