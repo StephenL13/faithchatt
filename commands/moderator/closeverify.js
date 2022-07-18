@@ -27,7 +27,7 @@ module.exports.run = async (client, message, args, prefix) => {
                     async function alreadyMem() {
                         const alreadyEmbed = new MessageEmbed()
                         .setColor('#FF0000')
-                        .setDescription(`👤 **User:** \`${unvMem.user.tag}\`\n📜 **ID:** \`${unvMem.user.id}\`\n\nMember has been already verified when it had duplicate channels.`)
+                        .setDescription(`👤 **User:** \`${unvMem.user.tag}\`\n📜 **ID:** \`${unvMem.user.id}\`\n\nMember has been already verified.`)
                         .setThumbnail(unvMem.user.displayAvatarURL())
                         await console.log("Member has been already verified.")
                         if(text.length >= 2000) {
