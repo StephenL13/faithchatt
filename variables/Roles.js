@@ -15,6 +15,9 @@ var usher = "927436319318224906"
 var fisherofmen = "844787540996915240"
 var welcomeping = "912259335881650176"
 var booster = "852783343376269323"
+var chatlanguage = "996492985804017704"
+var chattopics = "996493595395756074"
+var chatvideogames = "996493519592108063"
 var divPing = "908240970523492353"
 var divProfile = "929740383892672552"
 
@@ -25,7 +28,7 @@ var professor = "843151409167073350"
 var facilitator = "903033680497365033"
 
 module.exports = {
-    unverified, member, regular, muted, aqban,
+    unverified, member, regular, muted, aqban, chatvideogames, chatlanguage, chattopics,
     divPing, divProfile, prayerwarrior, usher, fisherofmen,
     welcomeping, booster, underage, legal, female, male,
     staff, moderator, professor, facilitator, 
