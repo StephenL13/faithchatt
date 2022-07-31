@@ -1,6 +1,6 @@
 const { textId, parentId, rolesId } = require('../../variablehandler.js')
 const { MessageEmbed } = require('discord.js')
-const schema = require('../model/jailsystem.js')
+const schema = require('../../model/jailsystem.js')
 module.exports.run = async (client, message, args, prefix) => {
     if(message.member.permissions.has("KICK_MEMBERS") || message.member.permissions.has("BAN_MEMBERS")) {
         let targetmember = message.mentions.members.first() || message.guild.members.cache.get(args[0]);

@@ -1,6 +1,6 @@
 const { textId, parentId, rolesId } = require('../../variablehandler.js');
 const { MessageEmbed, MessageAttachment } = require('discord.js');
-const schema = require('../model/jailsystem.js')
+const schema = require('../../model/jailsystem.js')
 const Discord = require('discord.js');
 const moment = require('moment');
 
