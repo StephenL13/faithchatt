@@ -20,6 +20,7 @@ module.exports.run = async (client, message, args, prefix) => {
         const femalerole = message.guild.roles.cache.get(rolesId.female)
 
         const mutedrole = message.guild.roles.cache.get(rolesId.muted)
+        const unverified = message.guild.roles.cache.get(rolesId.unverified)
         const everyone = message.guild.roles.cache.find(r => r.name === "@everyone")
         const modlog = message.guild.channels.cache.get(textId.modLog)
 
@@ -53,6 +54,7 @@ module.exports.run = async (client, message, args, prefix) => {
             await message.delete().catch(err => console.log(err))
 
             await targetmember.roles.add(mutedrole).catch(e=>{})
+            await targetmember.roles.remove(unverifiedrole).catch(e=>{})
             await targetmember.roles.remove(memberrole).catch(e=>{})
             await targetmember.roles.remove(regularrole).catch(e=>{})
             await targetmember.roles.remove(usherrole).catch(e=>{})
