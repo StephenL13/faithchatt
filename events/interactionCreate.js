@@ -20,7 +20,7 @@ client.on('interactionCreate', async interaction => {
             let simpledate = await moment().format('M-D-YYYY')
 
             const button1 = new MessageButton()
-                .setCustomId('askquestion-interaction')
+                .setCustomId('askquestion-legacy')
                 .setDisabled(false)
                 .setLabel('Click here to ask a question!')
                 .setEmoji('📖')
@@ -202,6 +202,11 @@ client.on('interactionCreate', async interaction => {
                 return executeModal();
             }
             
+        } else if (interaction.customId == 'askquestion-legacy') {
+            await interaction.reply({
+                content: `FaithChatt Utilities is moving away from this feature. Discord has released the new forums channel whereas users can now post their own questions.\n\n Learn more: https://support.discord.com/hc/en-us/articles/6208479917079-Forum-Channels-FAQ`,
+                ephemeral: true
+            })
         } else if (interaction.customId == "askquestion-help") {
             await interaction.reply({
                 content: `https://cdn.discordapp.com/attachments/839719700140261388/981851220304089178/FaithChatt_new_feature_1.mp4`,
