@@ -54,7 +54,7 @@ module.exports.run = async (client, message, args, prefix) => {
             await message.delete().catch(err => console.log(err))
 
             await targetmember.roles.add(mutedrole).catch(e=>{})
-            await targetmember.roles.remove(unverifiedrole).catch(e=>{})
+            await targetmember.roles.remove(unverified).catch(e=>{})
             await targetmember.roles.remove(memberrole).catch(e=>{})
             await targetmember.roles.remove(regularrole).catch(e=>{})
             await targetmember.roles.remove(usherrole).catch(e=>{})
