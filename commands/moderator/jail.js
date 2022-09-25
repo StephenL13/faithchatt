@@ -46,13 +46,7 @@ module.exports.run = async (client, message, args, prefix) => {
 
         let data = await schema.findOne({ userId: targetmember.user.id })
         if(!data) {
-            data = await schema.create({
-                userId: targetmember.user.id,
-                userName: targetmember.user.tag
-            })
-            data.save()
             await message.delete().catch(err => console.log(err))
-
             await targetmember.roles.add(mutedrole).catch(e=>{})
             await targetmember.roles.remove(unverified).catch(e=>{})
             await targetmember.roles.remove(memberrole).catch(e=>{})
@@ -81,6 +75,13 @@ module.exports.run = async (client, message, args, prefix) => {
                     { id: everyone.id, deny: ["VIEW_CHANNEL"] }
                 ]
             })
+
+            data = await schema.create({
+                userId: targetmember.user.id,
+                userName: targetmember.user.tag,
+                textChannel: jailchannel.id
+            })
+
             console.log(`🚨 Member has been jailed:\nMember: ${targetmember.user.tag}\nReason: ${reason}`)
             const channelembed = new MessageEmbed()
                 .setTitle("You have been jailed!")
@@ -108,7 +109,24 @@ module.exports.run = async (client, message, args, prefix) => {
                     .setFooter({ text: `Moderator UID: ${message.author.id}` })
                     .setColor('#ff0000')
             ] })
+            data.save()
             await jailchannel.send({ content: `${targetmember}`, embeds: [channelembed] }).catch(e=>{})
+        } else if (!message.guild.channel.cache.has(data.textChannel)) {
+            let ticketname = targetmember.user.tag
+            let jailchannel = await message.guild.channels.create("jail-"+ticketname, {
+                type: "GUILD_TEXT",
+                parent: parentId.jail,
+                topic: targetmember.user.id,
+                permissionOverwrites: [
+                    { id: targetmember.user.id, allow: ["VIEW_CHANNEL", "READ_MESSAGE_HISTORY", "SEND_MESSAGES"], deny: ["MANAGE_CHANNELS", "EMBED_LINKS", "ATTACH_FILES", "CREATE_PUBLIC_THREADS", "CREATE_PRIVATE_THREADS", "CREATE_INSTANT_INVITE", "SEND_MESSAGES_IN_THREADS", "MANAGE_THREADS", "MANAGE_MESSAGES", "USE_EXTERNAL_EMOJIS", "USE_EXTERNAL_STICKERS", "USE_APPLICATION_COMMANDS", "MANAGE_WEBHOOKS", "MANAGE_ROLES", "SEND_TTS_MESSAGES"] },
+                    { id: mutedrole.id, deny: ["EMBED_LINKS", "ATTACH_FILES"] },
+                    { id: memberrole.id, deny: ["VIEW_CHANNEL"] },
+                    { id: moderatorrole.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"] },
+                    { id: everyone.id, deny: ["VIEW_CHANNEL"] }
+                ]
+            })
+            data.textChannel = jailchannel.id;
+            await data.save()
         }
     } else {
         message.delete();
