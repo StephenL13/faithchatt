@@ -5,7 +5,7 @@ const Discord = require('discord.js');
 const moment = require('moment');
 
 module.exports.run = async (client, message, args, prefix) => {
-    if(message.member.roles.cache.has(rolesId.moderator)) {
+    if(message.member.permissions.has("KICK_MEMBERS") || message.member.permissions.has("BAN_MEMBERS")) {
         let targetmember = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         const memberrole = message.guild.roles.cache.get(rolesId.member)
         const mutedrole = message.guild.roles.cache.get(rolesId.muted)
