@@ -2,13 +2,19 @@ const { textId, parentId, rolesId } = require('../../variablehandler.js')
 const { MessageEmbed, Permissions } = require('discord.js')
 const schema = require('../../model/jailsystem.js')
 module.exports.run = async (client, message, args, prefix) => {
+    let targetmember = message.mentions.members.first() || message.guild.members.cache.get(args[0]);    
+    let reason = args.slice(1).join(" ")
+
     if(!message.member.permissions.has(Permissions.FLAGS.BAN_MEMBERS)) return message.author.send({
         embeds: [new MessageEmbed()
         .setColor("#ff0000")
         .setDescription('❌ You are not a staff member authorized to use this command.')]
     }).catch(e => {})
-    let targetmember = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
-    let reason = args.slice(1).join(" ")
+
+    if(!targetmember) return message.channel.send("Command usage:\n`!jail <@user/uid> <reason>`")
+    if(targetmember.roles.cache.has(rolesId.muted)) return message.reply("The member has been already jailed!")
+    if(!reason) return message.channel.send("Please supply a reason of the suspect.\n`!jail <@user/uid> <reason>`")
+
     const memberrole = message.guild.roles.cache.get(rolesId.member)
     const regularrole = message.guild.roles.cache.get(rolesId.regular)
     const usherrole = message.guild.roles.cache.get(rolesId.usher)
@@ -29,10 +35,6 @@ module.exports.run = async (client, message, args, prefix) => {
     const modlog = message.guild.channels.cache.get(textId.modLog)
 
     const moderatorrole = message.guild.roles.cache.get(rolesId.moderator)
-
-    if(!targetmember) return message.channel.send("Command usage:\n`!jail <@user/uid> <reason>`")
-    if(targetmember.roles.cache.has(rolesId.muted)) return message.reply("The member has been already jailed!")
-    if(!reason) return message.channel.send("Please supply a reason of the suspect.\n`!jail <@user/uid> <reason>`")
 
     // If a mod has met the prerequisites...
 

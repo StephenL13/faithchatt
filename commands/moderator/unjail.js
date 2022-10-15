@@ -5,13 +5,14 @@ const Discord = require('discord.js');
 const moment = require('moment');
 
 module.exports.run = async (client, message, args, prefix) => {
+    let targetmember = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
     if(!message.member.permissions.has(Permissions.FLAGS.BAN_MEMBERS)) return message.author.send({ 
         embeds: [
         new MessageEmbed()
         .setDescription("❌ | You are not a staff member authorized to use this command.")
         .setColor("#ff0000")]
     })
-    let targetmember = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
+    
     const memberrole = message.guild.roles.cache.get(rolesId.member)
     const mutedrole = message.guild.roles.cache.get(rolesId.muted)
     const generalChat = client.channels.cache.get(textId.general)
