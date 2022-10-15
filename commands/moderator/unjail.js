@@ -18,7 +18,7 @@ module.exports.run = async (client, message, args, prefix) => {
     if(!targetmember) return message.channel.send("Command usage:\n`!unjail <@user/uid>`");
     if (message.channel.parent.id === parentId.jail){
         let data = await schema.findOne({ userId: targetmember.user.id})
-        if(!data) {
+        if(message.guild.members.cache.has(data.channelId)) {
             await schema.deleteOne({ userId: targetmember.user.id})
 
             // the unjail action
@@ -71,6 +71,8 @@ module.exports.run = async (client, message, args, prefix) => {
                 message.channel.delete()
                 generalChat.send({ embeds: [welcomeBack] })
             }, 5000)
+        } else {
+            return message.reply("The member has left the server. To close the ticket, use \`!closejail\`")
         }
     } else return console.log(`${message.author.tag} executed in a non-jail ticket.`)
 
