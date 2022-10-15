@@ -5,7 +5,7 @@ const Discord = require('discord.js');
 const moment = require('moment');
 
 module.exports.run = async (client, message, args, prefix) => {
-    if(!message.member.permissions.has("KICK_MEMBERS") || message.member.permissions.has("BAN_MEMBERS")) return message.author.send({ 
+    if(!message.member.permissions.has("KICK_MEMBERS") && message.member.permissions.has("BAN_MEMBERS")) return message.author.send({ 
         embeds: [
         new MessageEmbed()
         .setDescription("❌ | You are not a staff member authorized to use this command.")
