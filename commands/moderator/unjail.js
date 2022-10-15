@@ -1,11 +1,11 @@
 const { textId, parentId, rolesId } = require('../../variablehandler.js');
-const { MessageEmbed, MessageAttachment } = require('discord.js');
+const { Collection, MessageEmbed, MessageAttachment, Permissions } = require('discord.js');
 const schema = require('../../model/jailsystem.js')
 const Discord = require('discord.js');
 const moment = require('moment');
 
 module.exports.run = async (client, message, args, prefix) => {
-    if(!message.member.permissions.has("BAN_MEMBERS")) return message.author.send({ 
+    if(!message.member.permissions.has(Permissions.FLAGS.BAN_MEMBERS)) return message.author.send({ 
         embeds: [
         new MessageEmbed()
         .setDescription("❌ | You are not a staff member authorized to use this command.")
@@ -24,7 +24,7 @@ module.exports.run = async (client, message, args, prefix) => {
 
             // the unjail action
             if(message.channel.id === textId.jailedRules) return message.delete()
-            let messageCollection = new Discord.Collection();
+            let messageCollection = new Collection();
                 let channelMessages = await message.channel.messages.fetch({ limit: 100 }).catch(err => console.log(err));
                 messageCollection = await messageCollection.concat(channelMessages);
                 while (channelMessages.size === 100) {

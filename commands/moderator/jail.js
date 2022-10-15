@@ -1,8 +1,8 @@
 const { textId, parentId, rolesId } = require('../../variablehandler.js')
-const { MessageEmbed } = require('discord.js')
+const { MessageEmbed, Permissions } = require('discord.js')
 const schema = require('../../model/jailsystem.js')
 module.exports.run = async (client, message, args, prefix) => {
-    if(!message.member.permissions.has("BAN_MEMBERS")) return message.author.send({
+    if(!message.member.permissions.has(Permissions.FLAGS.BAN_MEMBERS)) return message.author.send({
         embeds: [new MessageEmbed()
         .setColor("#ff0000")
         .setDescription('❌ You are not a staff member authorized to use this command.')]
