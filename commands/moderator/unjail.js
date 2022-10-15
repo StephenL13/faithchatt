@@ -18,7 +18,7 @@ module.exports.run = async (client, message, args, prefix) => {
     if(!targetmember) return message.channel.send("Command usage:\n`!unjail <@user/uid>`");
     if (message.channel.parent.id === parentId.jail){
         let data = await schema.findOne({ userId: targetmember.user.id})
-        if(message.guild.members.cache.has(data.channelId)) {
+        if(message.guild.members.cache.has(data.userId)) {
             await schema.deleteOne({ userId: targetmember.user.id})
 
             // the unjail action
