@@ -9,20 +9,8 @@ module.exports.run = async (client, message, args, prefix) => {
         let targetmember = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         const memberrole = message.guild.roles.cache.get(rolesId.member)
         const mutedrole = message.guild.roles.cache.get(rolesId.muted)
-        const modcheck = message.member.roles.cache.has(rolesId.moderator)
         const generalChat = client.channels.cache.get(textId.general)
 
-        if (!modcheck) return message.delete().then(() => {
-            try {
-                message.author.send({ embeds: [
-                    new MessageEmbed()
-                    .setDescription("❌ | You are not a staff member authorized to use this command.")
-                    .setColor("#ff0000")
-                ]})
-            } catch (error) {
-                console.log(error)
-            }
-        }).catch(err => {})
         if(!targetmember) return message.channel.send("Command usage:\n`!unjail <@user/uid>`");
         if (message.channel.parent.id === parentId.jail){
             let data = await schema.findOne({ userId: targetmember.user.id})

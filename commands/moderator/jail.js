@@ -25,19 +25,7 @@ module.exports.run = async (client, message, args, prefix) => {
         const modlog = message.guild.channels.cache.get(textId.modLog)
 
         const moderatorrole = message.guild.roles.cache.get(rolesId.moderator)
-        const modcheck = message.member.roles.cache.has(rolesId.moderator)
 
-        if(!modcheck) return message.delete().then(() => {
-            try {
-                message.author.send({ embeds: [
-                    new MessageEmbed()
-                    .setDescription("❌ | You are not a staff member authorized to use this command.")
-                    .setColor("#ff0000")
-                ]})
-            } catch (error) {
-                console.log(error)
-            }
-        }).catch(err => {})
         if(!targetmember) return message.channel.send("Command usage:\n`!jail <@user/uid> <reason>`")
         if(targetmember.roles.cache.has(rolesId.muted)) return message.reply("The member has been already jailed!")
         if(!reason) return message.channel.send("Please supply a reason of the suspect.\n`!jail <@user/uid> <reason>`")
