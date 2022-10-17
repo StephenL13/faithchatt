@@ -101,7 +101,7 @@ client.on('interactionCreate', async interaction => {
                 embeds: [
                     new MessageEmbed()
                     .setTitle("Verification is currently locked.")
-                    .setDescription("The server is currently on lockdown after a certain incident that caused constant violation of rules and regulations. We apologize for the inconvenience at the same time assuring you brothers and sisters in Christ for online safety.\n\nIf you have any questions, please send a private message to our staff team. Thank you!")
+                    .setDescription("The server is currently on lockdown after a certain incident that caused constant violation of rules and regulations. We apologize for the inconvenience at the same time assuring you brothers and sisters in Christ for online safety.\n\nIf you have any questions, please send a DM to our staff team. Thank you!")
                     .setFooter({ text: "© FaithChatt Forum" })
                     .setColor("#ff0000")
                 ],
