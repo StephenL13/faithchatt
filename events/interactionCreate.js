@@ -3,7 +3,6 @@ const { MessageEmbed, MessageActionRow, MessageButton, TextInputComponent, Modal
 const faithchatt = require('../variablehandler.js')
 const ticketschema = require('../model/ticket.js')
 const configschema = require('../model/botconfig.js')
-const aqblacklistSchema = require('../model/aqblacklist.js')
 const moment = require('moment')
 
 client.on('interactionCreate', async interaction => {
@@ -167,51 +166,6 @@ client.on('interactionCreate', async interaction => {
                 ],
                 ephemeral: true
             })
-        } else if (interaction.customId == 'askquestion-interaction') {
-            let data = await aqblacklistSchema.findOne({ userId: interaction.user.id })
-
-            async function executeModal() {
-                const modal = new Modal()
-                .setCustomId('question-modal')
-                .setTitle('Submit for #🤓│any-questions')
-                const component = new MessageActionRow().addComponents(
-                    new TextInputComponent()
-                    .setCustomId('questioninput')
-                    .setLabel('Enter your queries here.')
-                    .setMinLength(5)
-                    .setMaxLength(1500)
-                    .setStyle('PARAGRAPH')
-                    .setRequired(true)
-                )
-                await modal.addComponents(component)
-                await interaction.showModal(modal)
-            }
-
-            if(!data) return executeModal();
-            if(data.userId == interaction.user.id) {
-                return interaction.reply({
-                embeds: [
-                    new MessageEmbed()
-                    .setTitle('**You have been blacklisted from using this feature!**')
-                    .setDescription('However, you can still participate on threads or use the <#839722678860513281> channel.\n\nIf you have questions, concerns, or an appeal to contest the ban, [please visit our ticket helpdesk.](https://discord.com/channels/839708279973478430/955246024602034186/957059949689724969)')
-                    .setColor('#ff0000')
-                ],
-                ephemeral: true
-                })
-            } else {
-                return executeModal();
-            }
-            
-        } else if (interaction.customId == 'askquestion-legacy') {
-            await interaction.reply({
-                content: `FaithChatt Utilities is moving away from this feature. Discord has released the new forums channel whereas users can now post their own questions.\n\n Learn more: https://support.discord.com/hc/en-us/articles/6208479917079-Forum-Channels-FAQ`,
-                ephemeral: true
-            })
-        } else if (interaction.customId == "askquestion-help") {
-            await interaction.reply({
-                content: `https://cdn.discordapp.com/attachments/839719700140261388/981851220304089178/FaithChatt_new_feature_1.mp4`,
-                ephemeral: true
-            })
-        }
+        } 
     }
 })
