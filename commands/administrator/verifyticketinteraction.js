@@ -28,7 +28,7 @@ module.exports.run = async(client, message, args, prefix) => {
             .setTitle('Welcome to FaithChatt!')
             .setDescription('Thank you for joining us here on Discord. We are here to provide Bible studies to the entire world, fellowship with friends, Christian discipleship, and to share the gospel daily. Thanks for helping us proclaim the love of Jesus Christ virtually.\n\n**If you have problems with the verification ticket creation, immediately contact the moderators.**')
             .setThumbnail("https://cdn2.iconfinder.com/data/icons/unigrid-phantom-multimedia-vol-5/60/020_246_mail_email_envelope_message_ok_check_final_step_verification-512.png")
-            .setImage('https://cdn.discordapp.com/attachments/839719301963579442/859476775984431134/Gold_and_Black_Channel_Art.png')
+            .setImage('https://i.imgur.com/mgE2N2B.png')
             .setFooter({ text: '© FaithChatt Forum' })
             .setColor('#ffd100')
         await message.channel.send({ embeds: [embed], components: [row] })
