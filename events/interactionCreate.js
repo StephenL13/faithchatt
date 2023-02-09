@@ -108,7 +108,7 @@ client.on('interactionCreate', async interaction => {
             })} else if (configdata.verifyLock === false) {
                 const ticketembed = new MessageEmbed()
                     .setTitle('Welcome! Please answer the questions properly to gain server entry.  A minimum of one sentence will do. One-worders for each question will not be accepted.')
-                    .setDescription(`1. What made you come to the server?\n2. Where did you find the invite link?\n3. What is your age and gender?\n4. Who is Jesus, what has He done, and what does that mean to you?\n5. Have you been on FaithChatt Forum in the past?\n6. If done, ping a staff member. We will reach out to you as soon as possible.\n\n**NOTE:** We only allow incoming members of 13 years old and above, as prescribed by Discord's Terms of Service, for the safety of our brothers and sisters online.`)
+                    .setDescription(`1. What made you come to the server?\n2. Where did you find/who sent the invite link?\n3. What is your age and gender?\n4. Who is Jesus, what has He done, and what does that mean to you?\n5. Have you been on FaithChatt Forum in the past?\n6. If done, ping a staff member. We will reach out to you as soon as possible.\n\n**NOTE:** We only allow incoming members of 13 years old and above, as prescribed by Discord's Terms of Service, for the safety of our brothers and sisters online.`)
                     .setThumbnail('https://i.imgur.com/xO46ifo.png')
                     .setColor("#ffd100")
                     .setFooter({ text: "© FaithChatt Forum" })
