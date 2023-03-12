@@ -128,7 +128,7 @@ client.on('interactionCreate', async interaction => {
                             { id: unverified.id, deny: ["VIEW_CHANNEL"] },
                             { id: moderatorrole.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"] },
                             { id: adminrole.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"] },
-                            { id: muted.id, deny: ["VIEW_CHANNEL"] },
+                            { id: mutedrole.id, deny: ["VIEW_CHANNEL"] },
                             { id: everyone.id, deny: ["VIEW_CHANNEL"] }
                         ]
                     })
