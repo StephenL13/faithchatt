@@ -86,7 +86,8 @@ client.on('interactionCreate', async interaction => {
     // THE SYSTEM
     if(interaction.isButton){
         if(interaction.customId == "verifyStart"){
-            const moderatorrole = interaction.guild.roles.cache.get(faithchatt.rolesId.staff)
+            const moderatorrole = interaction.guild.roles.cache.get(faithchatt.rolesId.moderator)
+            const adminrole = interaction.guild.roles.cache.get(faitchatt.rolesId.admin)
             const unverified = interaction.guild.roles.cache.get(faithchatt.rolesId.unverified)
             const regular = interaction.guild.roles.cache.get(faithchatt.rolesId.regular)
             const memberrole = interaction.guild.roles.cache.get(faithchatt.rolesId.member)
@@ -125,6 +126,7 @@ client.on('interactionCreate', async interaction => {
                             { id: memberrole.id, deny: ["VIEW_CHANNEL"] },
                             { id: unverified.id, deny: ["VIEW_CHANNEL"] },
                             { id: moderatorrole.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"] },
+                            { id: adminrole.id, allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"] },
                             { id: everyone.id, deny: ["VIEW_CHANNEL"] }
                         ]
                     })
