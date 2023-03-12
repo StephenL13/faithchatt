@@ -20,6 +20,8 @@ var chatvideogames = "996493519592108063"
 var divPing = "908240970523492353"
 var divProfile = "929740383892672552"
 
+var muted = "859912959660785667"
+
 // STAFF MEMBER
 var staff = "871058889339207681"
 var admin = "839717564128690197"
@@ -30,6 +32,6 @@ var facilitator = "903033680497365033"
 module.exports = {
     unverified, member, regular, muted, chatvideogames, chatlanguage, chattopics,
     divPing, divProfile, prayerwarrior, usher, fisherofmen,
-    welcomeping, booster, underage, legal, female, male,
+    welcomeping, booster, underage, legal, female, male, muted,
     staff, moderator, admin, professor, facilitator, 
 }
