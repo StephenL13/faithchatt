@@ -87,7 +87,7 @@ client.on('interactionCreate', async interaction => {
     if(interaction.isButton){
         if(interaction.customId == "verifyStart"){
             const moderatorrole = interaction.guild.roles.cache.get(faithchatt.rolesId.moderator)
-            const adminrole = interaction.guild.roles.cache.get(faitchatt.rolesId.admin)
+            const adminrole = interaction.guild.roles.cache.get(faithchatt.rolesId.admin)
             const unverified = interaction.guild.roles.cache.get(faithchatt.rolesId.unverified)
             const regular = interaction.guild.roles.cache.get(faithchatt.rolesId.regular)
             const memberrole = interaction.guild.roles.cache.get(faithchatt.rolesId.member)
