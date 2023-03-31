@@ -13,54 +13,7 @@ client.on('interactionCreate', async interaction => {
     }
 
     if(interaction.isModalSubmit()) {
-        if(interaction.customId == "question-modal") {
-            const textChannel = client.channels.cache.get(faithchatt.textId.askquestion)
-            const textInput = await interaction.fields.getTextInputValue('questioninput')
-            let simpledate = await moment().format('M-D-YYYY')
-
-            const button1 = new MessageButton()
-                .setCustomId('askquestion-legacy')
-                .setDisabled(false)
-                .setLabel('Click here to ask a question!')
-                .setEmoji('📖')
-                .setStyle('PRIMARY')
-            const button2 = new MessageButton()
-                .setCustomId('askquestion-help')
-                .setDisabled(false)
-                .setLabel('How To Use')
-                .setStyle('SECONDARY')
-                .setEmoji('🆘')
-            const row = new MessageActionRow()
-                .addComponents(button1, button2)
-            let output = await textChannel.send({ 
-                embeds: [
-                new MessageEmbed()
-                .setColor('#ffd100')
-                .setAuthor({ name: interaction.user.tag, iconURL: interaction.user.displayAvatarURL() })
-                .setTitle("A new question has been submitted!")
-                .setDescription(textInput)
-                .setFooter({ text: `User ID: ${interaction.user.id} | © FaithChatt Forum`}),
-                ]
-            })
-            let msgFetch = await textChannel.messages.fetch(output.id)
-            let newThread = await msgFetch.startThread({
-                name: `${interaction.user.username} | ${simpledate}`,
-                autoArchiveDuration: 'MAX',
-                rateLimitPerUser: 5
-            })
-            newThread.send({ content: `Feel free to ping the \`@Professors\`, \`@Facilitators\`, or any fellow member who is free and capable to answer your concerns with Scriptural backing. God bless you.` + `\n\n${interaction.user}` })
-
-            await interaction.deferUpdate().catch(err => {})
-            await interaction.message.delete();
-            await textChannel.send({
-                embeds: [
-                    new MessageEmbed()
-                    .setDescription('Please post any questions you have about faith, life, or whatever here. The \`@Professors\` and \`@Facilitators\` also assure to keep on stand-by addressing theological concerns and anything related to Christian life.\n\nIf the bot is offline, you may use <#839722678860513281> channel.')
-                    .setColor('#ffd100')
-                ],
-                components: [row]
-            })
-        } else if (interaction.customId == "suggest-modal") {
+        if (interaction.customId == "suggest-modal") {
             const textChannel = client.channels.cache.get(faithchatt.textId.serversuggest)
             const textInput = await interaction.fields.getTextInputValue('suggestinput')
             await textChannel.send({ embeds: [
