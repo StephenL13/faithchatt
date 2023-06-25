@@ -8,7 +8,7 @@ module.exports.run = async (client, message, args, prefix) => {
     if(modcheck) {
         if (message.channel.parent.id === parentId.verification){
             if(message.channel.id === textId.verify) return message.delete()
-            let unvMem = message.guild.members.cache.get(message.channel.topic)
+            let unvMem = message.guild.members.cache.get(message.channel.topic).catch(() => {})
             async function logAction() {
                 let messageCollection = new Discord.Collection();
                 let channelMessages = await message.channel.messages.fetch({ limit: 100 }).catch(err => console.log(err));
