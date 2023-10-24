@@ -1,4 +1,4 @@
-# FaithChatt Forum Discord Bot
+# FaithChatt Forum LEGACY Discord Bot
 https://discord.gg/faithchatt
 
 **Dependencies (npm i)**
